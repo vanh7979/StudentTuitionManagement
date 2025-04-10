@@ -71,6 +71,7 @@ namespace ProjectStudentTuitionManagement
             this.button4.TabIndex = 12;
             this.button4.Text = "Tìm kiếm tất cả";
             this.button4.UseVisualStyleBackColor = true;
+            this.button4.Click += new System.EventHandler(this.button4_Click_1);
             // 
             // dataGridView1
             // 
@@ -89,6 +90,7 @@ namespace ProjectStudentTuitionManagement
             this.button1.TabIndex = 14;
             this.button1.Text = "Thanh Toán";
             this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click_1);
             // 
             // label1
             // 
@@ -103,7 +105,7 @@ namespace ProjectStudentTuitionManagement
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(70, 232);
+            this.label2.Location = new System.Drawing.Point(66, 238);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(59, 23);
             this.label2.TabIndex = 16;
@@ -113,7 +115,7 @@ namespace ProjectStudentTuitionManagement
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(57, 278);
+            this.label3.Location = new System.Drawing.Point(66, 280);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(63, 23);
             this.label3.TabIndex = 17;
@@ -123,7 +125,7 @@ namespace ProjectStudentTuitionManagement
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(70, 326);
+            this.label4.Location = new System.Drawing.Point(66, 325);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(38, 23);
             this.label4.TabIndex = 18;
@@ -133,11 +135,12 @@ namespace ProjectStudentTuitionManagement
             // 
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(70, 374);
+            this.label5.Location = new System.Drawing.Point(66, 373);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(78, 23);
             this.label5.TabIndex = 19;
             this.label5.Text = "Mã Khoa";
+            this.label5.Click += new System.EventHandler(this.label5_Click_1);
             // 
             // button2
             // 
@@ -150,12 +153,13 @@ namespace ProjectStudentTuitionManagement
             this.button2.TabIndex = 20;
             this.button2.Text = "Lọc";
             this.button2.UseVisualStyleBackColor = false;
+            this.button2.Click += new System.EventHandler(this.button2_Click_1);
             // 
             // comboBox1
             // 
             this.comboBox1.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(465, 59);
+            this.comboBox1.Location = new System.Drawing.Point(465, 61);
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(312, 36);
             this.comboBox1.TabIndex = 21;
@@ -165,7 +169,7 @@ namespace ProjectStudentTuitionManagement
             // 
             this.comboBox2.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.comboBox2.FormattingEnabled = true;
-            this.comboBox2.Location = new System.Drawing.Point(465, 104);
+            this.comboBox2.Location = new System.Drawing.Point(465, 106);
             this.comboBox2.Name = "comboBox2";
             this.comboBox2.Size = new System.Drawing.Size(312, 36);
             this.comboBox2.TabIndex = 22;
@@ -181,6 +185,7 @@ namespace ProjectStudentTuitionManagement
             this.button3.TabIndex = 23;
             this.button3.Text = "Xóa tạm";
             this.button3.UseVisualStyleBackColor = false;
+            this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
             // button5
             // 
@@ -192,6 +197,7 @@ namespace ProjectStudentTuitionManagement
             this.button5.TabIndex = 24;
             this.button5.Text = "Xóa tạm";
             this.button5.UseVisualStyleBackColor = false;
+            this.button5.Click += new System.EventHandler(this.button5_Click);
             // 
             // linkLabel1
             // 
@@ -203,6 +209,7 @@ namespace ProjectStudentTuitionManagement
             this.linkLabel1.TabIndex = 25;
             this.linkLabel1.TabStop = true;
             this.linkLabel1.Text = "Đăng xuất";
+            this.linkLabel1.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel1_LinkClicked);
             // 
             // User
             // 
@@ -228,6 +235,7 @@ namespace ProjectStudentTuitionManagement
             this.Name = "User";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "User";
+            this.Load += new System.EventHandler(this.User_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);

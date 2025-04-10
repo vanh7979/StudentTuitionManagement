@@ -30,14 +30,15 @@ namespace ProjectStudentTuitionManagement
 
         }
 
-        private void Tuition_Load(object sender, EventArgs e)
+        
+
+        private void Tuition_Load_1(object sender, EventArgs e)
         {
             label3.Text = $"{soTien:N0} VNĐ";
         }
 
-        private void button4_Click(object sender, EventArgs e)
+        private void button4_Click_1(object sender, EventArgs e)
         {
-            
             decimal daDong;
             if (!decimal.TryParse(textBox1.Text, out daDong) || daDong <= 0)
             {
@@ -130,8 +131,6 @@ namespace ProjectStudentTuitionManagement
                 MessageBox.Show("Lỗi khi thanh toán:\n" + ex.Message, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-
-
     }
 }
 

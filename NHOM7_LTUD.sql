@@ -606,6 +606,9 @@ GROUP BY
 
 ALTER TABLE HoaDon ADD NganHang NVARCHAR(100);
 
+EXEC sp_LayHocPhiTheoMaSV 'SV001'
+
+
 
 
 

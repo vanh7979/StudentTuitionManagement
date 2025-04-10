@@ -114,6 +114,7 @@ namespace ProjectStudentTuitionManagement
             this.linkLabel1.TabStop = true;
             this.linkLabel1.Text = "Quên mật khẩu";
             this.linkLabel1.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.linkLabel1.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel1_LinkClicked);
             // 
             // checkBox1
             // 
@@ -124,12 +125,13 @@ namespace ProjectStudentTuitionManagement
             this.checkBox1.TabIndex = 6;
             this.checkBox1.Text = "Ghi nhớ đăng nhập";
             this.checkBox1.UseVisualStyleBackColor = true;
+            this.checkBox1.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
             // 
             // linkLabel2
             // 
-            this.linkLabel2.Location = new System.Drawing.Point(356, 443);
+            this.linkLabel2.Location = new System.Drawing.Point(357, 443);
             this.linkLabel2.Name = "linkLabel2";
-            this.linkLabel2.Size = new System.Drawing.Size(69, 30);
+            this.linkLabel2.Size = new System.Drawing.Size(66, 37);
             this.linkLabel2.TabIndex = 8;
             this.linkLabel2.TabStop = true;
             this.linkLabel2.Text = "Đăng kí";

@@ -88,10 +88,11 @@ namespace ProjectStudentTuitionManagement
             // 
             // pictureBox1
             // 
+            this.pictureBox1.Image = global::NewProject.Properties.Resources.logo_neu_inkythuatso_01_09_10_41_01;
             this.pictureBox1.Location = new System.Drawing.Point(35, 8);
             this.pictureBox1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(130, 104);
+            this.pictureBox1.Size = new System.Drawing.Size(142, 142);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox1.TabIndex = 2;
             this.pictureBox1.TabStop = false;

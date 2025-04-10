@@ -69,13 +69,12 @@ namespace ProjectStudentTuitionManagement
             // 
             this.textBox1.BackColor = System.Drawing.Color.WhiteSmoke;
             this.textBox1.Font = new System.Drawing.Font("Segoe UI", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox1.ForeColor = System.Drawing.SystemColors.InactiveBorder;
+            this.textBox1.ForeColor = System.Drawing.SystemColors.WindowText;
             this.textBox1.Location = new System.Drawing.Point(140, 220);
             this.textBox1.Multiline = true;
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(300, 40);
             this.textBox1.TabIndex = 4;
-            this.textBox1.Text = "Họ Tên";
             // 
             // textBox2
             // 
@@ -94,6 +93,7 @@ namespace ProjectStudentTuitionManagement
             this.textBox3.Location = new System.Drawing.Point(140, 340);
             this.textBox3.Multiline = true;
             this.textBox3.Name = "textBox3";
+            this.textBox3.PasswordChar = '*';
             this.textBox3.Size = new System.Drawing.Size(300, 40);
             this.textBox3.TabIndex = 6;
             // 
@@ -104,6 +104,7 @@ namespace ProjectStudentTuitionManagement
             this.textBox4.Location = new System.Drawing.Point(140, 400);
             this.textBox4.Multiline = true;
             this.textBox4.Name = "textBox4";
+            this.textBox4.PasswordChar = '*';
             this.textBox4.Size = new System.Drawing.Size(300, 40);
             this.textBox4.TabIndex = 7;
             // 
@@ -124,6 +125,7 @@ namespace ProjectStudentTuitionManagement
             this.linkLabel2.TabIndex = 13;
             this.linkLabel2.TabStop = true;
             this.linkLabel2.Text = "Đăng nhập";
+            this.linkLabel2.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel2_LinkClicked_1);
             // 
             // button1
             // 
@@ -136,6 +138,7 @@ namespace ProjectStudentTuitionManagement
             this.button1.TabIndex = 9;
             this.button1.Text = "Đăng kí";
             this.button1.UseVisualStyleBackColor = false;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // RegisterForm
             // 

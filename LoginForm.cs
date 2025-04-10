@@ -24,16 +24,18 @@ namespace ProjectStudentTuitionManagement
             this.Hide();
         }
 
-        private void LoginForm_Load(object sender, EventArgs e)
-        {
-
-        }
+        
 
         
 
         private void LoginForm_Load_1(object sender, EventArgs e)
         {
-
+            if (NewProject.Properties.Settings.Default.RememberMe)
+            {
+                checkBox1.Checked = true;
+                textBox1.Text = NewProject.Properties.Settings.Default.SavedUsername;
+                textBox2.Text = NewProject.Properties.Settings.Default.SavedPassword;
+            }
         }
 
         private void button1_Click_1(object sender, EventArgs e)
@@ -41,11 +43,27 @@ namespace ProjectStudentTuitionManagement
             string username = textBox1.Text.Trim();
             string password = textBox2.Text.Trim();
 
+
+
             if (username == "" || password == "")
             {
                 MessageBox.Show("Vui lòng nhập đầy đủ tên đăng nhập và mật khẩu!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
+
+            if (checkBox1.Checked)
+            {
+                NewProject.Properties.Settings.Default.RememberMe = true;
+                NewProject.Properties.Settings.Default.SavedUsername = textBox1.Text;
+                NewProject.Properties.Settings.Default.SavedPassword = textBox2.Text;
+            }
+            else
+            {
+                NewProject.Properties.Settings.Default.RememberMe = false;
+                NewProject.Properties.Settings.Default.SavedUsername = "";
+                NewProject.Properties.Settings.Default.SavedPassword = "";
+            }
+            NewProject.Properties.Settings.Default.Save();
 
 
             string query = $"SELECT * FROM Users WHERE Username = '{username}' AND Password = '{password}'";
@@ -82,7 +100,10 @@ namespace ProjectStudentTuitionManagement
 
         private void linkLabel2_LinkClicked_1(object sender, LinkLabelLinkClickedEventArgs e)
         {
-
+            this.Hide();
+            RegisterForm form = new RegisterForm();
+            form.ShowDialog();
+            
         }
 
         private void textBox1_TextChanged(object sender, EventArgs e)
@@ -94,6 +115,19 @@ namespace ProjectStudentTuitionManagement
         {
             
         }
+
+        private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            MessageBox.Show("Vui lòng liên hệ quản trị viên để đặt lại mật khẩu.", "Quên mật khẩu", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+
+        private void checkBox1_CheckedChanged(object sender, EventArgs e)
+        {
+
+        }
     }
-}
+    }
+
+    
+
 
