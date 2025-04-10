@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using NewProject;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.Button;
 
 namespace ProjectStudentTuitionManagement
@@ -102,8 +103,8 @@ namespace ProjectStudentTuitionManagement
         DECLARE @ThanhToanID INT;
         SET @ThanhToanID = SCOPE_IDENTITY();
 
-        INSERT INTO HoaDon (ThanhToanID, NgayLap, SoTien)
-        VALUES (@ThanhToanID, GETDATE(), {daDong.ToString(System.Globalization.CultureInfo.InvariantCulture)});
+        INSERT INTO HoaDon (ThanhToanID, NgayLap, SoTien, NganHang)
+        VALUES (@ThanhToanID, GETDATE(), {daDong.ToString(System.Globalization.CultureInfo.InvariantCulture)}, N'{nganHang}');
 
         UPDATE HocPhi
         SET TrangThai = N'{trangThai}'
@@ -130,6 +131,8 @@ namespace ProjectStudentTuitionManagement
             {
                 MessageBox.Show("Lỗi khi thanh toán:\n" + ex.Message, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+            FormInvoice f = new FormInvoice(hocPhiID); // truyền đúng ID học phí
+            f.ShowDialog();
         }
     }
 }

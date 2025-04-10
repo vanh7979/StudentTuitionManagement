@@ -584,8 +584,9 @@ DROP TABLE IF EXISTS Users;
 
 
 
-CREATE VIEW v_HoaDon AS
+CREATE OR ALTER VIEW v_HoaDon AS
 SELECT 
+    hp.HocPhiID, -- 🟢 Thêm dòng này
     sv.MaSV,
     sv.FullName AS HoTen,
     sv.Lop,
@@ -602,9 +603,40 @@ JOIN KiHoc kh ON kh.KiHocID = hp.KiHocID
 LEFT JOIN ThanhToan tt ON hp.HocPhiID = tt.HocPhiID
 LEFT JOIN HoaDon hd ON hd.ThanhToanID = tt.ThanhToanID
 GROUP BY 
+    hp.HocPhiID, -- 🟢 Thêm vào đây nữa
     sv.MaSV, sv.FullName, sv.Lop, kh.TenKiHoc, hp.SoTien
 
 ALTER TABLE HoaDon ADD NganHang NVARCHAR(100);
+
+SELECT* FROM v_HoaDon 
+
+CREATE OR ALTER VIEW v_HoaDon_ChiTiet AS
+SELECT 
+    sv.MaSV,
+    sv.FullName AS HoTen,
+    sv.Lop,
+    kh.TenKiHoc,
+    hp.HocPhiID,
+    hp.SoTien AS HocPhi,
+    tt.SoTienDaDong AS SoTienVuaDong,   
+    hd.NganHang,
+    hd.NgayLap AS NgayThanhToan
+FROM HocPhi hp
+JOIN SinhVien sv ON sv.MaSV = hp.MaSV
+JOIN KiHoc kh ON kh.KiHocID = hp.KiHocID
+JOIN (
+    SELECT tt1.*
+    FROM ThanhToan tt1
+    JOIN (
+        SELECT HocPhiID, MAX(NgayThanhToan) AS MaxNgay
+        FROM ThanhToan
+        GROUP BY HocPhiID
+    ) latest ON tt1.HocPhiID = latest.HocPhiID AND tt1.NgayThanhToan = latest.MaxNgay
+) tt ON tt.HocPhiID = hp.HocPhiID
+JOIN HoaDon hd ON hd.ThanhToanID = tt.ThanhToanID
+
+select * from v_HoaDon_ChiTiet
+
 
 EXEC sp_LayHocPhiTheoMaSV 'SV001'
 
