@@ -1,5 +1,6 @@
 ﻿CREATE DATABASE NHOM7_LTUD
 USE NHOM7_LTUD;
+DROP DATABASE NHOM7_LTUD
 --Bảng user--
 CREATE TABLE Users (
     UserID INT IDENTITY(1,1) PRIMARY KEY,
@@ -14,34 +15,55 @@ ADD MaSV NVARCHAR(20) NULL;
 ALTER TABLE Users
 ADD CONSTRAINT FK_Users_SinhVien
 FOREIGN KEY (MaSV) REFERENCES SinhVien(MaSV);
-
+drop table Users
 
 --Bảng sinh viên--
 CREATE TABLE SinhVien (
     MaSV NVARCHAR(20) PRIMARY KEY,
     FullName NVARCHAR(100) NOT NULL,
-    Lop NVARCHAR(20),
-    Khoa NVARCHAR(50)
+    Lop NVARCHAR(10),
+    Khoa NVARCHAR(10),
+	foreign key (Lop) references Lop(MALOP),
+	foreign key (Khoa) references KhoaVien(MAKHOA),
 );
+drop table SinhVien
+--Bảng lớp--
+create table Lop(
+MALOP nvarchar(10) not null primary key,
+TENLOP nvarchar(30),
+MAKHOA nvarchar(10) not null,
+CVHT char(30), GHICHU char(100),
+foreign key (MAKHOA) references KhoaVien(MAKHOA));
+drop table Lop
+
+--Bảng khoa/viện--
+create table KhoaVien(
+MAKHOA nvarchar(10) not null primary key,
+TENKHOA nvarchar(50) not null,
+DIACHI char(50), SODT char(12));
+
+drop table KhoaVien
 --Bảng kì học--
 CREATE TABLE KiHoc (
-    KiHocID INT IDENTITY(1,1) PRIMARY KEY,
+    KiHocID NVARCHAR(10) PRIMARY KEY,
     TenKiHoc NVARCHAR(50) NOT NULL,  -- Ví dụ: "HK1 2025", "HK2 2025"
-    NamHoc INT NOT NULL              -- Ví dụ: 2025
+    NamHoc INT NOT NULL  ,            -- Ví dụ: 2025
+	TGBatDau Date,
+	TGKetThuc Date
 );
 Drop Table KiHoc 
 --Bảng học phí--
 CREATE TABLE HocPhi (
-    HocPhiID INT IDENTITY(1,1) PRIMARY KEY,
+    HocPhiID nvarchar(20) PRIMARY KEY,
     MaSV NVARCHAR(20) NOT NULL,
-    KiHocID INT NOT NULL,
+    KiHocID NVARCHAR(10) NOT NULL,
     SoTien DECIMAL(18, 2) NOT NULL,
     HanDong DATE,
     TrangThai NVARCHAR(20) NOT NULL DEFAULT N'Chưa đóng',
     FOREIGN KEY (MaSV) REFERENCES SinhVien(MaSV),
     FOREIGN KEY (KiHocID) REFERENCES KiHoc(KiHocID)
 );
---DROP TABLE HocPhi;
+DROP TABLE HocPhi;
 --Bảng thanh toán--
 CREATE TABLE ThanhToan (
     ThanhToanID INT IDENTITY(1,1) PRIMARY KEY,
@@ -62,7 +84,7 @@ CREATE TABLE HoaDon (
 CREATE TABLE ThongBaoNo (
     TBID INT IDENTITY(1,1) PRIMARY KEY,
     MaSV NVARCHAR(20) NOT NULL,
-    KiHocID INT NOT NULL,
+    KiHocID NVARCHAR(10) NOT NULL,
     SoTienNo DECIMAL(18, 2) NOT NULL,
     NgayThongBao DATE DEFAULT GETDATE(),
     FOREIGN KEY (MaSV) REFERENCES SinhVien(MaSV),
@@ -393,126 +415,145 @@ EXEC sp_LocHocPhi
 
 INSERT INTO Users (Username, Password, FullName, Role)
 VALUES
-('admin1', 'pass1', 'Nguyen Van A', 'admin'),
-('admin2', 'pass2', 'Tran Thi B', 'admin'),
-('user1', 'pass3', 'Le Van C', 'user'),
-('user2', 'pass4', 'Pham Thi D', 'user'),
-('user3', 'pass5', 'Hoang Van E', 'user'),
-('user4', 'pass6', 'Ngo Thi F', 'user'),
-('user5', 'pass7', 'Dang Van G', 'user'),
-('user6', 'pass8', 'Bui Thi H', 'user'),
-('user7', 'pass9', 'Mai Van I', 'user'),
-('user8', 'pass10', 'Do Thi K', 'user');
+('admin1', 'admin1', 'Nguyen Van Admin', 'admin'),
+('admin2', 'admin2', 'Tran Thi Admin', 'admin'),
+('user1', 'pass1', 'Nguyen Van A', 'user'),
+('user2', 'pass2', 'Le Thi B', 'user'),
+('user3', 'pass3', 'Tran Van C', 'user'),
+('user4', 'pass4', 'Pham Thi D', 'user'),
+('user5', 'pass5', 'Hoang Van E', 'user'),
+('user6', 'pass6', 'Do Thi F', 'user'),
+('user7', 'pass7', 'Ngo Van G', 'user'),
+('user8', 'pass8', 'Dang Thi G', 'user'),
+('user9', 'pass9', 'Bui Van I', 'user'),
+('user10', 'pass10', 'Mai Thi K', 'user');
 
 INSERT INTO SinhVien (MaSV, FullName, Lop, Khoa)
 VALUES
-('SV001', 'Nguyen Van A', 'CNTT1', 'CNTT'),
-('SV002', 'Le Thi B', 'CNTT1', 'CNTT'),
-('SV003', 'Tran Van C', 'CNTT2', 'CNTT'),
-('SV004', 'Pham Thi D', 'CNTT2', 'CNTT'),
-('SV005', 'Hoang Van E', 'KTPM1', 'KTPM'),
-('SV006', 'Do Thi F', 'KTPM1', 'KTPM'),
-('SV007', 'Ngo Van G', 'HTTT1', 'HTTT'),
-('SV008', 'Dang Thi H', 'HTTT1', 'HTTT'),
-('SV009', 'Bui Van I', 'HTTT2', 'HTTT'),
-('SV010', 'Mai Thi K', 'HTTT2', 'HTTT');
+('11220001', 'Nguyen Van A', 'CNTT1', 'CNTT'),
+('11220002', 'Le Thi B', 'CNTT1', 'CNTT'),
+('11220003', 'Tran Van C', 'CNTT2', 'CNTT'),
+('11220004', 'Pham Thi D', 'CNTT2', 'CNTT'),
+('11220005', 'Hoang Van E', 'KTPM1', 'KTPM'),
+('11220006', 'Do Thi F', 'KTPM1', 'KTPM'),
+('11220007', 'Ngo Van G', 'HTTT1', 'HTTT'),
+('11220008', 'Dang Thi H', 'HTTT1', 'HTTT'),
+('11220009', 'Bui Van I', 'HTTT2', 'HTTT'),
+('11220010', 'Mai Thi K', 'HTTT2', 'HTTT');
 
-UPDATE Users SET MaSV = 'SV001' WHERE Username = 'user1';
-UPDATE Users SET MaSV = 'SV002' WHERE Username = 'user2';
-UPDATE Users SET MaSV = 'SV003' WHERE Username = 'user3';
-UPDATE Users SET MaSV = 'SV004' WHERE Username = 'user4';
-UPDATE Users SET MaSV = 'SV005' WHERE Username = 'user5';
-UPDATE Users SET MaSV = 'SV006' WHERE Username = 'user6';
-UPDATE Users SET MaSV = 'SV007' WHERE Username = 'user7';
-UPDATE Users SET MaSV = 'SV008' WHERE Username = 'user8';
-
-INSERT INTO KiHoc (TenKiHoc, NamHoc)
+INSERT INTO Lop(MALOP, TENLOP, MAKHOA, CVHT)
 VALUES
-('HK1 2024', 2024),
-('HK2 2024', 2024),
-('HK1 2025', 2025),
-('HK2 2025', 2025),
-('HK1 2023', 2023),
-('HK2 2023', 2023),
-('HK1 2022', 2022),
-('HK2 2022', 2022),
-('HK1 2021', 2021),
-('HK2 2021', 2021);
+('CNTT1',N'Công Nghệ Thông Tin 1','CNTT',N'Nguyễn Văn A'),
+('CNTT2',N'Công Nghệ Thông Tin 2','CNTT',N'Nguyễn Văn B'),
+('KTPM1',N'Kỹ Thuật Phần Mềm 1','KTPM',N'Nguyễn Văn C'),
+('HTTT1',N'Hệ Thống Thông Tin 1','HTTT',N'Nguyễn Văn D'),
+('HTTT2',N'Hệ Thống Thông Tin 2','HTTT',N'Nguyễn Văn E');
 
-INSERT INTO HocPhi (MaSV, KiHocID, SoTien, HanDong)
+INSERT INTO KhoaVien(MAKHOA, TENKHOA, DIACHI, SODT)
 VALUES
-('SV001', 1, 5000000, '2024-01-31'),
-('SV002', 1, 5200000, '2024-01-31'),
-('SV003', 2, 4800000, '2024-06-30'),
-('SV004', 2, 5500000, '2024-06-30'),
-('SV005', 3, 6000000, '2025-01-31'),
-('SV006', 3, 6100000, '2025-01-31'),
-('SV007', 4, 6200000, '2025-06-30'),
-('SV008', 4, 6300000, '2025-06-30'),
-('SV009', 5, 5400000, '2023-01-31'),
-('SV010', 5, 5600000, '2023-01-31');
+('CNTT',N'Khoa Công Nghệ Thông Tin',N'Tòa A2','0123456789'),
+('KTPM',N'Viện Kỹ Thuật',N'Tòa A2','0123456789'),
+('HTTT',N'Khoa Kinh Tế',N'Tòa A2','0123456789');
 
-INSERT INTO HocPhi (MaSV, KiHocID, SoTien, HanDong)
+
+UPDATE Users SET MaSV = '11220001' WHERE Username = 'user1';
+UPDATE Users SET MaSV = '11220002' WHERE Username = 'user2';
+UPDATE Users SET MaSV = '11220003' WHERE Username = 'user3';
+UPDATE Users SET MaSV = '11220004' WHERE Username = 'user4';
+UPDATE Users SET MaSV = '11220005' WHERE Username = 'user5';
+UPDATE Users SET MaSV = '11220006' WHERE Username = 'user6';
+UPDATE Users SET MaSV = '11220007' WHERE Username = 'user7';
+UPDATE Users SET MaSV = '11220008' WHERE Username = 'user8';
+UPDATE Users SET MaSV = '11220009' WHERE Username = 'user9';
+UPDATE Users SET MaSV = '11220010' WHERE Username = 'user10';
+
+INSERT INTO KiHoc (KiHocID, TenKiHoc, NamHoc, TGBatDau, TGKetThuc)
 VALUES
--- HK2 2023 = KiHocID 6
-('SV001', 6, 5000000, '2023-06-30'),
-('SV002', 6, 5100000, '2023-06-30'),
-('SV003', 6, 5200000, '2023-06-30'),
-('SV004', 6, 5300000, '2023-06-30'),
-('SV005', 6, 5400000, '2023-06-30'),
-('SV006', 6, 5500000, '2023-06-30'),
-('SV007', 6, 5600000, '2023-06-30'),
-('SV008', 6, 5700000, '2023-06-30'),
-('SV009', 6, 5800000, '2023-06-30'),
-('SV010', 6, 5900000, '2023-06-30'),
+('1-2024','HK1 2024', 2024, '2023-09-06', '2024-02-06'),
+('2-2024','HK2 2024', 2024, '2024-03-01', '2024-06-20'),
+('1-2025','HK1 2025', 2025, '2024-09-06', '2025-02-06'),
+('2-2025','HK2 2025', 2025, '2025-03-01', '2025-06-20'),
+('1-2023','HK1 2023', 2023, '2022-09-06', '2022-02-06'),
+('2-2023','HK2 2023', 2023, '2023-03-01', '2023-06-20'),
+('1-2022','HK1 2022', 2022, '2021-09-06', '2022-02-06'),
+('2-2022','HK2 2022', 2022, '2022-03-01', '2022-06-20'),
+('1-2021','HK1 2021', 2021, '2020-09-06', '2021-02-06'),
+('2-2021','HK2 2021', 2021, '2021-03-01', '2021-06-20');
 
--- HK1 2022 = KiHocID 7
-('SV001', 7, 5050000, '2022-01-31'),
-('SV002', 7, 5150000, '2022-01-31'),
-('SV003', 7, 5250000, '2022-01-31'),
-('SV004', 7, 5350000, '2022-01-31'),
-('SV005', 7, 5450000, '2022-01-31'),
-('SV006', 7, 5550000, '2022-01-31'),
-('SV007', 7, 5650000, '2022-01-31'),
-('SV008', 7, 5750000, '2022-01-31'),
-('SV009', 7, 5850000, '2022-01-31'),
-('SV010', 7, 5950000, '2022-01-31'),
+Select * from KiHoc
+delete from KiHoc where KiHocID ='1-2021'
+INSERT INTO HocPhi (HocPhiID, MaSV, KiHocID, SoTien, HanDong)
+VALUES
+('11220001-1-2022','11220001', '1-2022', 5000000, '2023-01-31'),
+('11220002-1-2022','11220002', '1-2022', 5200000, '2023-01-31'),
+('11220003-1-2022','11220003', '1-2022', 4800000, '2023-01-31'),
+('11220004-1-2022','11220004', '1-2022', 5500000, '2023-01-31'),
+('11220005-1-2022','11220005', '1-2022', 6000000, '2023-01-31'),
+('11220006-1-2022','11220006', '1-2022', 6100000, '2023-01-31'),
+('11220007-1-2022','11220007', '1-2022', 6200000, '2023-01-31'),
+('11220008-1-2022','11220008', '1-2022', 6300000, '2023-01-31'),
+('11220009-1-2022','11220009', '1-2022', 5400000, '2023-01-31'),
+('11220010-1-2022','11220010', '1-2022', 5600000, '2023-01-31'),
 
--- HK2 2022 = KiHocID 8
-('SV001', 8, 5100000, '2022-06-30'),
-('SV002', 8, 5200000, '2022-06-30'),
-('SV003', 8, 5300000, '2022-06-30'),
-('SV004', 8, 5400000, '2022-06-30'),
-('SV005', 8, 5500000, '2022-06-30'),
-('SV006', 8, 5600000, '2022-06-30'),
-('SV007', 8, 5700000, '2022-06-30'),
-('SV008', 8, 5800000, '2022-06-30'),
-('SV009', 8, 5900000, '2022-06-30'),
-('SV010', 8, 6000000, '2022-06-30'),
+-- 2-2023 = KiHocID 6
+('11220001-2-2022','11220001', '2-2022', 5000000, '2022-05-30'),
+('11220002-2-2022','11220002', '2-2022', 5100000, '2022-05-30'),
+('11220003-2-2022','11220003', '2-2022', 5200000, '2022-05-30'),
+('11220004-2-2022','11220004', '2-2022', 5300000, '2022-05-30'),
+('11220005-2-2022','11220005', '2-2022', 5400000, '2022-05-30'),
+('11220006-2-2022','11220006', '2-2022', 5500000, '2022-05-30'),
+('11220007-2-2022','11220007', '2-2022', 5600000, '2022-05-30'),
+('11220008-2-2022','11220008', '2-2022', 5700000, '2022-05-30'),
+('11220009-2-2022','11220009', '2-2022', 5800000, '2022-05-30'),
+('11220010-2-2022','11220010', '2-2022', 5900000, '2022-05-30'),
 
--- HK1 2021 = KiHocID 9
-('SV001', 9, 5150000, '2021-01-31'),
-('SV002', 9, 5250000, '2021-01-31'),
-('SV003', 9, 5350000, '2021-01-31'),
-('SV004', 9, 5450000, '2021-01-31'),
-('SV005', 9, 5550000, '2021-01-31'),
-('SV006', 9, 5650000, '2021-01-31'),
-('SV007', 9, 5750000, '2021-01-31'),
-('SV008', 9, 5850000, '2021-01-31'),
-('SV009', 9, 5950000, '2021-01-31'),
-('SV010', 9, 6050000, '2021-01-31'),
+-- 1-2022 = KiHocID 7
+('11220001-1-2023','11220001', '1-2023', 5050000, '2023-01-31'),
+('11220002-1-2023','11220001', '1-2023', 5150000, '2023-01-31'),
+('11220003-1-2023','11220001', '1-2023', 5250000, '2023-01-31'),
+('11220004-1-2023','11220001', '1-2023', 5350000, '2023-01-31'),
+('11220005-1-2023','11220001', '1-2023', 5450000, '2023-01-31'),
+('11220006-1-2023','11220001', '1-2023', 5550000, '2023-01-31'),
+('11220007-1-2023','11220001', '1-2023', 5650000, '2023-01-31'),
+('11220008-1-2023','11220001', '1-2023', 5750000, '2023-01-31'),
+('11220009-1-2023','11220001', '1-2023', 5850000, '2023-01-31'),
+('11220010-1-2023','11220001', '1-2023', 5950000, '2023-01-31'),
 
--- HK2 2021 = KiHocID 10
-('SV001', 10, 5200000, '2021-06-30'),
-('SV002', 10, 5300000, '2021-06-30'),
-('SV003', 10, 5400000, '2021-06-30'),
-('SV004', 10, 5500000, '2021-06-30'),
-('SV005', 10, 5600000, '2021-06-30'),
-('SV006', 10, 5700000, '2021-06-30'),
-('SV007', 10, 5800000, '2021-06-30'),
-('SV008', 10, 5900000, '2021-06-30'),
-('SV009', 10, 6000000, '2021-06-30'),
-('SV010', 10, 6100000, '2021-06-30');
+-- 2-2022 = KiHocID 8
+('11220001-2-2023','11220001', '2-2023', 5100000, '2023-05-30'),
+('11220002-2-2023','11220001', '2-2023', 5200000, '2023-05-30'),
+('11220003-2-2023','11220001', '2-2023', 5300000, '2023-05-30'),
+('11220004-2-2023','11220001', '2-2023', 5400000, '2023-05-30'),
+('11220005-2-2023','11220001', '2-2023', 5500000, '2023-05-30'),
+('11220006-2-2023','11220001', '2-2023', 5600000, '2023-05-30'),
+('11220007-2-2023','11220001', '2-2023', 5700000, '2023-05-30'),
+('11220008-2-2023','11220001', '2-2023', 5800000, '2023-05-30'),
+('11220009-2-2023','11220001', '2-2023', 5900000, '2023-05-30'),
+('11220010-2-2023','11220001', '2-2023', 6000000, '2023-05-30'),
+
+-- 1-2021 = KiHocID 9
+('11220001-1-2024','11220001', '1-2024', 5150000, '2024-01-31'),
+('11220002-1-2024','11220001', '1-2024', 5250000, '2024-01-31'),
+('11220003-1-2024','11220001', '1-2024', 5350000, '2024-01-31'),
+('11220004-1-2024','11220001', '1-2024', 5450000, '2024-01-31'),
+('11220005-1-2024','11220001', '1-2024', 5550000, '2024-01-31'),
+('11220006-1-2024','11220001', '1-2024', 5650000, '2024-01-31'),
+('11220007-1-2024','11220001', '1-2024', 5750000, '2024-01-31'),
+('11220008-1-2024','11220001', '1-2024', 5850000, '2024-01-31'),
+('11220009-1-2024','11220001', '1-2024', 5950000, '2024-01-31'),
+('11220010-1-2024','11220001', '1-2024', 6050000, '2024-01-31'),
+
+-- 2-2021 = KiHocID 10
+('11220001-2-2024','11220001', '2-2024', 5200000, '2024-05-30'),
+('11220002-2-2024','11220001', '2-2024', 5300000, '2024-05-30'),
+('11220003-2-2024','11220001', '2-2024', 5400000, '2024-05-30'),
+('11220004-2-2024','11220001', '2-2024', 5500000, '2024-05-30'),
+('11220005-2-2024','11220001', '2-2024', 5600000, '2024-05-30'),
+('11220006-2-2024','11220001', '2-2024', 5700000, '2024-05-30'),
+('11220007-2-2024','11220001', '2-2024', 5800000, '2024-05-30'),
+('11220008-2-2024','11220001', '2-2024', 5900000, '2024-05-30'),
+('11220009-2-2024','11220001', '2-2024', 6000000, '2024-05-30'),
+('11220010-2-2024','11220001', '2-2024', 6100000, '2024-05-30');
 
 INSERT INTO ThanhToan (HocPhiID, NgayThanhToan, SoTienDaDong)
 VALUES
@@ -542,16 +583,16 @@ VALUES
 
 INSERT INTO ThongBaoNo (MaSV, KiHocID, SoTienNo, NgayThongBao)
 VALUES
-('SV001', 6, 3000000, '2023-07-01'),
-('SV002', 6, 2000000, '2023-07-01'),
-('SV003', 7, 1000000, '2022-01-01'),
-('SV004', 7, 500000,  '2022-01-01'),
-('SV005', 8, 4500000, '2022-06-01'),
-('SV006', 8, 2500000, '2022-06-01'),
-('SV007', 9, 1800000, '2021-01-01'),
-('SV008', 9, 1200000, '2021-01-01'),
-('SV009', 10, 1000000, '2021-06-01'),
-('SV010', 10, 900000,  '2021-06-01');
+('11220001', 6, 3000000, '2023-07-01'),
+('11220002', 6, 2000000, '2023-07-01'),
+('11220003', 7, 1000000, '2022-01-01'),
+('11220004', 7, 500000,  '2022-01-01'),
+('11220005', 8, 4500000, '2022-06-01'),
+('11220006', 8, 2500000, '2022-06-01'),
+('11220007', 9, 1800000, '2021-01-01'),
+('11220008', 9, 1200000, '2021-01-01'),
+('11220009', 10, 1000000, '2021-06-01'),
+('11220010', 10, 900000,  '2021-06-01');
 
 SELECT * FROM Users;
 SELECT * FROM SinhVien;
@@ -581,6 +622,9 @@ DROP TABLE IF EXISTS KiHoc;
 -- Bảng chính
 DROP TABLE IF EXISTS SinhVien;
 DROP TABLE IF EXISTS Users;
+
+SELECT TOP 1 MaSV FROM SinhVien
+ORDER BY MaSV DESC;
 
 
 

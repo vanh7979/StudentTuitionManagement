@@ -36,6 +36,11 @@ namespace ProjectStudentTuitionManagement
 
         }
 
+        private void textBox2_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
         private void btnStudent_Click(object sender, EventArgs e)
         {
             ShowControl(new StudentManagement());
@@ -56,9 +61,18 @@ namespace ProjectStudentTuitionManagement
             ShowControl(new StatisticReport());
         }
 
-        private void textBox2_TextChanged(object sender, EventArgs e)
+        private void lkLogout_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
+            var result = MessageBox.Show("Bạn có chắc chắn muốn đăng xuất?", "Xác nhận", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if (result == DialogResult.Yes)
+            {
+                this.Hide();
 
+                LoginForm loginForm = new LoginForm();
+                loginForm.Show();
+
+                Application.Restart();
+            }
         }
     }
 }

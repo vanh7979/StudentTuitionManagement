@@ -31,137 +31,127 @@ namespace ProjectStudentTuitionManagement
         /// </summary>
         private void InitializeComponent()
         {
-            button5 = new Button();
-            button3 = new Button();
-            button2 = new Button();
-            button4 = new Button();
-            button1 = new Button();
-            dataGridView1 = new DataGridView();
-            IDKiHoc = new DataGridViewTextBoxColumn();
-            TenKiHoc = new DataGridViewTextBoxColumn();
-            NamHoc = new DataGridViewTextBoxColumn();
-            textBox1 = new TextBox();
-            ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
-            SuspendLayout();
+            this.btnAll = new System.Windows.Forms.Button();
+            this.btnChange = new System.Windows.Forms.Button();
+            this.btnDelete = new System.Windows.Forms.Button();
+            this.btnSearch = new System.Windows.Forms.Button();
+            this.btnAdd = new System.Windows.Forms.Button();
+            this.txtSearch = new System.Windows.Forms.TextBox();
+            this.dvgSemester = new System.Windows.Forms.DataGridView();
+            ((System.ComponentModel.ISupportInitialize)(this.dvgSemester)).BeginInit();
+            this.SuspendLayout();
             // 
-            // button5
+            // btnAll
             // 
-            button5.Location = new Point(700, 580);
-            button5.Name = "button5";
-            button5.Size = new Size(200, 40);
-            button5.TabIndex = 16;
-            button5.Text = "Toàn bộ kì học";
-            button5.UseVisualStyleBackColor = true;
+            this.btnAll.Location = new System.Drawing.Point(700, 464);
+            this.btnAll.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btnAll.Name = "btnAll";
+            this.btnAll.Size = new System.Drawing.Size(200, 32);
+            this.btnAll.TabIndex = 16;
+            this.btnAll.Text = "Toàn bộ kì học";
+            this.btnAll.UseVisualStyleBackColor = true;
+            this.btnAll.Click += new System.EventHandler(this.btnAll_Click);
             // 
-            // button3
+            // btnChange
             // 
-            button3.Location = new Point(475, 580);
-            button3.Name = "button3";
-            button3.Size = new Size(200, 40);
-            button3.TabIndex = 15;
-            button3.Text = "Chỉnh sửa kì học";
-            button3.UseVisualStyleBackColor = true;
+            this.btnChange.Location = new System.Drawing.Point(475, 464);
+            this.btnChange.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btnChange.Name = "btnChange";
+            this.btnChange.Size = new System.Drawing.Size(200, 32);
+            this.btnChange.TabIndex = 15;
+            this.btnChange.Text = "Chỉnh sửa kì học";
+            this.btnChange.UseVisualStyleBackColor = true;
+            this.btnChange.Click += new System.EventHandler(this.btnChange_Click);
             // 
-            // button2
+            // btnDelete
             // 
-            button2.Location = new Point(250, 580);
-            button2.Name = "button2";
-            button2.Size = new Size(200, 40);
-            button2.TabIndex = 14;
-            button2.Text = "Xóa kì học";
-            button2.UseVisualStyleBackColor = true;
+            this.btnDelete.Location = new System.Drawing.Point(250, 464);
+            this.btnDelete.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btnDelete.Name = "btnDelete";
+            this.btnDelete.Size = new System.Drawing.Size(200, 32);
+            this.btnDelete.TabIndex = 14;
+            this.btnDelete.Text = "Xóa kì học";
+            this.btnDelete.UseVisualStyleBackColor = true;
+            this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
             // 
-            // button4
+            // btnSearch
             // 
-            button4.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            button4.Location = new Point(690, 40);
-            button4.Name = "button4";
-            button4.Size = new Size(120, 40);
-            button4.TabIndex = 13;
-            button4.Text = "Tìm kiếm";
-            button4.UseVisualStyleBackColor = true;
+            this.btnSearch.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnSearch.Location = new System.Drawing.Point(690, 32);
+            this.btnSearch.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btnSearch.Name = "btnSearch";
+            this.btnSearch.Size = new System.Drawing.Size(120, 32);
+            this.btnSearch.TabIndex = 13;
+            this.btnSearch.Text = "Tìm kiếm";
+            this.btnSearch.UseVisualStyleBackColor = true;
+            this.btnSearch.Click += new System.EventHandler(this.btnSearch_Click);
             // 
-            // button1
+            // btnAdd
             // 
-            button1.Location = new Point(25, 580);
-            button1.Name = "button1";
-            button1.Size = new Size(200, 40);
-            button1.TabIndex = 12;
-            button1.Text = "Thêm kì học";
-            button1.UseVisualStyleBackColor = true;
+            this.btnAdd.Location = new System.Drawing.Point(25, 464);
+            this.btnAdd.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btnAdd.Name = "btnAdd";
+            this.btnAdd.Size = new System.Drawing.Size(200, 32);
+            this.btnAdd.TabIndex = 12;
+            this.btnAdd.Text = "Thêm kì học";
+            this.btnAdd.UseVisualStyleBackColor = true;
+            this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
             // 
-            // dataGridView1
+            // txtSearch
             // 
-            dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView1.Columns.AddRange(new DataGridViewColumn[] { IDKiHoc, TenKiHoc, NamHoc });
-            dataGridView1.Location = new Point(25, 110);
-            dataGridView1.Name = "dataGridView1";
-            dataGridView1.RowHeadersVisible = false;
-            dataGridView1.RowHeadersWidth = 50;
-            dataGridView1.Size = new Size(900, 450);
-            dataGridView1.TabIndex = 11;
+            this.txtSearch.Font = new System.Drawing.Font("Segoe UI", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtSearch.ForeColor = System.Drawing.Color.Gray;
+            this.txtSearch.Location = new System.Drawing.Point(190, 32);
+            this.txtSearch.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.txtSearch.Multiline = true;
+            this.txtSearch.Name = "txtSearch";
+            this.txtSearch.Size = new System.Drawing.Size(480, 33);
+            this.txtSearch.TabIndex = 10;
+            this.txtSearch.Text = "Nhập kì học .VD:HK1 2021";
+            this.txtSearch.Enter += new System.EventHandler(this.txtSearch_Enter);
+            this.txtSearch.Leave += new System.EventHandler(this.txtSearch_Leave);
             // 
-            // IDKiHoc
+            // dvgSemester
             // 
-            IDKiHoc.HeaderText = "ID kì học";
-            IDKiHoc.MinimumWidth = 6;
-            IDKiHoc.Name = "IDKiHoc";
-            IDKiHoc.Width = 283;
-            // 
-            // TenKiHoc
-            // 
-            TenKiHoc.HeaderText = "Tên kì học";
-            TenKiHoc.MinimumWidth = 6;
-            TenKiHoc.Name = "TenKiHoc";
-            TenKiHoc.Width = 282;
-            // 
-            // NamHoc
-            // 
-            NamHoc.HeaderText = "Năm học";
-            NamHoc.MinimumWidth = 6;
-            NamHoc.Name = "NamHoc";
-            NamHoc.Width = 283;
-            // 
-            // textBox1
-            // 
-            textBox1.Font = new Font("Segoe UI", 13.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            textBox1.Location = new Point(190, 40);
-            textBox1.Multiline = true;
-            textBox1.Name = "textBox1";
-            
-            textBox1.Size = new Size(480, 40);
-            textBox1.TabIndex = 10;
+            this.dvgSemester.AllowUserToAddRows = false;
+            this.dvgSemester.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dvgSemester.Location = new System.Drawing.Point(41, 87);
+            this.dvgSemester.Name = "dvgSemester";
+            this.dvgSemester.RowHeadersWidth = 51;
+            this.dvgSemester.RowTemplate.Height = 24;
+            this.dvgSemester.Size = new System.Drawing.Size(875, 345);
+            this.dvgSemester.TabIndex = 17;
             // 
             // SemesterManagement
             // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
-            AutoScaleMode = AutoScaleMode.Font;
-            BackColor = Color.WhiteSmoke;
-            Controls.Add(button5);
-            Controls.Add(button3);
-            Controls.Add(button2);
-            Controls.Add(button4);
-            Controls.Add(button1);
-            Controls.Add(dataGridView1);
-            Controls.Add(textBox1);
-            Name = "SemesterManagement";
-            Size = new Size(950, 650);
-            ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
-            ResumeLayout(false);
-            PerformLayout();
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.Controls.Add(this.dvgSemester);
+            this.Controls.Add(this.btnAll);
+            this.Controls.Add(this.btnChange);
+            this.Controls.Add(this.btnDelete);
+            this.Controls.Add(this.btnSearch);
+            this.Controls.Add(this.btnAdd);
+            this.Controls.Add(this.txtSearch);
+            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.Name = "SemesterManagement";
+            this.Size = new System.Drawing.Size(950, 520);
+            this.Load += new System.EventHandler(this.SemesterManagement_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.dvgSemester)).EndInit();
+            this.ResumeLayout(false);
+            this.PerformLayout();
+
         }
 
         #endregion
 
-        private Button button5;
-        private Button button3;
-        private Button button2;
-        private Button button4;
-        private Button button1;
-        private DataGridView dataGridView1;
-        private TextBox textBox1;
-        private DataGridViewTextBoxColumn IDKiHoc;
-        private DataGridViewTextBoxColumn TenKiHoc;
-        private DataGridViewTextBoxColumn NamHoc;
+        private Button btnAll;
+        private Button btnChange;
+        private Button btnDelete;
+        private Button btnSearch;
+        private Button btnAdd;
+        private TextBox txtSearch;
+        private DataGridView dvgSemester;
     }
 }

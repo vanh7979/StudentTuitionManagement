@@ -39,12 +39,14 @@ namespace ProjectStudentTuitionManagement
             this.btnSemester = new System.Windows.Forms.Button();
             this.btnStudent = new System.Windows.Forms.Button();
             this.panelMain = new System.Windows.Forms.Panel();
+            this.lkLogout = new System.Windows.Forms.LinkLabel();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.lkLogout);
             this.panel1.Controls.Add(this.textBox2);
             this.panel1.Controls.Add(this.btnStatisticReport);
             this.panel1.Controls.Add(this.pictureBox1);
@@ -85,6 +87,7 @@ namespace ProjectStudentTuitionManagement
             this.btnStatisticReport.TabIndex = 2;
             this.btnStatisticReport.Text = "Thống kê, báo cáo";
             this.btnStatisticReport.UseVisualStyleBackColor = true;
+            this.btnStatisticReport.Click += new System.EventHandler(this.btnStatisticReport_Click);
             // 
             // pictureBox1
             // 
@@ -110,6 +113,7 @@ namespace ProjectStudentTuitionManagement
             this.btnTuition.TabIndex = 1;
             this.btnTuition.Text = "Quản lý học phí";
             this.btnTuition.UseVisualStyleBackColor = true;
+            this.btnTuition.Click += new System.EventHandler(this.btnTuition_Click);
             // 
             // btnSemester
             // 
@@ -124,6 +128,7 @@ namespace ProjectStudentTuitionManagement
             this.btnSemester.TabIndex = 1;
             this.btnSemester.Text = "Quản lý học kì";
             this.btnSemester.UseVisualStyleBackColor = true;
+            this.btnSemester.Click += new System.EventHandler(this.btnSemester_Click);
             // 
             // btnStudent
             // 
@@ -139,6 +144,7 @@ namespace ProjectStudentTuitionManagement
             this.btnStudent.TabIndex = 0;
             this.btnStudent.Text = "Quản lý sinh viên";
             this.btnStudent.UseVisualStyleBackColor = true;
+            this.btnStudent.Click += new System.EventHandler(this.btnStudent_Click);
             // 
             // panelMain
             // 
@@ -147,6 +153,18 @@ namespace ProjectStudentTuitionManagement
             this.panelMain.Name = "panelMain";
             this.panelMain.Size = new System.Drawing.Size(950, 520);
             this.panelMain.TabIndex = 1;
+            // 
+            // lkLogout
+            // 
+            this.lkLogout.AutoSize = true;
+            this.lkLogout.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
+            this.lkLogout.Location = new System.Drawing.Point(52, 471);
+            this.lkLogout.Name = "lkLogout";
+            this.lkLogout.Size = new System.Drawing.Size(101, 25);
+            this.lkLogout.TabIndex = 5;
+            this.lkLogout.TabStop = true;
+            this.lkLogout.Text = "Đăng xuất";
+            this.lkLogout.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lkLogout_LinkClicked);
             // 
             // Admin
             // 
@@ -177,5 +195,6 @@ namespace ProjectStudentTuitionManagement
         private Panel panelMain;
         private Button btnStatisticReport;
         private TextBox textBox2;
+        private LinkLabel lkLogout;
     }
 }

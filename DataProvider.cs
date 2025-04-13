@@ -16,7 +16,7 @@ namespace ProjectStudentTuitionManagement
         public SqlCommand cmd;
         public DataTable dta;
         public SqlDataAdapter ada;
-        private string strKN = "Data Source=PTRANVANH;Initial Catalog=NHOM7_LTUD;Integrated Security=True";
+        private string strKN = "Data Source=DESKTOP\\HAYLAMDMM;Initial Catalog=NHOM7_LTUD;Integrated Security=True";
 
 
         public void KetNoiDl()
@@ -29,6 +29,27 @@ namespace ProjectStudentTuitionManagement
             if (cnn.State == ConnectionState.Open)
                 cnn.Close();
         }
+
+        public void Doc_DL(string sql, Action<SqlDataReader> xuLyDuLieu)
+        {
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(strKN))
+                using (SqlCommand cmd = new SqlCommand(sql, conn))
+                {
+                    conn.Open();
+                    using (SqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        xuLyDuLieu(reader);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Lỗi khi đọc dữ liệu: " + ex.Message);
+            }
+        }
+
         public void ThucThi(string sql)
         {
             try
@@ -53,7 +74,6 @@ namespace ProjectStudentTuitionManagement
             KetNoiDl();
             DataTable dta = new DataTable();
             ada = new SqlDataAdapter(sql, cnn);
-            dta = new DataTable();
             ada.Fill(dta);
             return dta;
 

@@ -32,11 +32,11 @@ namespace NewProject
             string reportPath = Path.Combine(Application.StartupPath, "HOADON.rpt");
             rpt.Load(reportPath);
 
-            rpt.SetDatabaseLogon("", "", "PTRANVANH", "NHOM7_LTUD"); 
+            rpt.SetDatabaseLogon("", "", "DESKTOP\\HAYLAMDMM", "NHOM7_LTUD"); 
             foreach (Table table in rpt.Database.Tables)
             {
                 TableLogOnInfo logonInfo = table.LogOnInfo;
-                logonInfo.ConnectionInfo.ServerName = "PTRANVANH";
+                logonInfo.ConnectionInfo.ServerName = "DESKTOP\\HAYLAMDMM";
                 logonInfo.ConnectionInfo.DatabaseName = "NHOM7_LTUD";
                 logonInfo.ConnectionInfo.IntegratedSecurity = true; 
                 table.ApplyLogOnInfo(logonInfo);
