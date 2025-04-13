@@ -43,6 +43,16 @@ TENKHOA nvarchar(50) not null,
 DIACHI char(50), SODT char(12));
 
 drop table KhoaVien
+
+--Bảng tín chỉ--
+create table TinChi(
+MATIN nvarchar(10) not null primary key,
+MALOP nvarchar(10) not null,
+SOTIEN1TIN int,
+foreign key (MALOP) references Lop(MALOP)
+)
+
+drop table TinChi
 --Bảng kì học--
 CREATE TABLE KiHoc (
     KiHocID NVARCHAR(10) PRIMARY KEY,
@@ -67,7 +77,7 @@ DROP TABLE HocPhi;
 --Bảng thanh toán--
 CREATE TABLE ThanhToan (
     ThanhToanID INT IDENTITY(1,1) PRIMARY KEY,
-    HocPhiID INT NOT NULL,
+    HocPhiID NVARCHAR(20) NOT NULL,
     NgayThanhToan DATE DEFAULT GETDATE(),
     SoTienDaDong DECIMAL(18, 2) NOT NULL,
     FOREIGN KEY (HocPhiID) REFERENCES HocPhi(HocPhiID)
@@ -379,7 +389,7 @@ BEGIN
     ORDER BY kh.NamHoc DESC, kh.TenKiHoc;
 END;
 
-
+exec sp_LayHocPhiTheoMaSV '11220011'
 CREATE PROCEDURE sp_LocHocPhi
     @MaSV NVARCHAR(20),
     @TenKiHoc NVARCHAR(50) = NULL,
@@ -401,7 +411,7 @@ BEGIN
 END;
 
 EXEC sp_LocHocPhi 
-    @MaSV = 'SV001', 
+    @MaSV = '11220001', 
     @TenKiHoc = NULL, 
     @TrangThai = NULL;
 
@@ -427,7 +437,7 @@ VALUES
 ('user8', 'pass8', 'Dang Thi G', 'user'),
 ('user9', 'pass9', 'Bui Van I', 'user'),
 ('user10', 'pass10', 'Mai Thi K', 'user');
-
+select * from Users
 INSERT INTO SinhVien (MaSV, FullName, Lop, Khoa)
 VALUES
 ('11220001', 'Nguyen Van A', 'CNTT1', 'CNTT'),
@@ -454,7 +464,7 @@ VALUES
 ('CNTT',N'Khoa Công Nghệ Thông Tin',N'Tòa A2','0123456789'),
 ('KTPM',N'Viện Kỹ Thuật',N'Tòa A2','0123456789'),
 ('HTTT',N'Khoa Kinh Tế',N'Tòa A2','0123456789');
-
+select* from Users
 
 UPDATE Users SET MaSV = '11220001' WHERE Username = 'user1';
 UPDATE Users SET MaSV = '11220002' WHERE Username = 'user2';
@@ -481,7 +491,18 @@ VALUES
 ('2-2021','HK2 2021', 2021, '2021-03-01', '2021-06-20');
 
 Select * from KiHoc
-delete from KiHoc where KiHocID ='1-2021'
+
+INSERT INTO TinChi 
+values
+('CNTT1-450', 'CNTT1',450000),
+('CNTT2-450', 'CNTT2',450000),
+('KTPM1-415', 'KTPM1',4150000),
+('HTTT1-500', 'HTTT1',500000),
+('HTTT2-500', 'HTTT2',500000)
+
+drop table TinChi
+
+select SOTIEN1TIN from TinChi where MALOP = 'CNTT1'
 INSERT INTO HocPhi (HocPhiID, MaSV, KiHocID, SoTien, HanDong)
 VALUES
 ('11220001-1-2022','11220001', '1-2022', 5000000, '2023-01-31'),
@@ -683,17 +704,3 @@ select * from v_HoaDon_ChiTiet
 
 
 EXEC sp_LayHocPhiTheoMaSV 'SV001'
-
-
-
-
-
-
-
-
-
-
-
-
-
-
