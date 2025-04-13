@@ -31,149 +31,127 @@ namespace ProjectStudentTuitionManagement
         /// </summary>
         private void InitializeComponent()
         {
-            textBox1 = new TextBox();
-            dataGridView1 = new DataGridView();
-            MaSV = new DataGridViewTextBoxColumn();
-            HoTen = new DataGridViewTextBoxColumn();
-            Lop = new DataGridViewTextBoxColumn();
-            Khoa = new DataGridViewTextBoxColumn();
-            button1 = new Button();
-            button4 = new Button();
-            button2 = new Button();
-            button3 = new Button();
-            button5 = new Button();
-            ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
-            SuspendLayout();
+            this.txtSearch = new System.Windows.Forms.TextBox();
+            this.dvgThongTinSV = new System.Windows.Forms.DataGridView();
+            this.btnAdd = new System.Windows.Forms.Button();
+            this.btnSearch = new System.Windows.Forms.Button();
+            this.btnDelete = new System.Windows.Forms.Button();
+            this.btnChange = new System.Windows.Forms.Button();
+            this.btnAll = new System.Windows.Forms.Button();
+            ((System.ComponentModel.ISupportInitialize)(this.dvgThongTinSV)).BeginInit();
+            this.SuspendLayout();
             // 
-            // textBox1
+            // txtSearch
             // 
-            textBox1.Font = new Font("Segoe UI", 13.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            textBox1.Location = new Point(190, 40);
-            textBox1.Multiline = true;
-            textBox1.Name = "textBox1";
-            textBox1.Size = new Size(480, 40);
-            textBox1.TabIndex = 0;
+            this.txtSearch.Font = new System.Drawing.Font("Segoe UI", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtSearch.ForeColor = System.Drawing.Color.Gray;
+            this.txtSearch.Location = new System.Drawing.Point(190, 32);
+            this.txtSearch.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.txtSearch.Multiline = true;
+            this.txtSearch.Name = "txtSearch";
+            this.txtSearch.Size = new System.Drawing.Size(480, 33);
+            this.txtSearch.TabIndex = 0;
+            this.txtSearch.Text = "Nhập mã sinh viên";
+            this.txtSearch.Enter += new System.EventHandler(this.txtSearch_Enter);
+            this.txtSearch.Leave += new System.EventHandler(this.txtSearch_Leave);
             // 
-            // dataGridView1
+            // dvgThongTinSV
             // 
-            dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView1.Columns.AddRange(new DataGridViewColumn[] { MaSV, HoTen, Lop, Khoa });
-            dataGridView1.Location = new Point(25, 120);
-            dataGridView1.Name = "dataGridView1";
-            dataGridView1.RowHeadersWidth = 50;
-            dataGridView1.Size = new Size(900, 450);
-            dataGridView1.TabIndex = 2;
+            this.dvgThongTinSV.AllowUserToAddRows = false;
+            this.dvgThongTinSV.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dvgThongTinSV.Location = new System.Drawing.Point(25, 96);
+            this.dvgThongTinSV.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.dvgThongTinSV.Name = "dvgThongTinSV";
+            this.dvgThongTinSV.RowHeadersWidth = 50;
+            this.dvgThongTinSV.Size = new System.Drawing.Size(900, 360);
+            this.dvgThongTinSV.TabIndex = 2;
             // 
-            // MaSV
+            // btnAdd
             // 
-            MaSV.FillWeight = 50.6066475F;
-            MaSV.HeaderText = "Mã sinh viên";
-            MaSV.MinimumWidth = 6;
-            MaSV.Name = "MaSV";
-            MaSV.Width = 150;
+            this.btnAdd.Location = new System.Drawing.Point(25, 472);
+            this.btnAdd.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btnAdd.Name = "btnAdd";
+            this.btnAdd.Size = new System.Drawing.Size(200, 32);
+            this.btnAdd.TabIndex = 3;
+            this.btnAdd.Text = "Thêm sinh viên";
+            this.btnAdd.UseVisualStyleBackColor = true;
+            this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
             // 
-            // HoTen
+            // btnSearch
             // 
-            HoTen.FillWeight = 99.29669F;
-            HoTen.HeaderText = "Họ và tên";
-            HoTen.MinimumWidth = 6;
-            HoTen.Name = "HoTen";
-            HoTen.Width = 294;
+            this.btnSearch.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnSearch.Location = new System.Drawing.Point(690, 32);
+            this.btnSearch.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btnSearch.Name = "btnSearch";
+            this.btnSearch.Size = new System.Drawing.Size(120, 32);
+            this.btnSearch.TabIndex = 6;
+            this.btnSearch.Text = "Tìm kiếm";
+            this.btnSearch.UseVisualStyleBackColor = true;
+            this.btnSearch.Click += new System.EventHandler(this.btnSearch_Click);
             // 
-            // Lop
+            // btnDelete
             // 
-            Lop.FillWeight = 68.45799F;
-            Lop.HeaderText = "Lớp";
-            Lop.MinimumWidth = 6;
-            Lop.Name = "Lop";
-            Lop.Width = 203;
+            this.btnDelete.Location = new System.Drawing.Point(250, 472);
+            this.btnDelete.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btnDelete.Name = "btnDelete";
+            this.btnDelete.Size = new System.Drawing.Size(200, 32);
+            this.btnDelete.TabIndex = 7;
+            this.btnDelete.Text = "Xóa sinh viên";
+            this.btnDelete.UseVisualStyleBackColor = true;
+            this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
             // 
-            // Khoa
+            // btnChange
             // 
-            Khoa.FillWeight = 67.73493F;
-            Khoa.HeaderText = "Khoa";
-            Khoa.MinimumWidth = 6;
-            Khoa.Name = "Khoa";
-            Khoa.Width = 201;
+            this.btnChange.Location = new System.Drawing.Point(475, 472);
+            this.btnChange.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btnChange.Name = "btnChange";
+            this.btnChange.Size = new System.Drawing.Size(200, 32);
+            this.btnChange.TabIndex = 8;
+            this.btnChange.Text = "Chỉnh sửa thông tin";
+            this.btnChange.UseVisualStyleBackColor = true;
+            this.btnChange.Click += new System.EventHandler(this.btnChange_Click);
             // 
-            // button1
+            // btnAll
             // 
-            button1.Location = new Point(25, 590);
-            button1.Name = "button1";
-            button1.Size = new Size(200, 40);
-            button1.TabIndex = 3;
-            button1.Text = "Thêm sinh viên";
-            button1.UseVisualStyleBackColor = true;
-            // 
-            // button4
-            // 
-            button4.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            button4.Location = new Point(690, 40);
-            button4.Name = "button4";
-            button4.Size = new Size(120, 40);
-            button4.TabIndex = 6;
-            button4.Text = "Tìm kiếm";
-            button4.UseVisualStyleBackColor = true;
-            // 
-            // button2
-            // 
-            button2.Location = new Point(250, 590);
-            button2.Name = "button2";
-            button2.Size = new Size(200, 40);
-            button2.TabIndex = 7;
-            button2.Text = "Xóa sinh viên";
-            button2.UseVisualStyleBackColor = true;
-            // 
-            // button3
-            // 
-            button3.Location = new Point(475, 590);
-            button3.Name = "button3";
-            button3.Size = new Size(200, 40);
-            button3.TabIndex = 8;
-            button3.Text = "Chỉnh sửa thông tin";
-            button3.UseVisualStyleBackColor = true;
-            // 
-            // button5
-            // 
-            button5.Location = new Point(700, 590);
-            button5.Name = "button5";
-            button5.Size = new Size(200, 40);
-            button5.TabIndex = 9;
-            button5.Text = "Toàn bộ danh sách";
-            button5.UseVisualStyleBackColor = true;
+            this.btnAll.Location = new System.Drawing.Point(700, 472);
+            this.btnAll.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btnAll.Name = "btnAll";
+            this.btnAll.Size = new System.Drawing.Size(200, 32);
+            this.btnAll.TabIndex = 9;
+            this.btnAll.Text = "Toàn bộ danh sách";
+            this.btnAll.UseVisualStyleBackColor = true;
+            this.btnAll.Click += new System.EventHandler(this.btnAll_Click);
             // 
             // StudentManagement
             // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
-            AutoScaleMode = AutoScaleMode.Font;
-            BackColor = Color.WhiteSmoke;
-            Controls.Add(button5);
-            Controls.Add(button3);
-            Controls.Add(button2);
-            Controls.Add(button4);
-            Controls.Add(button1);
-            Controls.Add(dataGridView1);
-            Controls.Add(textBox1);
-            Name = "StudentManagement";
-            Size = new Size(950, 650);
-            Load += StudentManagement_Load;
-            ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
-            ResumeLayout(false);
-            PerformLayout();
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.Controls.Add(this.btnAll);
+            this.Controls.Add(this.btnChange);
+            this.Controls.Add(this.btnDelete);
+            this.Controls.Add(this.btnSearch);
+            this.Controls.Add(this.btnAdd);
+            this.Controls.Add(this.dvgThongTinSV);
+            this.Controls.Add(this.txtSearch);
+            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.Name = "StudentManagement";
+            this.Size = new System.Drawing.Size(950, 520);
+            this.Load += new System.EventHandler(this.StudentManagement_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.dvgThongTinSV)).EndInit();
+            this.ResumeLayout(false);
+            this.PerformLayout();
+
         }
 
         #endregion
 
-        private TextBox textBox1;
-        private DataGridView dataGridView1;
-        private DataGridViewTextBoxColumn MaSV;
-        private DataGridViewTextBoxColumn HoTen;
-        private DataGridViewTextBoxColumn Lop;
-        private DataGridViewTextBoxColumn Khoa;
-        private Button button1;
-        private Button button4;
-        private Button button2;
-        private Button button3;
-        private Button button5;
+        private TextBox txtSearch;
+        private DataGridView dvgThongTinSV;
+        private Button btnAdd;
+        private Button btnSearch;
+        private Button btnDelete;
+        private Button btnChange;
+        private Button btnAll;
     }
 }

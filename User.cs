@@ -67,6 +67,7 @@ namespace ProjectStudentTuitionManagement
                 dataGridView1.Columns["HanDong"].HeaderText = "Hạn đóng";
                 dataGridView1.Columns["TrangThai"].HeaderText = "Trạng thái";
                 dataGridView1.Visible = true;
+                dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             }
 
         }
