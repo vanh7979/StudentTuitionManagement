@@ -21,6 +21,8 @@ namespace ProjectStudentTuitionManagement
         private void StudentManagement_Load(object sender, EventArgs e)
         {
             LoadThongTinSinhVien();
+            txtSearch.Focus();
+            
         }
 
         public void LoadThongTinSinhVien()
@@ -44,19 +46,24 @@ namespace ProjectStudentTuitionManagement
 
         private void btnDelete_Click(object sender, EventArgs e)
         {
-            if (txtSearch.Text == "Nhập mã sinh viên")
+            if (dvgThongTinSV.CurrentRow == null)
             {
-                MessageBox.Show("Hãy nhập mã sinh viên vào ô tìm kiếm!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Vui lòng chọn một sinh viên để xóa!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
             }
-            else
+
+            
+            string maSV = dvgThongTinSV.CurrentRow.Cells["MaSV"].Value.ToString();
+
+            DialogResult dr = MessageBox.Show("Bạn chắc chắn muốn xóa sinh viên mã " + maSV + "?", "Xác nhận xóa", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if (dr == DialogResult.Yes)
             {
-                DialogResult dr = MessageBox.Show("Bạn chắc chắn muốn xóa sinh viên mã " + txtSearch.Text + "?", "Thông báo", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
-                if (dr == DialogResult.Yes)
-                {
-                    string query = $"DELETE FROM SinhVien where MaSV = '" + txtSearch.Text + "'";
-                    dp.ThucThi(query);
-                    this.StudentManagement_Load(sender, e);
-                }    
+                string query = $"DELETE FROM SinhVien WHERE MaSV = '{maSV}'";
+                dp.ThucThi(query);
+                MessageBox.Show("Đã xóa sinh viên!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                
+                this.StudentManagement_Load(sender, e);
             }
         }
 
@@ -101,26 +108,29 @@ namespace ProjectStudentTuitionManagement
 
         private void btnChange_Click(object sender, EventArgs e)
         {
-            if (txtSearch.Text == "Nhập mã sinh viên")
+            if (dvgThongTinSV.CurrentRow == null)
             {
-                MessageBox.Show("Hãy nhập mã sinh viên vào ô tìm kiếm!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Vui lòng chọn một sinh viên để sửa!");
+                return;
             }
-            else
+
+            
+            string maSV = dvgThongTinSV.CurrentRow.Cells["MaSV"].Value.ToString();
+
+            
+            string query = $"SELECT * FROM SinhVien WHERE MaSV = '{maSV}'";
+            dp.Doc_DL(query, reader =>
             {
-                string query = "SELECT * FROM SinhVien WHERE MaSV ='" + txtSearch.Text + "'";
-                dp.Doc_DL(query, reader =>
+                if (reader.Read())
                 {
-                    if (reader.Read())
-                    {
-                        ChangeStudentInfo changeTuitionInfo = new ChangeStudentInfo(this, txtSearch.Text);
-                        changeTuitionInfo.Show();
-                    }
-                    else
-                    {
-                        MessageBox.Show("Hãy kiểm tra lại mã sinh viên!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    }
-                });
-            }
+                    ChangeStudentInfo changeStudentForm = new ChangeStudentInfo(this, maSV);
+                    changeStudentForm.Show();
+                }
+                else
+                {
+                    MessageBox.Show("Không tìm thấy sinh viên, vui lòng kiểm tra lại!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
+            });
         }
 
         private void btnAll_Click(object sender, EventArgs e)

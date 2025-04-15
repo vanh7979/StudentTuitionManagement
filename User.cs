@@ -37,6 +37,7 @@ namespace ProjectStudentTuitionManagement
                 label4.Text = lop;
                 label5.Text = khoa;
             }
+            
         }
 
 
@@ -154,10 +155,10 @@ namespace ProjectStudentTuitionManagement
             string trangThaiParam = string.IsNullOrEmpty(trangThai) ? "NULL" : $"N'{trangThai.Replace("'", "''")}'";
 
             string query = $@"
-        EXEC sp_LocHocPhi 
-        @MaSV = N'{maSV}', 
-        @TenKiHoc = {tenKiHocParam}, 
-        @TrangThai = {trangThaiParam}";
+            EXEC sp_LocHocPhi 
+            @MaSV = N'{maSV}', 
+            @TenKiHoc = {tenKiHocParam}, 
+            @TrangThai = {trangThaiParam}";
 
             DataTable dta = dp.Lay_DLbang(query);
             if (dta != null && dta.Rows.Count > 0)
@@ -193,6 +194,11 @@ namespace ProjectStudentTuitionManagement
             }
             comboBox2.DataSource = dtTrangThaiHienThi;
             comboBox2.DisplayMember = "TrangThaiText";
+        }
+
+        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
         }
     }
 }

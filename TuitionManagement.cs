@@ -24,6 +24,11 @@ namespace ProjectStudentTuitionManagement
             DataTable dt = new DataTable();
             dt = dp.Lay_DLbang(query);
             dvgThongTin.DataSource = dt;
+
+            dvgThongTin.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
+            dvgThongTin.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
+            dvgThongTin.DefaultCellStyle.WrapMode = DataGridViewTriState.True;
+
             dvgThongTin.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dvgThongTin.Columns["HocPhiID"].HeaderText = "Mã Học Phí";
             dvgThongTin.Columns["MaSV"].HeaderText = "Mã Sinh Viên";
@@ -121,19 +126,21 @@ namespace ProjectStudentTuitionManagement
 
         private void btnDelete_Click(object sender, EventArgs e)
         {
-            if (txtSearch.Text == "Nhập kì học hoặc mã sinh viên")
+            if (dvgThongTin.CurrentRow == null)
             {
-                MessageBox.Show("Hãy nhập thông tin tìm kiếm vào ô tìm kiếm!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Vui lòng chọn một dòng học phí để xóa!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
             }
-            else
+
+            string hocPhiID = dvgThongTin.CurrentRow.Cells["HocPhiID"].Value.ToString();
+
+            DialogResult dr = MessageBox.Show($"Bạn chắc chắn muốn xóa học phí mã {hocPhiID}?", "Xác nhận", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if (dr == DialogResult.Yes)
             {
-                DialogResult dr = MessageBox.Show("Bạn chắc chắn muốn xóa học phí cho sinh viên không ?", "Thông báo", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
-                if (dr == DialogResult.Yes)
-                {
-                    string query = $"DELETE FROM HocPhi where HocPhiID = '" + txtSearch.Text + "'";
-                    dp.ThucThi(query);
-                    this.TuitionManagement_Load(sender, e);
-                }
+                string query = $"DELETE FROM HocPhi WHERE HocPhiID = '{hocPhiID}'";
+                dp.ThucThi(query);
+                MessageBox.Show("Đã xóa học phí!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                this.TuitionManagement_Load(sender, e);
             }
         }
 
@@ -144,26 +151,27 @@ namespace ProjectStudentTuitionManagement
 
         private void btnChange_Click(object sender, EventArgs e)
         {
-            if (txtSearch.Text == "Nhập kì học hoặc mã sinh viên")
+            if (dvgThongTin.CurrentRow == null)
             {
-                MessageBox.Show("Hãy nhập mã học phí vào ô tìm kiếm!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Vui lòng chọn một dòng học phí để sửa!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
             }
-            else
+
+            string hocPhiID = dvgThongTin.CurrentRow.Cells["HocPhiID"].Value.ToString();
+
+            string query = $"SELECT * FROM HocPhi WHERE HocPhiID = '{hocPhiID}'";
+            dp.Doc_DL(query, reader =>
             {
-                string query = "SELECT * FROM HocPhi WHERE HocPhiID ='" + txtSearch.Text + "'";
-                dp.Doc_DL(query, reader =>
+                if (reader.Read())
                 {
-                    if (reader.Read())
-                    {
-                        ChangeTuitionInfo changeTuitionInfo = new ChangeTuitionInfo(this, txtSearch.Text);
-                        changeTuitionInfo.Show();
-                    }
-                    else
-                    {
-                        MessageBox.Show("Hãy kiểm tra lại mã học phí!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    }
-                });
-            }
+                    ChangeTuitionInfo changeForm = new ChangeTuitionInfo(this, hocPhiID);
+                    changeForm.Show();
+                }
+                else
+                {
+                    MessageBox.Show("Không tìm thấy học phí!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
+            });
         }
     }
 }

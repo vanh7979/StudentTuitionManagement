@@ -19,9 +19,7 @@ namespace ProjectStudentTuitionManagement
         DataProvider dp = new DataProvider();
         private void linkLabel2_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            RegisterForm registerForm = new RegisterForm();
-            registerForm.Show();
-            this.Hide();
+            
         }
 
         
@@ -36,6 +34,11 @@ namespace ProjectStudentTuitionManagement
                 textBox1.Text = NewProject.Properties.Settings.Default.SavedUsername;
                 textBox2.Text = NewProject.Properties.Settings.Default.SavedPassword;
             }
+            this.FormBorderStyle = FormBorderStyle.FixedDialog; 
+            this.MaximizeBox = false; 
+            this.MinimizeBox = false; 
+            this.ControlBox = false;  
+            this.StartPosition = FormStartPosition.CenterScreen;
         }
 
         private void button1_Click_1(object sender, EventArgs e)
@@ -78,9 +81,10 @@ namespace ProjectStudentTuitionManagement
                 MessageBox.Show("Đăng nhập thành công!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 this.Hide();
 
+
                 if (role == "admin")
                 {
-                    Admin adminForm = new Admin();
+                    Admin adminForm = new Admin(username);
                     adminForm.ShowDialog();
                 }
                 else
@@ -98,13 +102,7 @@ namespace ProjectStudentTuitionManagement
             }
         }
 
-        private void linkLabel2_LinkClicked_1(object sender, LinkLabelLinkClickedEventArgs e)
-        {
-            this.Hide();
-            RegisterForm form = new RegisterForm();
-            form.ShowDialog();
-            
-        }
+        
 
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
@@ -124,6 +122,11 @@ namespace ProjectStudentTuitionManagement
         private void checkBox1_CheckedChanged(object sender, EventArgs e)
         {
 
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
         }
     }
     }

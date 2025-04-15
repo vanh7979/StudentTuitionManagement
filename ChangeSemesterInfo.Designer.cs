@@ -102,7 +102,7 @@
             this.btnChange.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
             this.btnChange.Location = new System.Drawing.Point(151, 370);
             this.btnChange.Name = "btnChange";
-            this.btnChange.Size = new System.Drawing.Size(181, 36);
+            this.btnChange.Size = new System.Drawing.Size(221, 36);
             this.btnChange.TabIndex = 34;
             this.btnChange.Text = "Thay đổi thông tin";
             this.btnChange.UseVisualStyleBackColor = true;

@@ -67,56 +67,47 @@ namespace ProjectStudentTuitionManagement
 
         private void btnDelete_Click(object sender, EventArgs e)
         {
-            if (txtSearch.Text == "Nhập kì học .VD:HK1 2021")
+            if (dvgSemester.CurrentRow == null)
             {
-                MessageBox.Show("Hãy nhập mã kì học vào ô tìm kiếm!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Vui lòng chọn một kỳ học để xóa!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
             }
-            else
+
+            string tenKiHoc = dvgSemester.CurrentRow.Cells["TenKiHoc"].Value.ToString();
+
+            DialogResult dr = MessageBox.Show($"Bạn chắc chắn muốn xóa học kỳ '{tenKiHoc}'?", "Xác nhận", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if (dr == DialogResult.Yes)
             {
-                string query = "SELECT * FROM KiHoc WHERE TenKiHoc = '" + txtSearch.Text + "'";
-                dp.Doc_DL(query, reader =>
-                {
-                    if (!reader.Read())
-                    {
-                        MessageBox.Show("Không tìm thấy kì học, hãy kiểm tra lại.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    }
-                    else 
-                    {
-                        DialogResult dr = MessageBox.Show("Bạn chắc chắn muốn xóa học kì mã " + txtSearch.Text + "?", "Thông báo", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
-                        if (dr == DialogResult.Yes)
-                        {
-                            string delete = $"DELETE FROM KiHoc where TenKiHoc = '" + txtSearch.Text + "'";
-                            dp.ThucThi(delete);
-                            MessageBox.Show("Đã xóa!");
-                            this.SemesterManagement_Load(sender, e);
-                        }
-                    }
-                });
+                string delete = $"DELETE FROM KiHoc WHERE TenKiHoc = '{tenKiHoc}'";
+                dp.ThucThi(delete);
+                MessageBox.Show("Đã xóa!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                this.SemesterManagement_Load(sender, e);
             }
         }
 
         private void btnChange_Click(object sender, EventArgs e)
         {
-            if (txtSearch.Text == "Nhập kì học .VD:HK1 2021")
-            {
-                MessageBox.Show("Hãy nhập tên học kì vào ô tìm kiếm!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            if(dvgSemester.CurrentRow == null)
+    {
+                MessageBox.Show("Vui lòng chọn một kỳ học để sửa!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
             }
-            else
+
+            string tenKiHoc = dvgSemester.CurrentRow.Cells["TenKiHoc"].Value.ToString();
+
+            string query = $"SELECT * FROM KiHoc WHERE TenKiHoc = '{tenKiHoc}'";
+            dp.Doc_DL(query, reader =>
             {
-                string query = "SELECT * FROM KiHoc WHERE TenKiHoc ='" + txtSearch.Text + "'";
-                dp.Doc_DL(query, reader =>
+                if (reader.Read())
                 {
-                    if (reader.Read())
-                    {
-                        ChangeSemesterInfo changeSemesterInfo = new ChangeSemesterInfo(this, txtSearch.Text);
-                        changeSemesterInfo.Show();
-                    }
-                    else
-                    {
-                        MessageBox.Show("Hãy kiểm tra lại tên học kì!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    }
-                });
-            }
+                    ChangeSemesterInfo changeSemesterInfo = new ChangeSemesterInfo(this, tenKiHoc);
+                    changeSemesterInfo.Show();
+                }
+                else
+                {
+                    MessageBox.Show("Không tìm thấy kỳ học!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
+            });
         }
 
         private void btnSearch_Click(object sender, EventArgs e)

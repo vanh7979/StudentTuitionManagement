@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -31,7 +32,7 @@ namespace ProjectStudentTuitionManagement
 
         }
 
-        
+
 
         private void Tuition_Load_1(object sender, EventArgs e)
         {
@@ -40,12 +41,15 @@ namespace ProjectStudentTuitionManagement
 
         private void button4_Click_1(object sender, EventArgs e)
         {
+            // Bước 1: Kiểm tra số tiền nhập
             decimal daDong;
             if (!decimal.TryParse(textBox1.Text, out daDong) || daDong <= 0)
             {
                 MessageBox.Show("Vui lòng nhập số tiền hợp lệ và lớn hơn 0!", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
+
+            // Bước 2: Xác định ngân hàng được chọn
             string nganHang = "";
             if (radioButton1.Checked) nganHang = "MB Bank";
             else if (radioButton2.Checked) nganHang = "Techcombank";
@@ -57,82 +61,42 @@ namespace ProjectStudentTuitionManagement
                 return;
             }
 
+            // Bước 3: Gọi stored procedure để xử lý thanh toán
             DataProvider dp = new DataProvider();
-
-            // Lấy thông tin học phí của sinh viên và kỳ học
-            string query = $@"
-        SELECT hp.HocPhiID, hp.SoTien, kh.KiHocID
-        FROM HocPhi hp
-        JOIN KiHoc kh ON kh.KiHocID = hp.KiHocID
-        WHERE hp.MaSV = N'{maSV}' AND kh.TenKiHoc = N'{tenKiHoc}'";
-
-            DataTable dt = dp.Lay_DLbang(query);
-            if (dt.Rows.Count == 0)
-            {
-                MessageBox.Show("Không tìm thấy học phí cho kỳ học này!", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-            }
-
-            int hocPhiID = Convert.ToInt32(dt.Rows[0]["HocPhiID"]);
-            int kiHocID = Convert.ToInt32(dt.Rows[0]["KiHocID"]);
-            decimal tongTien = Convert.ToDecimal(dt.Rows[0]["SoTien"]);
-
-            // Tổng số tiền đã đóng trước đó
-            string queryDaDong = $"SELECT ISNULL(SUM(SoTienDaDong), 0) FROM ThanhToan WHERE HocPhiID = {hocPhiID}";
-            decimal daDongTruoc = Convert.ToDecimal(dp.Lay_GiaTriDon(queryDaDong));
-
-            // Tổng sau khi thanh toán lần này
-            decimal tongDaDong = daDongTruoc + daDong;
-            decimal conLai = tongTien - tongDaDong;
-
-            // Xác định trạng thái mới
-            string trangThai = "";
-            if (tongDaDong == 0)
-                trangThai = "Chưa đóng";
-            else if (conLai <= 0)
-                trangThai = "Đã đóng";
-            else
-                trangThai = "Còn nợ";
-
-            // Tạo câu lệnh SQL để thực thi
-            string sql = $@"
-    BEGIN
-        INSERT INTO ThanhToan (HocPhiID, NgayThanhToan, SoTienDaDong)
-        VALUES ({hocPhiID}, GETDATE(), {daDong.ToString(System.Globalization.CultureInfo.InvariantCulture)});
-
-        DECLARE @ThanhToanID INT;
-        SET @ThanhToanID = SCOPE_IDENTITY();
-
-        INSERT INTO HoaDon (ThanhToanID, NgayLap, SoTien, NganHang)
-        VALUES (@ThanhToanID, GETDATE(), {daDong.ToString(System.Globalization.CultureInfo.InvariantCulture)}, N'{nganHang}');
-
-        UPDATE HocPhi
-        SET TrangThai = N'{trangThai}'
-        WHERE HocPhiID = {hocPhiID};";
-
-            // Nếu còn nợ, thêm vào ThongBaoNo
-            if (conLai > 0)
-            {
-                sql += $@"
-        INSERT INTO ThongBaoNo (MaSV, KiHocID, SoTienNo, NgayThongBao)
-        VALUES (N'{maSV}', {kiHocID}, {conLai.ToString(System.Globalization.CultureInfo.InvariantCulture)}, GETDATE());";
-            }
-
-            sql += "\nEND;";
-
-            // Thực thi truy vấn
             try
             {
-                dp.ThucThi(sql);
+                
+                dp.KetNoiDl(); // mở kết nối
+
+                SqlCommand cmd = new SqlCommand("sp_ThanhToanHocPhi", dp.cnn);
+                cmd.CommandType = CommandType.StoredProcedure;
+
+                // Thêm các tham số vào stored procedure
+                cmd.Parameters.AddWithValue("@MaSV", maSV);
+                cmd.Parameters.AddWithValue("@TenKiHoc", tenKiHoc);
+                cmd.Parameters.AddWithValue("@SoTien", daDong);
+                cmd.Parameters.AddWithValue("@NganHang", nganHang);
+
+                cmd.ExecuteNonQuery(); // thực thi
+
                 MessageBox.Show("Thanh toán thành công!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                // Mở form hóa đơn
+                FormInvoice f = new FormInvoice(maSV, tenKiHoc); // truyền vào nếu form hỗ trợ
+                f.ShowDialog();
+
                 this.Close();
             }
             catch (Exception ex)
             {
                 MessageBox.Show("Lỗi khi thanh toán:\n" + ex.Message, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-            FormInvoice f = new FormInvoice(hocPhiID); // truyền đúng ID học phí
-            f.ShowDialog();
+            finally
+            {
+                // Đóng kết nối
+                
+                dp.HuyKN();
+            }
         }
     }
 }

@@ -32,22 +32,22 @@ namespace ProjectStudentTuitionManagement
         private void InitializeComponent()
         {
             this.panel1 = new System.Windows.Forms.Panel();
-            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.lkLogout = new System.Windows.Forms.LinkLabel();
             this.btnStatisticReport = new System.Windows.Forms.Button();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.btnTuition = new System.Windows.Forms.Button();
             this.btnSemester = new System.Windows.Forms.Button();
             this.btnStudent = new System.Windows.Forms.Button();
             this.panelMain = new System.Windows.Forms.Panel();
-            this.lkLogout = new System.Windows.Forms.LinkLabel();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.label1);
             this.panel1.Controls.Add(this.lkLogout);
-            this.panel1.Controls.Add(this.textBox2);
             this.panel1.Controls.Add(this.btnStatisticReport);
             this.panel1.Controls.Add(this.pictureBox1);
             this.panel1.Controls.Add(this.btnTuition);
@@ -59,20 +59,30 @@ namespace ProjectStudentTuitionManagement
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(200, 522);
             this.panel1.TabIndex = 0;
+            this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
             // 
-            // textBox2
+            // label1
             // 
-            this.textBox2.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox2.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.textBox2.Location = new System.Drawing.Point(45, 154);
-            this.textBox2.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.textBox2.Multiline = true;
-            this.textBox2.Name = "textBox2";
-            this.textBox2.ReadOnly = true;
-            this.textBox2.Size = new System.Drawing.Size(120, 33);
-            this.textBox2.TabIndex = 4;
-            this.textBox2.Text = "Admin";
-            this.textBox2.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(12, 171);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(71, 22);
+            this.label1.TabIndex = 6;
+            this.label1.Text = "ADMIN";
+            this.label1.Click += new System.EventHandler(this.label1_Click);
+            // 
+            // lkLogout
+            // 
+            this.lkLogout.AutoSize = true;
+            this.lkLogout.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
+            this.lkLogout.Location = new System.Drawing.Point(52, 471);
+            this.lkLogout.Name = "lkLogout";
+            this.lkLogout.Size = new System.Drawing.Size(101, 25);
+            this.lkLogout.TabIndex = 5;
+            this.lkLogout.TabStop = true;
+            this.lkLogout.Text = "Đăng xuất";
+            this.lkLogout.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lkLogout_LinkClicked);
             // 
             // btnStatisticReport
             // 
@@ -154,18 +164,6 @@ namespace ProjectStudentTuitionManagement
             this.panelMain.Size = new System.Drawing.Size(950, 520);
             this.panelMain.TabIndex = 1;
             // 
-            // lkLogout
-            // 
-            this.lkLogout.AutoSize = true;
-            this.lkLogout.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
-            this.lkLogout.Location = new System.Drawing.Point(52, 471);
-            this.lkLogout.Name = "lkLogout";
-            this.lkLogout.Size = new System.Drawing.Size(101, 25);
-            this.lkLogout.TabIndex = 5;
-            this.lkLogout.TabStop = true;
-            this.lkLogout.Text = "Đăng xuất";
-            this.lkLogout.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lkLogout_LinkClicked);
-            // 
             // Admin
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -194,7 +192,7 @@ namespace ProjectStudentTuitionManagement
         private PictureBox pictureBox1;
         private Panel panelMain;
         private Button btnStatisticReport;
-        private TextBox textBox2;
         private LinkLabel lkLogout;
+        private Label label1;
     }
 }

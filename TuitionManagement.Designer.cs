@@ -115,9 +115,8 @@ namespace ProjectStudentTuitionManagement
             this.txtSearch.ForeColor = System.Drawing.SystemColors.ScrollBar;
             this.txtSearch.Location = new System.Drawing.Point(190, 32);
             this.txtSearch.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.txtSearch.Multiline = true;
             this.txtSearch.Name = "txtSearch";
-            this.txtSearch.Size = new System.Drawing.Size(480, 33);
+            this.txtSearch.Size = new System.Drawing.Size(480, 38);
             this.txtSearch.TabIndex = 10;
             this.txtSearch.Text = "Nhập kì học hoặc mã sinh viên";
             this.txtSearch.Enter += new System.EventHandler(this.txtSearch_Enter);

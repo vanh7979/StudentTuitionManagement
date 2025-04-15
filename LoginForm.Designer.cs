@@ -38,8 +38,7 @@ namespace ProjectStudentTuitionManagement
             this.button1 = new System.Windows.Forms.Button();
             this.linkLabel1 = new System.Windows.Forms.LinkLabel();
             this.checkBox1 = new System.Windows.Forms.CheckBox();
-            this.linkLabel2 = new System.Windows.Forms.LinkLabel();
-            this.label2 = new System.Windows.Forms.Label();
+            this.button2 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -96,10 +95,10 @@ namespace ProjectStudentTuitionManagement
             this.button1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(66)))), ((int)(((byte)(115)))), ((int)(((byte)(244)))));
             this.button1.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button1.ForeColor = System.Drawing.Color.White;
-            this.button1.Location = new System.Drawing.Point(191, 388);
+            this.button1.Location = new System.Drawing.Point(141, 386);
             this.button1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(209, 42);
+            this.button1.Size = new System.Drawing.Size(133, 42);
             this.button1.TabIndex = 4;
             this.button1.Text = "Đăng nhập";
             this.button1.UseVisualStyleBackColor = false;
@@ -127,24 +126,19 @@ namespace ProjectStudentTuitionManagement
             this.checkBox1.UseVisualStyleBackColor = true;
             this.checkBox1.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
             // 
-            // linkLabel2
+            // button2
             // 
-            this.linkLabel2.Location = new System.Drawing.Point(357, 443);
-            this.linkLabel2.Name = "linkLabel2";
-            this.linkLabel2.Size = new System.Drawing.Size(66, 37);
-            this.linkLabel2.TabIndex = 8;
-            this.linkLabel2.TabStop = true;
-            this.linkLabel2.Text = "Đăng kí";
-            this.linkLabel2.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel2_LinkClicked_1);
-            // 
-            // label2
-            // 
-            this.label2.Location = new System.Drawing.Point(191, 436);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(149, 30);
-            this.label2.TabIndex = 7;
-            this.label2.Text = "Chưa có tài khoản?";
-            this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.button2.BackColor = System.Drawing.Color.LightGray;
+            this.button2.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button2.ForeColor = System.Drawing.Color.White;
+            this.button2.Location = new System.Drawing.Point(306, 386);
+            this.button2.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(144, 42);
+            this.button2.TabIndex = 7;
+            this.button2.Text = "Thoát";
+            this.button2.UseVisualStyleBackColor = false;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // LoginForm
             // 
@@ -152,8 +146,7 @@ namespace ProjectStudentTuitionManagement
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(582, 522);
-            this.Controls.Add(this.label2);
-            this.Controls.Add(this.linkLabel2);
+            this.Controls.Add(this.button2);
             this.Controls.Add(this.checkBox1);
             this.Controls.Add(this.linkLabel1);
             this.Controls.Add(this.button1);
@@ -181,7 +174,6 @@ namespace ProjectStudentTuitionManagement
         private Button button1;
         private LinkLabel linkLabel1;
         private CheckBox checkBox1;
-        private LinkLabel linkLabel2;
-        private Label label2;
+        private Button button2;
     }
 }
