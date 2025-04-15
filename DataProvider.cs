@@ -16,7 +16,7 @@ namespace ProjectStudentTuitionManagement
         public SqlCommand cmd;
         public DataTable dta;
         public SqlDataAdapter ada;
-        private string strKN = "Data Source=DESKTOP\\HAYLAMDMM;Initial Catalog=NHOM7_LTUD;Integrated Security=True";
+        private string strKN = "Data Source=PTRANVANH;Initial Catalog=NHOM7_LTUD;Integrated Security=True";
 
 
         public void KetNoiDl()
