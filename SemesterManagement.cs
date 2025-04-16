@@ -21,6 +21,7 @@ namespace ProjectStudentTuitionManagement
         private void SemesterManagement_Load(object sender, EventArgs e)
         {
             LoadThongTin();
+            
         }
 
         public void LoadThongTin()

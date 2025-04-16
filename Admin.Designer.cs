@@ -35,11 +35,11 @@ namespace ProjectStudentTuitionManagement
             this.label1 = new System.Windows.Forms.Label();
             this.lkLogout = new System.Windows.Forms.LinkLabel();
             this.btnStatisticReport = new System.Windows.Forms.Button();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.btnTuition = new System.Windows.Forms.Button();
             this.btnSemester = new System.Windows.Forms.Button();
             this.btnStudent = new System.Windows.Forms.Button();
             this.panelMain = new System.Windows.Forms.Panel();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
@@ -99,17 +99,6 @@ namespace ProjectStudentTuitionManagement
             this.btnStatisticReport.UseVisualStyleBackColor = true;
             this.btnStatisticReport.Click += new System.EventHandler(this.btnStatisticReport_Click);
             // 
-            // pictureBox1
-            // 
-            this.pictureBox1.Image = global::NewProject.Properties.Resources.logo_neu_inkythuatso_01_09_10_41_01;
-            this.pictureBox1.Location = new System.Drawing.Point(35, 8);
-            this.pictureBox1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(142, 142);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBox1.TabIndex = 2;
-            this.pictureBox1.TabStop = false;
-            // 
             // btnTuition
             // 
             this.btnTuition.FlatAppearance.BorderSize = 0;
@@ -163,6 +152,18 @@ namespace ProjectStudentTuitionManagement
             this.panelMain.Name = "panelMain";
             this.panelMain.Size = new System.Drawing.Size(950, 520);
             this.panelMain.TabIndex = 1;
+            this.panelMain.Paint += new System.Windows.Forms.PaintEventHandler(this.panelMain_Paint);
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Image = global::NewProject.Properties.Resources.logo_neu_inkythuatso_01_09_10_41_01;
+            this.pictureBox1.Location = new System.Drawing.Point(35, 8);
+            this.pictureBox1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(142, 142);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox1.TabIndex = 2;
+            this.pictureBox1.TabStop = false;
             // 
             // Admin
             // 
