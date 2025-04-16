@@ -77,6 +77,20 @@
     <Compile Include="Admin.Designer.cs">
       <DependentUpon>Admin.cs</DependentUpon>
     </Compile>
+    <Compile Include="BAOCAOHOCPHI.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>BAOCAOHOCPHI.rpt</DependentUpon>
+      <SubType>Component</SubType>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="BAOCAOSINHVIEN.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>BAOCAOSINHVIEN.rpt</DependentUpon>
+      <SubType>Component</SubType>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Compile>
     <Compile Include="ChangeSemesterInfo.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -96,6 +110,18 @@
       <DependentUpon>ChangeTuitionInfo.cs</DependentUpon>
     </Compile>
     <Compile Include="DataProvider.cs" />
+    <Compile Include="FormBaoCaoHP.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormBaoCaoHP.Designer.cs">
+      <DependentUpon>FormBaoCaoHP.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormBaoCaoSV.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormBaoCaoSV.Designer.cs">
+      <DependentUpon>FormBaoCaoSV.cs</DependentUpon>
+    </Compile>
     <Compile Include="FormInvoice.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -165,6 +191,16 @@
     <EmbeddedResource Include="Admin.resx">
       <DependentUpon>Admin.cs</DependentUpon>
     </EmbeddedResource>
+    <Content Include="BAOCAOSINHVIEN.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>BAOCAOSINHVIEN.cs</LastGenOutput>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="BAOCAOHOCPHI.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>BAOCAOHOCPHI.cs</LastGenOutput>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <EmbeddedResource Include="ChangeSemesterInfo.resx">
       <DependentUpon>ChangeSemesterInfo.cs</DependentUpon>
     </EmbeddedResource>
@@ -173,6 +209,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ChangeTuitionInfo.resx">
       <DependentUpon>ChangeTuitionInfo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormBaoCaoHP.resx">
+      <DependentUpon>FormBaoCaoHP.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormBaoCaoSV.resx">
+      <DependentUpon>FormBaoCaoSV.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormInvoice.resx">
       <DependentUpon>FormInvoice.cs</DependentUpon>

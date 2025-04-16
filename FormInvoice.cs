@@ -49,7 +49,6 @@ namespace NewProject
                     table.ApplyLogOnInfo(logonInfo);
                 }
 
-                // 🟢 Phải đặt dấu nháy đơn cho chuỗi NVARCHAR
                 rpt.RecordSelectionFormula = $"{{v_HoaDon_ChiTiet.HocPhiID}} = '{hocPhiID}'";
 
                 crystalReportViewer1.ReportSource = rpt;

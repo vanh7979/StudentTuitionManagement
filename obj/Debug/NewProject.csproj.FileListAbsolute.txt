@@ -87,3 +87,9 @@ D:\New\StudentTuitionManagement\obj\Debug\NewProject.csproj.CoreCompileInputs.ca
 D:\New\StudentTuitionManagement\obj\Debug\NewProject.csproj.Up2Date
 D:\New\StudentTuitionManagement\obj\Debug\NewProject.exe
 D:\New\StudentTuitionManagement\obj\Debug\NewProject.pdb
+D:\New\StudentTuitionManagement\obj\Debug\NewProject.FormBaoCaoSV.resources
+D:\New\StudentTuitionManagement\bin\Debug\BAOCAOSINHVIEN.rpt
+D:\New\StudentTuitionManagement\bin\Debug\BAOCAOSINHVIEN.cs
+D:\New\StudentTuitionManagement\obj\Debug\NewProject.FormBaoCaoHP.resources
+D:\New\StudentTuitionManagement\bin\Debug\BAOCAOHOCPHI.rpt
+D:\New\StudentTuitionManagement\bin\Debug\BAOCAOHOCPHI.cs
