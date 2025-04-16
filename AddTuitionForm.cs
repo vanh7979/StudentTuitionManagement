@@ -23,6 +23,7 @@ namespace NewProject
 
         private void AddTuitionForm_Load(object sender, EventArgs e)
         {
+            txtMaSV.Focus();
             HOCKI();
         }
 
@@ -109,7 +110,22 @@ namespace NewProject
         {
             if (txtHP.Text != "")
             {
-                string strLuu = "Insert into HocPhi (HocPhiID, MaSV, KiHocID, SoTien, HanDong) values ('" + txtMaHK.Text + "','" + txtMaSV.Text + "','" + cbxHocki.Text + "'," + int.Parse(txtHP.Text) + ",'" + dtpEnd.Value + "')";
+                string hocPhiID = txtMaHK.Text.Trim();
+                string checkQuery = $"SELECT COUNT(*) FROM HocPhi WHERE HocPhiID = '{hocPhiID}'";
+                int count = Convert.ToInt32(dp.Lay_GiaTriDon(checkQuery));
+                string tenKiHoc = cbxHocki.Text; 
+
+                MessageBox.Show($"⚠️ Học phí kỳ học {tenKiHoc} cho sinh viên đã tồn tại!\nVui lòng chọn kỳ học khác hoặc chỉnh sửa bản ghi cũ.",
+                                "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+
+                if (count > 0)
+                {
+                    MessageBox.Show($"⚠️ Học phí kỳ học {tenKiHoc} cho sinh viên đã tồn tại!\nVui lòng chọn kỳ học khác hoặc chỉnh sửa bản ghi cũ.",
+                "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+                string ngayHanDong = dtpEnd.Value.ToString("yyyy-MM-dd");
+                string strLuu = "Insert into HocPhi (HocPhiID, MaSV, KiHocID, SoTien, HanDong) values ('" + txtMaHK.Text + "','" + txtMaSV.Text + "','" + cbxHocki.Text + "'," + int.Parse(txtHP.Text) + ",'" + ngayHanDong + "')";
                 DialogResult = MessageBox.Show("Xác nhận thêm học phí mới cho sinh viên mã " + txtMaSV.Text +"?", "Thông báo", MessageBoxButtons.OKCancel, MessageBoxIcon.Information);
                 if (DialogResult == DialogResult.OK)
                 {
@@ -118,6 +134,16 @@ namespace NewProject
                     this.Close();
                 }
             }
+        }
+
+        private void txtMaHK_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void txtMaSV_TextChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

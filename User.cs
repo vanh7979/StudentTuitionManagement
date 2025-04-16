@@ -164,9 +164,14 @@ namespace ProjectStudentTuitionManagement
             if (dta != null && dta.Rows.Count > 0)
             {
                 dataGridView1.DataSource = dta;
+
+                // Thiết lập tiêu đề cột cho đầy đủ các cột trả về
                 dataGridView1.Columns["SoTien"].HeaderText = "Tổng tiền";
-                dataGridView1.Columns["TrangThai"].HeaderText = "Trạng thái";
+                dataGridView1.Columns["SoTienConNo"].HeaderText = "Còn phải đóng";
                 dataGridView1.Columns["HanDong"].HeaderText = "Hạn đóng";
+                dataGridView1.Columns["TrangThai"].HeaderText = "Trạng thái";
+
+                dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
                 dataGridView1.Visible = true;
             }
             else

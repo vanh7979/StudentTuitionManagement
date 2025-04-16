@@ -11,11 +11,13 @@ CREATE TABLE Users (
 select * from Users
 
 ALTER TABLE Users
-ADD MaSV NVARCHAR(20) NULL;
+DROP CONSTRAINT FK_Users_SinhVien;
 
 ALTER TABLE Users
 ADD CONSTRAINT FK_Users_SinhVien
-FOREIGN KEY (MaSV) REFERENCES SinhVien(MaSV);
+FOREIGN KEY (MaSV) REFERENCES SinhVien(MaSV)
+ON DELETE CASCADE;
+
 drop table Users
 
 --Bảng sinh viên--
@@ -391,7 +393,7 @@ BEGIN
 END;
 
 exec sp_LayHocPhiTheoMaSV '11220011'
-CREATE PROCEDURE sp_LocHocPhi
+CREATE OR ALTER PROCEDURE sp_LocHocPhi
     @MaSV NVARCHAR(20),
     @TenKiHoc NVARCHAR(50) = NULL,
     @TrangThai NVARCHAR(20) = NULL
@@ -401,6 +403,11 @@ BEGIN
         kh.TenKiHoc,
         kh.NamHoc,
         hp.SoTien,
+        ISNULL(hp.SoTien - (
+            SELECT SUM(SoTienDaDong)
+            FROM ThanhToan
+            WHERE HocPhiID = hp.HocPhiID
+        ), hp.SoTien) AS SoTienConNo,
         hp.HanDong,
         hp.TrangThai
     FROM HocPhi hp
@@ -410,6 +417,7 @@ BEGIN
         AND (@TrangThai IS NULL OR hp.TrangThai = @TrangThai)
     ORDER BY kh.NamHoc DESC, kh.TenKiHoc;
 END;
+
 
 EXEC sp_LocHocPhi 
     @MaSV = '11220001', 
@@ -658,7 +666,8 @@ VALUES
 SELECT * FROM Users;
 SELECT * FROM SinhVien;
 SELECT * FROM KiHoc;
-SELECT * FROM HocPhi where MaSV = '11220001'
+SELECT * FROM HocPhi 
+sp_help HocPhi
 SELECT * FROM ThanhToan;
 SELECT * FROM HoaDon;
 SELECT * FROM ThongBaoNo;
@@ -755,4 +764,63 @@ select * from HocPhi
 
 select * from users
 
-sp_help HocPhi
+
+CREATE OR ALTER TRIGGER trg_DeleteSinhVien
+ON SinhVien
+AFTER DELETE
+AS
+BEGIN
+    SET NOCOUNT ON;
+
+    -- Xóa hóa đơn trước (liên quan qua ThanhToan → HocPhi → SinhVien)
+    DELETE hd
+    FROM HoaDon hd
+    JOIN ThanhToan tt ON hd.ThanhToanID = tt.ThanhToanID
+    JOIN HocPhi hp ON tt.HocPhiID = hp.HocPhiID
+    JOIN deleted d ON hp.MaSV = d.MaSV;
+
+    -- Xóa thanh toán
+    DELETE tt
+    FROM ThanhToan tt
+    JOIN HocPhi hp ON tt.HocPhiID = hp.HocPhiID
+    JOIN deleted d ON hp.MaSV = d.MaSV;
+
+    -- Xóa thông báo nợ
+    DELETE tb
+    FROM ThongBaoNo tb
+    JOIN deleted d ON tb.MaSV = d.MaSV;
+
+    -- Xóa học phí
+    DELETE hp
+    FROM HocPhi hp
+    JOIN deleted d ON hp.MaSV = d.MaSV;
+
+    -- Xóa tài khoản người dùng
+    DELETE u
+    FROM Users u
+    JOIN deleted d ON u.MaSV = d.MaSV;
+END;
+
+SELECT * FROM HocPhi WHERE MaSV = '11220011';
+
+ALTER TABLE Users DROP CONSTRAINT FK_Users_SinhVien;
+ALTER TABLE HocPhi DROP CONSTRAINT FK_HocPhi_MaSV;
+ALTER TABLE ThanhToan DROP CONSTRAINT FK_ThanhToan_HocPhi;
+ALTER TABLE HoaDon DROP CONSTRAINT FK_HoaDon_ThanhToan;
+ALTER TABLE ThongBaoNo DROP CONSTRAINT FK_ThongBaoNo_MaSV;
+ALTER TABLE ThongBaoNo DROP CONSTRAINT FK_ThongBaoNo_KiHoc;
+
+SELECT 
+    f.name AS ConstraintName,
+    OBJECT_NAME(f.parent_object_id) AS TableName,
+    COL_NAME(fc.parent_object_id, fc.parent_column_id) AS ColumnName,
+    OBJECT_NAME (f.referenced_object_id) AS ReferencedTableName
+FROM 
+    sys.foreign_keys AS f
+INNER JOIN 
+    sys.foreign_key_columns AS fc ON f.object_id = fc.constraint_object_id
+WHERE 
+    OBJECT_NAME(f.parent_object_id) = 'Users';
+
+
+

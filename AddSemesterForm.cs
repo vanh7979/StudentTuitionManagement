@@ -24,6 +24,9 @@ namespace NewProject
         private void AddSemesterForm_Load(object sender, EventArgs e)
         {
             LoadHocKi();
+            dtpStart.Enabled = false;
+            dtpEnd.Enabled = false;
+            txtYear.Focus();
         }
 
         private void LoadHocKi()
@@ -83,7 +86,19 @@ namespace NewProject
                 {
                     TenHocKi = "HK2 " + txtYear.Text;
                 }
-                string strLuu = "Insert into KiHoc values ('" + txtMaHK.Text + "','" + TenHocKi + "'," + txtYear.Text + ",'" + dtpStart.Value + "','" + dtpEnd.Value + "')";
+                string checkQuery = $"SELECT COUNT(*) FROM KiHoc WHERE KiHocID = '{txtMaHK.Text}'";
+                object result = dp.Lay_GiaTriDon(checkQuery);
+                int count = Convert.ToInt32(result);
+
+                if (count > 0)
+                {
+                    MessageBox.Show($"⚠️ Học kỳ '{txtMaHK.Text}' đã tồn tại!\nVui lòng chọn năm học khác hoặc học kỳ khác.",
+                        "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+                string ngayBatDau = dtpStart.Value.ToString("yyyy-MM-dd");
+                string ngayKetThuc = dtpEnd.Value.ToString("yyyy-MM-dd");
+                string strLuu = "Insert into KiHoc values ('" + txtMaHK.Text + "','" + TenHocKi + "'," + txtYear.Text + ",'" + ngayBatDau + "','" + ngayKetThuc + "')";
                 DialogResult = MessageBox.Show("Xác nhận thêm kì học mới ?", "Thông báo", MessageBoxButtons.OKCancel, MessageBoxIcon.Information);
                 if (DialogResult == DialogResult.OK)
                 {

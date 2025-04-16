@@ -95,6 +95,7 @@
             this.txtMaSV.Name = "txtMaSV";
             this.txtMaSV.Size = new System.Drawing.Size(181, 30);
             this.txtMaSV.TabIndex = 33;
+            this.txtMaSV.TextChanged += new System.EventHandler(this.txtMaSV_TextChanged);
             // 
             // txtMaHK
             // 
@@ -104,6 +105,8 @@
             this.txtMaHK.ReadOnly = true;
             this.txtMaHK.Size = new System.Drawing.Size(415, 30);
             this.txtMaHK.TabIndex = 32;
+            this.txtMaHK.TabStop = false;
+            this.txtMaHK.TextChanged += new System.EventHandler(this.txtMaHK_TextChanged);
             // 
             // lblMaSV
             // 

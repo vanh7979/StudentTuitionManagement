@@ -85,7 +85,7 @@ namespace ProjectStudentTuitionManagement
                 conn.Open();
                 SqlCommand cmd = new SqlCommand(query, conn);
                 object result = cmd.ExecuteScalar();
-                return result ?? 0; // nếu null thì trả về 0
+                return result ?? 0; 
             }
         }
     }

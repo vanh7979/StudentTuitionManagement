@@ -66,7 +66,9 @@ namespace NewProject
 
         private void btnChange_Click(object sender, EventArgs e)
         {
-            string strLuu = "Update KiHoc set TGBatDau = '" + dtpStart.Value + "', TGKetThuc = '" + dtpEnd.Value + "' where KiHocID = '" + txtMaHK.Text + "'" ;
+            string ngayBatDau = dtpStart.Value.ToString("yyyy-MM-dd");
+            string ngayKetThuc = dtpEnd.Value.ToString("yyyy-MM-dd");
+            string strLuu = "Update KiHoc set TGBatDau = '" + ngayBatDau + "', TGKetThuc = '" + ngayKetThuc + "' where KiHocID = '" + txtMaHK.Text + "'" ;
             dp.ThucThi(strLuu);
             DialogResult = MessageBox.Show("Xác nhận thay đổi thông tin sinh viên ?", "Thông báo", MessageBoxButtons.OKCancel, MessageBoxIcon.Information);
             if (DialogResult == DialogResult.OK)

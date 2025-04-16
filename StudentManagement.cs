@@ -52,19 +52,25 @@ namespace ProjectStudentTuitionManagement
                 return;
             }
 
-            
             string maSV = dvgThongTinSV.CurrentRow.Cells["MaSV"].Value.ToString();
 
             DialogResult dr = MessageBox.Show("Bạn chắc chắn muốn xóa sinh viên mã " + maSV + "?", "Xác nhận xóa", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
             if (dr == DialogResult.Yes)
             {
-                string query = $"DELETE FROM SinhVien WHERE MaSV = '{maSV}'";
-                dp.ThucThi(query);
-                MessageBox.Show("Đã xóa sinh viên!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                try
+                {
+                    string query = $"DELETE FROM SinhVien WHERE MaSV = '{maSV}'";
+                    dp.ThucThi(query);
 
-                
-                this.StudentManagement_Load(sender, e);
+                    MessageBox.Show("✅ Đã xóa sinh viên và các dữ liệu liên quan (nếu có)!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    this.StudentManagement_Load(sender, e); 
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("❌ Lỗi khi xóa sinh viên:\n" + ex.Message, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
             }
+
         }
 
         private void txtSearch_Leave(object sender, EventArgs e)
