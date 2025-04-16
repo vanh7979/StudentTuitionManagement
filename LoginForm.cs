@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -23,11 +24,6 @@ namespace ProjectStudentTuitionManagement
             registerForm.Show();
             this.Hide();
         }
-
-        
-
-        
-
         private void LoginForm_Load_1(object sender, EventArgs e)
         {
             if (NewProject.Properties.Settings.Default.RememberMe)
@@ -66,35 +62,42 @@ namespace ProjectStudentTuitionManagement
             NewProject.Properties.Settings.Default.Save();
 
 
-            string query = $"SELECT * FROM Users WHERE Username = '{username}' AND Password = '{password}'";
+            string query1 = $"SELECT * FROM Users WHERE Username = '{username}' AND Password = '{password}'";
+            string query2 = $"SELECT * FROM Admin WHERE Username = '{username}' AND Password = '{password}'";
 
-            DataTable dta = dp.Lay_DLbang(query);
+            DataTable dta1 = dp.Lay_DLbang(query1);
 
-            if (dta != null && dta.Rows.Count > 0)
+            if (dta1 != null && dta1.Rows.Count > 0)
             {
 
-                string role = dta.Rows[0]["Role"].ToString();
+                string role = dta1.Rows[0]["Role"].ToString();
 
                 MessageBox.Show("Đăng nhập thành công!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 this.Hide();
-
-                if (role == "admin")
-                {
-                    Admin adminForm = new Admin();
-                    adminForm.ShowDialog();
-                }
-                else
-                {
-                    string maSV = dta.Rows[0]["MaSV"].ToString();
-                    User userForm = new User(maSV);
-                    userForm.ShowDialog();
-                }
+                string maSV = dta1.Rows[0]["MaSV"].ToString();
+                User userForm = new User(maSV);
+                userForm.ShowDialog();
 
                 this.Close();
             }
             else
             {
-                MessageBox.Show("Sai tên đăng nhập hoặc mật khẩu!", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                DataTable dta2 = dp.Lay_DLbang(query2);
+                if (dta2 != null && dta2.Rows.Count > 0)
+                {
+                    string role = dta2.Rows[0]["Role"].ToString();
+
+                    MessageBox.Show("Đăng nhập thành công!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    this.Hide();
+                    Admin adminForm = new Admin();
+                    adminForm.ShowDialog();
+
+                    this.Close();
+                }
+                else
+                {
+                    MessageBox.Show("Sai tên đăng nhập hoặc mật khẩu!", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
             }
         }
 

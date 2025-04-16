@@ -88,6 +88,56 @@ namespace ProjectStudentTuitionManagement
                 return result ?? 0; // nếu null thì trả về 0
             }
         }
+
+        public bool ExecuteNonQuery(string storedProcedureName, SqlParameter[] parameters)
+        {
+            using (SqlConnection conn = new SqlConnection(strKN))
+            {
+                try
+                {
+                    conn.Open();
+                    SqlCommand cmd = new SqlCommand(storedProcedureName, conn);
+                    cmd.CommandType = CommandType.StoredProcedure;
+
+                    if (parameters != null)
+                        cmd.Parameters.AddRange(parameters);
+
+                    cmd.ExecuteNonQuery();
+                    return true;
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Lỗi: " + ex.Message);
+                    return false;
+                }
+            }
+        }
+
+        // Hàm gọi stored procedure có trả về dữ liệu (ví dụ: SELECT)
+        public DataTable ExecuteQuery(string storedProcedureName, SqlParameter[] parameters = null)
+        {
+            DataTable dt = new DataTable();
+            using (SqlConnection conn = new SqlConnection(strKN))
+            {
+                try
+                {
+                    conn.Open();
+                    SqlCommand cmd = new SqlCommand(storedProcedureName, conn);
+                    cmd.CommandType = CommandType.StoredProcedure;
+
+                    if (parameters != null)
+                        cmd.Parameters.AddRange(parameters);
+
+                    SqlDataAdapter adapter = new SqlDataAdapter(cmd);
+                    adapter.Fill(dt);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Lỗi: " + ex.Message);
+                }
+            }
+            return dt;
+        }
     }
 }
 

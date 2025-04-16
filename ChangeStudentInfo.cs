@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -63,14 +64,27 @@ namespace NewProject
 
         private void btnChange_Click(object sender, EventArgs e)
         {
-            string strLuu = "Update SinhVien set FullName = '" + txtName.Text + "', Lop = '" + cbxLop.Text + "', Khoa = '" + cbxKhoa.Text + "' WHERE MaSV = '" + txtMaSV.Text +"'";
-            dp.ThucThi(strLuu);
-            DialogResult = MessageBox.Show("Xác nhận thay đổi thông tin sinh viên ?", "Thông báo", MessageBoxButtons.OKCancel, MessageBoxIcon.Information);
-            if (DialogResult == DialogResult.OK)
+            DialogResult dr = MessageBox.Show("Xác nhận thay đổi thông tin sinh viên ?", "Thông báo", MessageBoxButtons.OKCancel, MessageBoxIcon.Information);
+            if (dr == DialogResult.OK)
             {
-                MessageBox.Show("Thành công");
-                parentForm.LoadThongTinSinhVien();
-                this.Close();
+                SqlParameter[] SV = new SqlParameter[]
+                {
+                    new SqlParameter("@MaSV", txtMaSV.Text),
+                    new SqlParameter("@FullName", txtName.Text),
+                    new SqlParameter("@Lop", cbxLop.Text),
+                    new SqlParameter("@Khoa", cbxKhoa.Text)
+                };
+                bool result_SV = dp.ExecuteNonQuery("sp_SuaSinhVien", SV);
+                if (result_SV)
+                {
+                    MessageBox.Show("Thành công");
+                    parentForm.LoadThongTinSinhVien();
+                    this.Close();
+                }
+                else
+                {
+                    MessageBox.Show("Xảy ra lỗi.");
+                }
             }
         }
 

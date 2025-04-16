@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -85,9 +86,15 @@ namespace ProjectStudentTuitionManagement
                         DialogResult dr = MessageBox.Show("Bạn chắc chắn muốn xóa học kì mã " + txtSearch.Text + "?", "Thông báo", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
                         if (dr == DialogResult.Yes)
                         {
-                            string delete = $"DELETE FROM KiHoc where TenKiHoc = '" + txtSearch.Text + "'";
-                            dp.ThucThi(delete);
-                            MessageBox.Show("Đã xóa!");
+                            SqlParameter[] kihoc = new SqlParameter[]
+ {
+                                new SqlParameter("@KiHocID", reader["KiHocID"].ToString()),
+ };
+                            bool result_HK = dp.ExecuteNonQuery("sp_XoaKiHoc", kihoc);
+                            if (result_HK)
+                                MessageBox.Show("Xóa thành công!");
+                            else
+                                MessageBox.Show("Xảy ra lỗi, kiểm tra lại mã sinh viên");
                             this.SemesterManagement_Load(sender, e);
                         }
                     }

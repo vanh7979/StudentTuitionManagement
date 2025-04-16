@@ -71,15 +71,32 @@ namespace NewProject
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
-            string strLuu = "Insert into SinhVien values ('" + txtMaSV.Text + "',N'" + txtName.Text + "','" + cbxLop.Text + "','" + cbxKhoa.Text + "')";
-            string strTK = "Insert into Users (Username, Password, FullName, Role, MaSV) values ('user" + txtMaSV.Text.Substring(txtMaSV.Text.Length - 2) + "','pass" + txtMaSV.Text.Substring(txtMaSV.Text.Length - 2) + "','" + txtName.Text + "','user','" + txtMaSV.Text +"')";
             DialogResult = MessageBox.Show("Xác nhận thêm sinh viên mới ?", "Thông báo", MessageBoxButtons.OKCancel, MessageBoxIcon.Information);
             if (DialogResult == DialogResult.OK)
             {
-                dp.ThucThi(strLuu);
-                dp.ThucThi(strTK);
+                SqlParameter[] SV = new SqlParameter[]
+                {
+                    new SqlParameter("@MaSV", txtMaSV.Text),
+                    new SqlParameter("@FullName", txtName.Text),
+                    new SqlParameter("@Lop", cbxLop.Text),
+                    new SqlParameter("@Khoa", cbxKhoa.Text)
+                };
+                bool result_SV = dp.ExecuteNonQuery("sp_ThemSinhVien", SV);
+                string userID = "user" + txtMaSV.Text.Substring(txtMaSV.Text.Length - 2);
+                string pass = "pass" + txtMaSV.Text.Substring(txtMaSV.Text.Length - 2);
+                SqlParameter[] user = new SqlParameter[]
+                {
+                    new SqlParameter("@Username", userID),
+                    new SqlParameter("@Password", pass),
+                    new SqlParameter("@FullName", txtName.Text),
+                    new SqlParameter("@MaSV", txtMaSV.Text)
+                };
+                bool result_User = dp.ExecuteNonQuery("sp_ThemUsers", user);
+                if (result_SV && result_User)
+                    MessageBox.Show("Thêm thành công!");
+                else
+                    MessageBox.Show("Xảy ra lỗi, kiểm tra lại thông tin");
                 parentForm.LoadThongTinSinhVien();
-
                 this.Close();
             }
         }

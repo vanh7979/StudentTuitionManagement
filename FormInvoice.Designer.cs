@@ -51,6 +51,7 @@
             this.Controls.Add(this.crystalReportViewer1);
             this.Name = "FormInvoice";
             this.Text = "FormInvoice";
+            this.Load += new System.EventHandler(this.FormInvoice_Load);
             this.ResumeLayout(false);
 
         }

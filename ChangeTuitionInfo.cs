@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -99,6 +100,27 @@ namespace NewProject
             DialogResult dr = MessageBox.Show("Xác nhận thoát ?", "Thông báo", MessageBoxButtons.OKCancel, MessageBoxIcon.Information);
             if (dr == DialogResult.OK)
             {
+                this.Close();
+            }
+        }
+
+        private void btnAdd_Click(object sender, EventArgs e)
+        {
+            DialogResult dr = MessageBox.Show("Xác nhận thay đổi học phí mới cho sinh viên mã " + txtMaSV.Text + "?", "Thông báo", MessageBoxButtons.OKCancel, MessageBoxIcon.Information);
+            if (dr == DialogResult.OK)
+            {
+                SqlParameter[] HocKi = new SqlParameter[]
+{
+                    new SqlParameter("@HocPhiID", txtMaHK.Text),
+                    new SqlParameter("@SoTien", int.Parse(txtHP.Text)),
+                    new SqlParameter("@HanDong", dtpEnd.Value)
+};
+                bool result_HK = dp.ExecuteNonQuery("sp_SuaHocPhi", HocKi);
+                if (result_HK)
+                    MessageBox.Show("Thay đổi thành công!");
+                else
+                    MessageBox.Show("Xảy ra lỗi, kiểm tra lại mã học phí");
+                parentForm.LoadThongTin();
                 this.Close();
             }
         }

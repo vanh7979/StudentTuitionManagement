@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -74,6 +75,7 @@ namespace NewProject
         {
             if (txtMaHK.Text != "")
             {
+
                 string TenHocKi;
                 if (cbxHocki.Text == "Học kì 1")
                 {
@@ -83,13 +85,34 @@ namespace NewProject
                 {
                     TenHocKi = "HK2 " + txtYear.Text;
                 }
-                string strLuu = "Insert into KiHoc values ('" + txtMaHK.Text + "','" + TenHocKi + "'," + txtYear.Text + ",'" + dtpStart.Value + "','" + dtpEnd.Value + "')";
-                DialogResult = MessageBox.Show("Xác nhận thêm kì học mới ?", "Thông báo", MessageBoxButtons.OKCancel, MessageBoxIcon.Information);
-                if (DialogResult == DialogResult.OK)
+                string query = $"SELECT * FROM KiHoc where TenKiHoc = '" + TenHocKi + "'";
+                DataTable dt = new DataTable();
+                dt = dp.Lay_DLbang(query);
+                if (dt.Rows.Count == 0)
                 {
-                    dp.ThucThi(strLuu);
-                    parentForm.LoadThongTin();
-                    this.Close();
+                    DialogResult dr = MessageBox.Show("Xác nhận thêm kì học mới ?", "Thông báo", MessageBoxButtons.OKCancel, MessageBoxIcon.Information);
+                    if (dr == DialogResult.OK)
+                    {
+                        SqlParameter[] HK = new SqlParameter[]
+                        {
+                            new SqlParameter("@KiHocID", txtMaHK.Text),
+                            new SqlParameter("@TenKiHoc", TenHocKi),
+                            new SqlParameter("@NamHoc", txtYear.Text),
+                            new SqlParameter("@TGBatDau", dtpStart.Value),
+                            new SqlParameter("TGKetThuc", dtpEnd.Value)
+                        };
+                        bool result_HK = dp.ExecuteNonQuery("sp_ThemKiHoc", HK);
+                        if (result_HK)
+                            MessageBox.Show("Thêm thành công!");
+                        else
+                            MessageBox.Show("Xảy ra lỗi, kiểm tra lại thông tin");
+                        parentForm.LoadThongTin();
+                        this.Close();
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Học kì đã tồn tại.");
                 }
             }    
         }

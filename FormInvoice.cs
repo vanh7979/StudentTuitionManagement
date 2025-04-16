@@ -19,8 +19,8 @@ namespace NewProject
         {
             InitializeComponent();
         }
-        public int hocPhiID;
-        public FormInvoice(int hocPhiID)
+        public string hocPhiID;
+        public FormInvoice(string hocPhiID)
         {
             InitializeComponent();
             this.hocPhiID = hocPhiID;
@@ -41,11 +41,15 @@ namespace NewProject
                 logonInfo.ConnectionInfo.IntegratedSecurity = true; 
                 table.ApplyLogOnInfo(logonInfo);
             }
-
-            rpt.RecordSelectionFormula = $"{{v_HoaDon_ChiTiet.HocPhiID}} = {hocPhiID}";
-
+            string safeHocPhiID = hocPhiID.Replace("'", "''"); // escape ký tự '
+            rpt.RecordSelectionFormula = $"{{v_HoaDon_ChiTiet.HocPhiID}} = '{safeHocPhiID}'";
             crystalReportViewer1.ReportSource = rpt;
             crystalReportViewer1.Refresh();
+        }
+
+        private void FormInvoice_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

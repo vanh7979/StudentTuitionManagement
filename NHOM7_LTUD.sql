@@ -2,12 +2,20 @@
 USE NHOM7_LTUD;
 DROP DATABASE NHOM7_LTUD
 --Bảng user--
+CREATE TABLE Admin (
+    UserID INT IDENTITY(1,1) PRIMARY KEY,
+    Username NVARCHAR(50) NOT NULL UNIQUE,
+    Password NVARCHAR(100) NOT NULL,
+    FullName NVARCHAR(100),
+    Role NVARCHAR(10) NOT NULL default N'admin');
+
+
 CREATE TABLE Users (
     UserID INT IDENTITY(1,1) PRIMARY KEY,
     Username NVARCHAR(50) NOT NULL UNIQUE,
     Password NVARCHAR(100) NOT NULL,
     FullName NVARCHAR(100),
-    Role NVARCHAR(10) NOT NULL CHECK (Role IN ('admin', 'user')));
+    Role NVARCHAR(10) NOT NULL default N'user');
 
 ALTER TABLE Users
 ADD MaSV NVARCHAR(20) NULL;
@@ -88,6 +96,7 @@ CREATE TABLE HoaDon (
     ThanhToanID INT NOT NULL,
     NgayLap DATE DEFAULT GETDATE(),
     SoTien DECIMAL(18, 2) NOT NULL,
+	NganHang NVARCHAR(100)
     FOREIGN KEY (ThanhToanID) REFERENCES ThanhToan(ThanhToanID)
 );
 --Bảng thông báo nợ--
@@ -104,25 +113,25 @@ CREATE TABLE ThongBaoNo (
 -- Thủ tục thêm, sửa, xóa cho các bảng --
 --Bảng users
 -- Thêm
-CREATE PROCEDURE sp_ThemUsers
+alter PROCEDURE sp_ThemUsers
     @Username NVARCHAR(50),
     @Password NVARCHAR(100),
-    @FullName NVARCHAR(100),
-    @Role NVARCHAR(10)
+	@FullName NVARCHAR(100),
+	@MaSV NVARCHAR(20)
 AS
 BEGIN
-    INSERT INTO Users(Username, Password, FullName, Role)
-    VALUES (@Username, @Password, @FullName, @Role);
+    INSERT INTO Users(Username, Password, FullName, Role, MaSV)
+    VALUES (@Username, @Password, @FullName, 'user', @MaSV);
 END;
 GO
+select * from Users
 
 -- Sửa
 CREATE PROCEDURE sp_SuaUsers
     @UserID INT,
     @Username NVARCHAR(50),
     @Password NVARCHAR(100),
-    @FullName NVARCHAR(100),
-    @Role NVARCHAR(10)
+    @FullName NVARCHAR(100)
 AS
 BEGIN
     UPDATE Users
@@ -134,12 +143,15 @@ BEGIN
 END;
 GO
 
+select* from Users
+
 -- Xóa
-CREATE PROCEDURE sp_XoaUsers
-    @UserID INT
+alter PROCEDURE sp_XoaUsers
+    @UserID int,
+	@MaSV NVARCHAR(20)
 AS
 BEGIN
-    DELETE FROM Users WHERE UserID = @UserID;
+    DELETE FROM Users WHERE UserID = @UserID and MaSV = @MaSV;
 END;
 GO
 --Ví dụ cách thêm, sửa, xóa
@@ -190,30 +202,33 @@ GO
 
 --Bảng kì học
 CREATE PROCEDURE sp_ThemKiHoc
+	@KiHocID NVARCHAR(10),
     @TenKiHoc NVARCHAR(50),
-    @NamHoc INT
+    @NamHoc INT,
+	@TGBatDau Date,
+	@TGKetThuc Date
 AS
 BEGIN
-    INSERT INTO KiHoc(TenKiHoc, NamHoc)
-    VALUES (@TenKiHoc, @NamHoc);
+    INSERT INTO KiHoc (KiHocID,TenKiHoc, NamHoc,TGBatDau,TGKetThuc)
+    VALUES (@KiHocID,@TenKiHoc, @NamHoc,@TGBatDau,@TGKetThuc);
 END;
 GO
 
 CREATE PROCEDURE sp_SuaKiHoc
-    @KiHocID INT,
-    @TenKiHoc NVARCHAR(50),
-    @NamHoc INT
+	@KiHocID NVARCHAR(10),
+	@TGBatDau Date,
+	@TGKetThuc Date
 AS
 BEGIN
     UPDATE KiHoc
-    SET TenKiHoc = @TenKiHoc,
-        NamHoc = @NamHoc
+    SET TGBatDau = @TGBatDau,
+		TGKetThuc = @TGKetThuc
     WHERE KiHocID = @KiHocID;
 END;
 GO
 
 CREATE PROCEDURE sp_XoaKiHoc
-    @KiHocID INT
+    @KiHocID NVARCHAR(10)
 AS
 BEGIN
     DELETE FROM KiHoc WHERE KiHocID = @KiHocID;
@@ -222,45 +237,50 @@ GO
 
 --Bảng học phí
 CREATE PROCEDURE sp_ThemHocPhi
+	@HocPhiID nvarchar(20),
     @MaSV NVARCHAR(20),
-    @KiHocID INT,
-    @SoTien DECIMAL(18,2),
+    @KiHocID NVARCHAR(10),
+    @SoTien DECIMAL(18, 2),
     @HanDong DATE
 AS
 BEGIN
-    INSERT INTO HocPhi(MaSV, KiHocID, SoTien, HanDong)
-    VALUES (@MaSV, @KiHocID, @SoTien, @HanDong);
+    INSERT INTO HocPhi(HocPhiID,MaSV, KiHocID, SoTien, HanDong)
+    VALUES (@HocPhiID,@MaSV, @KiHocID, @SoTien, @HanDong);
 END;
 GO
 
 CREATE PROCEDURE sp_SuaHocPhi
-    @HocPhiID INT,
-    @MaSV NVARCHAR(20),
-    @KiHocID INT,
-    @SoTien DECIMAL(18,2),
+	@HocPhiID nvarchar(20),
+    @SoTien DECIMAL(18, 2),
     @HanDong DATE
 AS
 BEGIN
     UPDATE HocPhi
-    SET MaSV = @MaSV,
-        KiHocID = @KiHocID,
-        SoTien = @SoTien,
+    SET SoTien = @SoTien,
         HanDong = @HanDong
     WHERE HocPhiID = @HocPhiID;
 END;
 GO
 
 CREATE PROCEDURE sp_XoaHocPhi
-    @HocPhiID INT
+    @HocPhiID NVARCHAR(20)
 AS
 BEGIN
     DELETE FROM HocPhi WHERE HocPhiID = @HocPhiID;
 END;
 GO
 
+CREATE PROC sp_XoaHocPhiTheoMSV
+	@MaSV NVARCHAR(10)
+as
+begin
+	DELETE FROM HocPhi WHERE MaSV = @MaSV;
+end
+go
+
 --Bảng thanh toán 
 CREATE PROCEDURE sp_ThemThanhToan
-    @HocPhiID INT,
+    @HocPhiID NVARCHAR(20),
     @NgayThanhToan DATE,
     @SoTienDaDong DECIMAL(18,2)
 AS
@@ -272,7 +292,7 @@ GO
 
 CREATE PROCEDURE sp_SuaThanhToan
     @ThanhToanID INT,
-    @HocPhiID INT,
+    @HocPhiID nvarchar(20),
     @NgayThanhToan DATE,
     @SoTienDaDong DECIMAL(18,2)
 AS
@@ -421,22 +441,25 @@ EXEC sp_LocHocPhi
 
 
 
-
-
-INSERT INTO Users (Username, Password, FullName, Role)
+INSERT INTO Admin (Username, Password, FullName)
 VALUES
-('admin1', 'admin1', 'Nguyen Van Admin', 'admin'),
-('admin2', 'admin2', 'Tran Thi Admin', 'admin'),
-('user1', 'pass1', 'Nguyen Van A', 'user'),
-('user2', 'pass2', 'Le Thi B', 'user'),
-('user3', 'pass3', 'Tran Van C', 'user'),
-('user4', 'pass4', 'Pham Thi D', 'user'),
-('user5', 'pass5', 'Hoang Van E', 'user'),
-('user6', 'pass6', 'Do Thi F', 'user'),
-('user7', 'pass7', 'Ngo Van G', 'user'),
-('user8', 'pass8', 'Dang Thi G', 'user'),
-('user9', 'pass9', 'Bui Van I', 'user'),
-('user10', 'pass10', 'Mai Thi K', 'user');
+('admin1', 'pass1', 'Nguyen Van Admin'),
+('admin2', 'pass2', 'Nguyen Thi Admin')
+
+select * from Admin
+
+INSERT INTO Users (Username, Password, FullName, Role, MaSV)
+VALUES
+('user1', 'pass1', 'Nguyen Van A', 'user','11220001'),
+('user2', 'pass2', 'Le Thi B', 'user','11220002'),
+('user3', 'pass3', 'Tran Van C', 'user','11220003'),
+('user4', 'pass4', 'Pham Thi D', 'user','11220004'),
+('user5', 'pass5', 'Hoang Van E', 'user','11220005'),
+('user6', 'pass6', 'Do Thi F', 'user','11220006'),
+('user7', 'pass7', 'Ngo Van G', 'user','11220007'),
+('user8', 'pass8', 'Dang Thi G', 'user','11220008'),
+('user9', 'pass9', 'Bui Van I', 'user','11220009'),
+('user10', 'pass10', 'Mai Thi K', 'user','11220010');
 select * from Users
 INSERT INTO SinhVien (MaSV, FullName, Lop, Khoa)
 VALUES
@@ -464,7 +487,7 @@ VALUES
 ('CNTT',N'Khoa Công Nghệ Thông Tin',N'Tòa A2','0123456789'),
 ('KTPM',N'Viện Kỹ Thuật',N'Tòa A2','0123456789'),
 ('HTTT',N'Khoa Kinh Tế',N'Tòa A2','0123456789');
-select* from Users
+select* from Users, Admin
 
 UPDATE Users SET MaSV = '11220001' WHERE Username = 'user1';
 UPDATE Users SET MaSV = '11220002' WHERE Username = 'user2';
@@ -503,6 +526,7 @@ values
 drop table TinChi
 
 select SOTIEN1TIN from TinChi where MALOP = 'CNTT1'
+delete from HocPhi
 INSERT INTO HocPhi (HocPhiID, MaSV, KiHocID, SoTien, HanDong)
 VALUES
 ('11220001-1-2022','11220001', '1-2022', 5000000, '2023-01-31'),
@@ -530,51 +554,51 @@ VALUES
 
 -- 1-2022 = KiHocID 7
 ('11220001-1-2023','11220001', '1-2023', 5050000, '2023-01-31'),
-('11220002-1-2023','11220001', '1-2023', 5150000, '2023-01-31'),
-('11220003-1-2023','11220001', '1-2023', 5250000, '2023-01-31'),
-('11220004-1-2023','11220001', '1-2023', 5350000, '2023-01-31'),
-('11220005-1-2023','11220001', '1-2023', 5450000, '2023-01-31'),
-('11220006-1-2023','11220001', '1-2023', 5550000, '2023-01-31'),
-('11220007-1-2023','11220001', '1-2023', 5650000, '2023-01-31'),
-('11220008-1-2023','11220001', '1-2023', 5750000, '2023-01-31'),
-('11220009-1-2023','11220001', '1-2023', 5850000, '2023-01-31'),
-('11220010-1-2023','11220001', '1-2023', 5950000, '2023-01-31'),
+('11220002-1-2023','11220002', '1-2023', 5150000, '2023-01-31'),
+('11220003-1-2023','11220003', '1-2023', 5250000, '2023-01-31'),
+('11220004-1-2023','11220004', '1-2023', 5350000, '2023-01-31'),
+('11220005-1-2023','11220005', '1-2023', 5450000, '2023-01-31'),
+('11220006-1-2023','11220006', '1-2023', 5550000, '2023-01-31'),
+('11220007-1-2023','11220007', '1-2023', 5650000, '2023-01-31'),
+('11220008-1-2023','11220008', '1-2023', 5750000, '2023-01-31'),
+('11220009-1-2023','11220009', '1-2023', 5850000, '2023-01-31'),
+('11220010-1-2023','11220010', '1-2023', 5950000, '2023-01-31'),
 
 -- 2-2022 = KiHocID 8
 ('11220001-2-2023','11220001', '2-2023', 5100000, '2023-05-30'),
-('11220002-2-2023','11220001', '2-2023', 5200000, '2023-05-30'),
-('11220003-2-2023','11220001', '2-2023', 5300000, '2023-05-30'),
-('11220004-2-2023','11220001', '2-2023', 5400000, '2023-05-30'),
-('11220005-2-2023','11220001', '2-2023', 5500000, '2023-05-30'),
-('11220006-2-2023','11220001', '2-2023', 5600000, '2023-05-30'),
-('11220007-2-2023','11220001', '2-2023', 5700000, '2023-05-30'),
-('11220008-2-2023','11220001', '2-2023', 5800000, '2023-05-30'),
-('11220009-2-2023','11220001', '2-2023', 5900000, '2023-05-30'),
-('11220010-2-2023','11220001', '2-2023', 6000000, '2023-05-30'),
+('11220002-2-2023','11220002', '2-2023', 5200000, '2023-05-30'),
+('11220003-2-2023','11220003', '2-2023', 5300000, '2023-05-30'),
+('11220004-2-2023','11220004', '2-2023', 5400000, '2023-05-30'),
+('11220005-2-2023','11220005', '2-2023', 5500000, '2023-05-30'),
+('11220006-2-2023','11220006', '2-2023', 5600000, '2023-05-30'),
+('11220007-2-2023','11220007', '2-2023', 5700000, '2023-05-30'),
+('11220008-2-2023','11220008', '2-2023', 5800000, '2023-05-30'),
+('11220009-2-2023','11220009', '2-2023', 5900000, '2023-05-30'),
+('11220010-2-2023','11220010', '2-2023', 6000000, '2023-05-30'),
 
 -- 1-2021 = KiHocID 9
 ('11220001-1-2024','11220001', '1-2024', 5150000, '2024-01-31'),
-('11220002-1-2024','11220001', '1-2024', 5250000, '2024-01-31'),
-('11220003-1-2024','11220001', '1-2024', 5350000, '2024-01-31'),
-('11220004-1-2024','11220001', '1-2024', 5450000, '2024-01-31'),
-('11220005-1-2024','11220001', '1-2024', 5550000, '2024-01-31'),
-('11220006-1-2024','11220001', '1-2024', 5650000, '2024-01-31'),
-('11220007-1-2024','11220001', '1-2024', 5750000, '2024-01-31'),
-('11220008-1-2024','11220001', '1-2024', 5850000, '2024-01-31'),
-('11220009-1-2024','11220001', '1-2024', 5950000, '2024-01-31'),
-('11220010-1-2024','11220001', '1-2024', 6050000, '2024-01-31'),
+('11220002-1-2024','11220002', '1-2024', 5250000, '2024-01-31'),
+('11220003-1-2024','11220003', '1-2024', 5350000, '2024-01-31'),
+('11220004-1-2024','11220004', '1-2024', 5450000, '2024-01-31'),
+('11220005-1-2024','11220005', '1-2024', 5550000, '2024-01-31'),
+('11220006-1-2024','11220006', '1-2024', 5650000, '2024-01-31'),
+('11220007-1-2024','11220007', '1-2024', 5750000, '2024-01-31'),
+('11220008-1-2024','11220008', '1-2024', 5850000, '2024-01-31'),
+('11220009-1-2024','11220009', '1-2024', 5950000, '2024-01-31'),
+('11220010-1-2024','11220010', '1-2024', 6050000, '2024-01-31'),
 
 -- 2-2021 = KiHocID 10
 ('11220001-2-2024','11220001', '2-2024', 5200000, '2024-05-30'),
-('11220002-2-2024','11220001', '2-2024', 5300000, '2024-05-30'),
-('11220003-2-2024','11220001', '2-2024', 5400000, '2024-05-30'),
-('11220004-2-2024','11220001', '2-2024', 5500000, '2024-05-30'),
-('11220005-2-2024','11220001', '2-2024', 5600000, '2024-05-30'),
-('11220006-2-2024','11220001', '2-2024', 5700000, '2024-05-30'),
-('11220007-2-2024','11220001', '2-2024', 5800000, '2024-05-30'),
-('11220008-2-2024','11220001', '2-2024', 5900000, '2024-05-30'),
-('11220009-2-2024','11220001', '2-2024', 6000000, '2024-05-30'),
-('11220010-2-2024','11220001', '2-2024', 6100000, '2024-05-30');
+('11220002-2-2024','11220002', '2-2024', 5300000, '2024-05-30'),
+('11220003-2-2024','11220003', '2-2024', 5400000, '2024-05-30'),
+('11220004-2-2024','11220004', '2-2024', 5500000, '2024-05-30'),
+('11220005-2-2024','11220005', '2-2024', 5600000, '2024-05-30'),
+('11220006-2-2024','11220006', '2-2024', 5700000, '2024-05-30'),
+('11220007-2-2024','11220007', '2-2024', 5800000, '2024-05-30'),
+('11220008-2-2024','11220008', '2-2024', 5900000, '2024-05-30'),
+('11220009-2-2024','11220009', '2-2024', 6000000, '2024-05-30'),
+('11220010-2-2024','11220010', '2-2024', 6100000, '2024-05-30');
 
 INSERT INTO ThanhToan (HocPhiID, NgayThanhToan, SoTienDaDong)
 VALUES
@@ -615,7 +639,7 @@ VALUES
 ('11220009', 10, 1000000, '2021-06-01'),
 ('11220010', 10, 900000,  '2021-06-01');
 
-SELECT * FROM Users;
+SELECT * FROM Users ;
 SELECT * FROM SinhVien;
 SELECT * FROM KiHoc;
 SELECT * FROM HocPhi;
@@ -671,7 +695,6 @@ GROUP BY
     hp.HocPhiID, -- 🟢 Thêm vào đây nữa
     sv.MaSV, sv.FullName, sv.Lop, kh.TenKiHoc, hp.SoTien
 
-ALTER TABLE HoaDon ADD NganHang NVARCHAR(100);
 
 SELECT* FROM v_HoaDon 
 
@@ -700,7 +723,21 @@ JOIN (
 ) tt ON tt.HocPhiID = hp.HocPhiID
 JOIN HoaDon hd ON hd.ThanhToanID = tt.ThanhToanID
 
-select * from v_HoaDon_ChiTiet
+select * from v_HoaDon_ChiTiet where v_HoaDon_ChiTiet.HocPhiID = '11220001-2-2024'
 
 
 EXEC sp_LayHocPhiTheoMaSV 'SV001'
+
+
+
+
+
+
+
+
+
+
+
+
+
+

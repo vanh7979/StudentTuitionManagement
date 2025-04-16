@@ -70,6 +70,7 @@
             this.btnAdd.TabIndex = 71;
             this.btnAdd.Text = "Thay đổi";
             this.btnAdd.UseVisualStyleBackColor = true;
+            this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
             // 
             // txtHP
             // 

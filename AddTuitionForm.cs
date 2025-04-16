@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -109,13 +110,34 @@ namespace NewProject
         {
             if (txtHP.Text != "")
             {
-                string strLuu = "Insert into HocPhi (HocPhiID, MaSV, KiHocID, SoTien, HanDong) values ('" + txtMaHK.Text + "','" + txtMaSV.Text + "','" + cbxHocki.Text + "'," + int.Parse(txtHP.Text) + ",'" + dtpEnd.Value + "')";
-                DialogResult = MessageBox.Show("Xác nhận thêm học phí mới cho sinh viên mã " + txtMaSV.Text +"?", "Thông báo", MessageBoxButtons.OKCancel, MessageBoxIcon.Information);
-                if (DialogResult == DialogResult.OK)
+                string query = $"SELECT * FROM HocPhi where HocPhiID = '" + txtMaHK.Text +"'";
+                DataTable dt = new DataTable();
+                dt = dp.Lay_DLbang(query);
+                if (dt.Rows.Count == 0)
                 {
-                    dp.ThucThi(strLuu);
-                    parentForm.LoadThongTin();
-                    this.Close();
+                    DialogResult = MessageBox.Show("Xác nhận thêm học phí mới cho sinh viên mã " + txtMaSV.Text + "?", "Thông báo", MessageBoxButtons.OKCancel, MessageBoxIcon.Information);
+                    if (DialogResult == DialogResult.OK)
+                    {
+                        SqlParameter[] HocKi = new SqlParameter[]
+    {
+                        new SqlParameter("@HocPhiID", txtMaHK.Text),
+                        new SqlParameter("@MaSV", txtMaSV.Text),
+                        new SqlParameter("@KiHocID", cbxHocki.Text),
+                        new SqlParameter("@SoTien", int.Parse(txtHP.Text)),
+                        new SqlParameter("@HanDong", dtpEnd.Value)
+    };
+                        bool result_HK = dp.ExecuteNonQuery("sp_ThemHocPhi", HocKi);
+                        if (result_HK)
+                            MessageBox.Show("Xóa thành công!");
+                        else
+                            MessageBox.Show("Xảy ra lỗi, kiểm tra lại mã học phí");
+                        parentForm.LoadThongTin();
+                        this.Close();
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Mã học phí đã tồn tại!");
                 }
             }
         }

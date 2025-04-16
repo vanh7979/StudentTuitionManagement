@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -66,14 +67,24 @@ namespace NewProject
 
         private void btnChange_Click(object sender, EventArgs e)
         {
-            string strLuu = "Update KiHoc set TGBatDau = '" + dtpStart.Value + "', TGKetThuc = '" + dtpEnd.Value + "' where KiHocID = '" + txtMaHK.Text + "'" ;
-            dp.ThucThi(strLuu);
-            DialogResult = MessageBox.Show("Xác nhận thay đổi thông tin sinh viên ?", "Thông báo", MessageBoxButtons.OKCancel, MessageBoxIcon.Information);
-            if (DialogResult == DialogResult.OK)
+            DialogResult dr = MessageBox.Show("Xác nhận thay đổi thông tin kì học ?", "Thông báo", MessageBoxButtons.OKCancel, MessageBoxIcon.Information);
+            if (dr == DialogResult.OK)
             {
-                MessageBox.Show("Thành công");
-                this.Close();
-                parentForm.LoadThongTin();
+                SqlParameter[] HK = new SqlParameter[]
+{
+                    new SqlParameter("@KiHocID", txtMaHK.Text),
+                    new SqlParameter("@TGBatDau", dtpStart.Value),
+                    new SqlParameter("@TGKetThuc", dtpEnd.Value)
+};
+                bool result_HK = dp.ExecuteNonQuery("sp_SuaKiHoc", HK);
+                if (result_HK)
+                {
+                    MessageBox.Show("Thay đổi thành công!");
+                    parentForm.LoadThongTin();
+                    this.Close();
+                }
+                else
+                    MessageBox.Show("Xảy ra lỗi, kiểm tra lại mã học phí");
             }
         }
 
