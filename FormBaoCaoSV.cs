@@ -19,7 +19,6 @@ namespace NewProject
         {
             try
             {
-                // Bước 1: Lấy dữ liệu từ VIEW thay vì stored procedure
                 string connectionString = "Data Source=PTRANVANH;Initial Catalog=NHOM7_LTUD;Integrated Security=True";
                 using (SqlConnection conn = new SqlConnection(connectionString))
                 {
@@ -32,13 +31,10 @@ namespace NewProject
                         MessageBox.Show("❗ Không có dữ liệu để hiển thị báo cáo.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         return;
                     }
-
-                    // Bước 2: Load Crystal Report
                     ReportDocument rpt = new ReportDocument();
                     string reportPath = Path.Combine(Application.StartupPath, "BAOCAOSINHVIEN.rpt");
                     rpt.Load(reportPath);
 
-                    // Bước 3: Thiết lập kết nối CSDL cho Crystal Report
                     rpt.SetDatabaseLogon("", "", "PTRANVANH", "NHOM7_LTUD");
 
                     foreach (Table table in rpt.Database.Tables)

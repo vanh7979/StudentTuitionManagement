@@ -32,23 +32,24 @@ namespace ProjectStudentTuitionManagement
         private void InitializeComponent()
         {
             this.panel1 = new System.Windows.Forms.Panel();
-            this.label1 = new System.Windows.Forms.Label();
+            this.pnlDropdown = new System.Windows.Forms.Panel();
             this.lkLogout = new System.Windows.Forms.LinkLabel();
+            this.label1 = new System.Windows.Forms.Label();
             this.btnStatisticReport = new System.Windows.Forms.Button();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.btnTuition = new System.Windows.Forms.Button();
             this.btnSemester = new System.Windows.Forms.Button();
             this.btnStudent = new System.Windows.Forms.Button();
             this.panelMain = new System.Windows.Forms.Panel();
-            this.pnlDropdown = new System.Windows.Forms.Panel();
             this.BottomToolStripPanel = new System.Windows.Forms.ToolStripPanel();
             this.TopToolStripPanel = new System.Windows.Forms.ToolStripPanel();
             this.RightToolStripPanel = new System.Windows.Forms.ToolStripPanel();
             this.LeftToolStripPanel = new System.Windows.Forms.ToolStripPanel();
             this.ContentPanel = new System.Windows.Forms.ToolStripContentPanel();
+            this.linkLabel1 = new System.Windows.Forms.LinkLabel();
             this.panel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.pnlDropdown.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // panel1
@@ -68,16 +69,15 @@ namespace ProjectStudentTuitionManagement
             this.panel1.TabIndex = 0;
             this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
             // 
-            // label1
+            // pnlDropdown
             // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(12, 166);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(71, 22);
-            this.label1.TabIndex = 6;
-            this.label1.Text = "ADMIN";
-            this.label1.Click += new System.EventHandler(this.label1_Click);
+            this.pnlDropdown.Controls.Add(this.linkLabel1);
+            this.pnlDropdown.Controls.Add(this.lkLogout);
+            this.pnlDropdown.Location = new System.Drawing.Point(54, 191);
+            this.pnlDropdown.Name = "pnlDropdown";
+            this.pnlDropdown.Size = new System.Drawing.Size(96, 55);
+            this.pnlDropdown.TabIndex = 0;
+            this.pnlDropdown.Visible = false;
             // 
             // lkLogout
             // 
@@ -91,13 +91,24 @@ namespace ProjectStudentTuitionManagement
             this.lkLogout.Text = "Đăng xuất";
             this.lkLogout.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lkLogout_LinkClicked);
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(12, 166);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(71, 22);
+            this.label1.TabIndex = 6;
+            this.label1.Text = "ADMIN";
+            this.label1.Click += new System.EventHandler(this.label1_Click);
+            // 
             // btnStatisticReport
             // 
             this.btnStatisticReport.FlatAppearance.BorderSize = 0;
             this.btnStatisticReport.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.ActiveCaption;
             this.btnStatisticReport.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.ActiveCaption;
             this.btnStatisticReport.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnStatisticReport.Location = new System.Drawing.Point(0, 400);
+            this.btnStatisticReport.Location = new System.Drawing.Point(0, 410);
             this.btnStatisticReport.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnStatisticReport.Name = "btnStatisticReport";
             this.btnStatisticReport.Size = new System.Drawing.Size(200, 48);
@@ -123,7 +134,7 @@ namespace ProjectStudentTuitionManagement
             this.btnTuition.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.ActiveCaption;
             this.btnTuition.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.ActiveCaption;
             this.btnTuition.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnTuition.Location = new System.Drawing.Point(0, 344);
+            this.btnTuition.Location = new System.Drawing.Point(0, 354);
             this.btnTuition.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnTuition.Name = "btnTuition";
             this.btnTuition.Size = new System.Drawing.Size(200, 48);
@@ -138,7 +149,7 @@ namespace ProjectStudentTuitionManagement
             this.btnSemester.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.ActiveCaption;
             this.btnSemester.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.ActiveCaption;
             this.btnSemester.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnSemester.Location = new System.Drawing.Point(0, 288);
+            this.btnSemester.Location = new System.Drawing.Point(0, 298);
             this.btnSemester.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnSemester.Name = "btnSemester";
             this.btnSemester.Size = new System.Drawing.Size(200, 48);
@@ -154,7 +165,7 @@ namespace ProjectStudentTuitionManagement
             this.btnStudent.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.ActiveCaption;
             this.btnStudent.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnStudent.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.btnStudent.Location = new System.Drawing.Point(0, 232);
+            this.btnStudent.Location = new System.Drawing.Point(0, 242);
             this.btnStudent.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnStudent.Name = "btnStudent";
             this.btnStudent.Size = new System.Drawing.Size(200, 48);
@@ -171,15 +182,6 @@ namespace ProjectStudentTuitionManagement
             this.panelMain.Size = new System.Drawing.Size(937, 520);
             this.panelMain.TabIndex = 1;
             this.panelMain.Paint += new System.Windows.Forms.PaintEventHandler(this.panelMain_Paint);
-            // 
-            // pnlDropdown
-            // 
-            this.pnlDropdown.Controls.Add(this.lkLogout);
-            this.pnlDropdown.Location = new System.Drawing.Point(54, 191);
-            this.pnlDropdown.Name = "pnlDropdown";
-            this.pnlDropdown.Size = new System.Drawing.Size(96, 22);
-            this.pnlDropdown.TabIndex = 0;
-            this.pnlDropdown.Visible = false;
             // 
             // BottomToolStripPanel
             // 
@@ -217,6 +219,18 @@ namespace ProjectStudentTuitionManagement
             // 
             this.ContentPanel.Size = new System.Drawing.Size(150, 150);
             // 
+            // linkLabel1
+            // 
+            this.linkLabel1.AutoSize = true;
+            this.linkLabel1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
+            this.linkLabel1.Location = new System.Drawing.Point(19, 26);
+            this.linkLabel1.Name = "linkLabel1";
+            this.linkLabel1.Size = new System.Drawing.Size(51, 20);
+            this.linkLabel1.TabIndex = 6;
+            this.linkLabel1.TabStop = true;
+            this.linkLabel1.Text = "Thoát";
+            this.linkLabel1.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel1_LinkClicked);
+            // 
             // Admin
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -232,9 +246,9 @@ namespace ProjectStudentTuitionManagement
             this.Load += new System.EventHandler(this.Admin_Load_1);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.pnlDropdown.ResumeLayout(false);
             this.pnlDropdown.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -256,5 +270,6 @@ namespace ProjectStudentTuitionManagement
         private ToolStripContentPanel ContentPanel;
         private Label label1;
         private Panel pnlDropdown;
+        private LinkLabel linkLabel1;
     }
 }

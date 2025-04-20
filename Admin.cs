@@ -126,5 +126,14 @@ namespace ProjectStudentTuitionManagement
             this.ControlBox = false;
             this.StartPosition = FormStartPosition.CenterScreen;
         }
+
+        private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            this.Hide();
+            LoginForm loginForm = new LoginForm();
+            loginForm.Show();
+
+            Application.Restart();
+        }
     }
 }

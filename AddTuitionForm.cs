@@ -111,29 +111,37 @@ namespace NewProject
             if (txtHP.Text != "")
             {
                 string hocPhiID = txtMaHK.Text.Trim();
+                string tenKiHoc = cbxHocki.Text;
                 string checkQuery = $"SELECT COUNT(*) FROM HocPhi WHERE HocPhiID = '{hocPhiID}'";
                 int count = Convert.ToInt32(dp.Lay_GiaTriDon(checkQuery));
-                string tenKiHoc = cbxHocki.Text; 
 
                 
-                MessageBox.Show($"⚠️ Học phí kỳ học {tenKiHoc} cho sinh viên đã tồn tại!\nVui lòng chọn kỳ học khác hoặc chỉnh sửa bản ghi cũ.",
-                                "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-
                 if (count > 0)
                 {
                     MessageBox.Show($"⚠️ Học phí kỳ học {tenKiHoc} cho sinh viên đã tồn tại!\nVui lòng chọn kỳ học khác hoặc chỉnh sửa bản ghi cũ.",
-                "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                                    "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
                 }
+
+                
                 string ngayHanDong = dtpEnd.Value.ToString("yyyy-MM-dd");
-                string strLuu = "Insert into HocPhi (HocPhiID, MaSV, KiHocID, SoTien, HanDong) values ('" + txtMaHK.Text + "','" + txtMaSV.Text + "','" + cbxHocki.Text + "'," + int.Parse(txtHP.Text) + ",'" + ngayHanDong + "')";
-                DialogResult = MessageBox.Show("Xác nhận thêm học phí mới cho sinh viên mã " + txtMaSV.Text +"?", "Thông báo", MessageBoxButtons.OKCancel, MessageBoxIcon.Information);
-                if (DialogResult == DialogResult.OK)
+                string strLuu = "INSERT INTO HocPhi (HocPhiID, MaSV, KiHocID, SoTien, HanDong) " +
+                                "VALUES ('" + txtMaHK.Text + "','" + txtMaSV.Text + "','" + cbxHocki.Text + "'," +
+                                int.Parse(txtHP.Text) + ",'" + ngayHanDong + "')";
+
+                DialogResult result = MessageBox.Show("Xác nhận thêm học phí mới cho sinh viên mã " + txtMaSV.Text + "?",
+                                                      "Thông báo", MessageBoxButtons.OKCancel, MessageBoxIcon.Information);
+
+                if (result == DialogResult.OK)
                 {
                     dp.ThucThi(strLuu);
                     parentForm.LoadThongTin();
                     this.Close();
                 }
+            }
+            else
+            {
+                MessageBox.Show("Vui lòng nhập số tiền học phí!", "Thiếu thông tin", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
         }
 

@@ -54,7 +54,7 @@ namespace ProjectStudentTuitionManagement
             this.button3.BackColor = System.Drawing.Color.Transparent;
             this.button3.Cursor = System.Windows.Forms.Cursors.Hand;
             this.button3.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button3.Location = new System.Drawing.Point(393, 37);
+            this.button3.Location = new System.Drawing.Point(481, 37);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(300, 409);
             this.button3.TabIndex = 2;
@@ -71,7 +71,7 @@ namespace ProjectStudentTuitionManagement
             this.Controls.Add(this.button1);
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "StatisticReport";
-            this.Size = new System.Drawing.Size(744, 497);
+            this.Size = new System.Drawing.Size(820, 497);
             this.Load += new System.EventHandler(this.StatisticReport_Load);
             this.ResumeLayout(false);
 

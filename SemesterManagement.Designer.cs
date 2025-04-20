@@ -107,6 +107,7 @@ namespace ProjectStudentTuitionManagement
             this.txtSearch.Size = new System.Drawing.Size(480, 38);
             this.txtSearch.TabIndex = 10;
             this.txtSearch.Text = "Nhập kì học .VD:HK1 2021";
+            this.txtSearch.TextChanged += new System.EventHandler(this.txtSearch_TextChanged);
             this.txtSearch.Enter += new System.EventHandler(this.txtSearch_Enter);
             this.txtSearch.Leave += new System.EventHandler(this.txtSearch_Leave);
             // 

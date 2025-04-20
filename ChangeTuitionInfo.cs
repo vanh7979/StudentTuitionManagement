@@ -102,5 +102,37 @@ namespace NewProject
                 this.Close();
             }
         }
+
+        private void btnAdd_Click(object sender, EventArgs e)
+        {
+            if (string.IsNullOrWhiteSpace(txtMaHK.Text) ||
+                string.IsNullOrWhiteSpace(txtMaSV.Text) ||
+                string.IsNullOrWhiteSpace(cbxHocki.Text) ||
+                string.IsNullOrWhiteSpace(txtHP.Text))
+            {
+                MessageBox.Show("Vui lòng nhập đầy đủ thông tin học phí!", "Thiếu thông tin", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            DialogResult result = MessageBox.Show("Xác nhận cập nhật học phí cho sinh viên " + txtMaSV.Text + "?",
+                                                  "Cập nhật học phí", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
+
+            if (result == DialogResult.OK)
+            {
+                string hocPhiID = txtMaHK.Text.Trim();
+                string maSV = txtMaSV.Text.Trim();
+                string kiHocID = cbxHocki.Text.Trim();
+                string soTien = txtHP.Text.Trim();
+                string hanDong = dtpEnd.Value.ToString("yyyy-MM-dd");
+
+                string query = $"UPDATE HocPhi SET MaSV = N'{maSV}', KiHocID = N'{kiHocID}', SoTien = {soTien}, HanDong = '{hanDong}' WHERE HocPhiID = N'{hocPhiID}'";
+
+                dp.ThucThi(query);
+
+                MessageBox.Show("Cập nhật thành công!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                parentForm.LoadThongTin(); // load lại danh sách
+                this.Close(); // đóng form
+            }
+        }
     }
 }

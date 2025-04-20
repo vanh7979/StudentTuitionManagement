@@ -19,7 +19,11 @@ namespace ProjectStudentTuitionManagement
         {
             InitializeComponent();
             this.maSV = maSV;
-            
+
+            label1.MouseEnter += label1_MouseEnter;
+            label1.MouseLeave += label1_MouseLeave;
+            label1.Click += label1_Click;
+
         }
         private void LoadThongTinSinhVien()
         {
@@ -37,7 +41,7 @@ namespace ProjectStudentTuitionManagement
                 label4.Text = tenLop;
                 label5.Text = tenKhoa;
 
-                label1.Text = $"Xin chào {ten} ";
+                label1.Text = $"Xin chào {ten} ⌄";
             }
 
         }
@@ -201,6 +205,12 @@ namespace ProjectStudentTuitionManagement
             }
             comboBox2.DataSource = dtTrangThaiHienThi;
             comboBox2.DisplayMember = "TrangThaiText";
+
+            this.FormBorderStyle = FormBorderStyle.FixedDialog;
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
+            this.ControlBox = false;
+            this.StartPosition = FormStartPosition.CenterScreen;
         }
 
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
@@ -211,6 +221,45 @@ namespace ProjectStudentTuitionManagement
         private void comboBox2_SelectedIndexChanged(object sender, EventArgs e)
         {
 
+        }
+        private void label1_MouseEnter(object sender, EventArgs e)
+        {
+            label1.ForeColor = Color.MediumBlue;
+            label1.Cursor = Cursors.Hand; 
+        }
+
+        private void label1_MouseLeave(object sender, EventArgs e)
+        {
+        
+            label1.ForeColor = Color.Black;
+        }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+            pnlDropdown.Visible = !pnlDropdown.Visible; 
+        }
+
+        private void lkLogout_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            var result = MessageBox.Show("Bạn có chắc chắn muốn đăng xuất?", "Xác nhận", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if (result == DialogResult.Yes)
+            {
+                this.Hide();
+
+                LoginForm loginForm = new LoginForm();
+                loginForm.Show();
+
+                Application.Restart();
+            }
+        }
+
+        private void linkLabel2_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            this.Hide();
+            LoginForm loginForm = new LoginForm();
+            loginForm.Show();
+
+            Application.Restart();
         }
     }
 }

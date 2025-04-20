@@ -132,5 +132,10 @@ namespace ProjectStudentTuitionManagement
                 this.SemesterManagement_Load(sender, e);
             }
         }
+
+        private void txtSearch_TextChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }

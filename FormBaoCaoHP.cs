@@ -15,37 +15,30 @@ namespace NewProject
             InitializeComponent();
         }
 
-       
-
         private void crystalReportViewer1_Load(object sender, EventArgs e)
         {
             try
             {
-               
-                string reportPath = Path.Combine(Application.StartupPath, "BAOCAOHOCPHI.rpt");
-
-                ReportDocument rpt = new ReportDocument();
-                rpt.Load(reportPath);
-
-               
-                ConnectionInfo connectionInfo = new ConnectionInfo()
-                {
-                    ServerName = "PTRANVANH", 
-                    DatabaseName = "NHOM7_LTUD",
-                    IntegratedSecurity = true
-                };
-
                 
-                foreach (Table table in rpt.Database.Tables)
+                string connectionString = "Data Source=PTRANVANH;Initial Catalog=NHOM7_LTUD;Integrated Security=True";
+                using (SqlConnection conn = new SqlConnection(connectionString))
                 {
-                    TableLogOnInfo logonInfo = table.LogOnInfo;
-                    logonInfo.ConnectionInfo = connectionInfo;
-                    table.ApplyLogOnInfo(logonInfo);
+                    SqlDataAdapter da = new SqlDataAdapter("SELECT * FROM v_BaoCaoHocPhi", conn);
+                    DataTable dt = new DataTable();
+                    da.Fill(dt);
+
+                    if (dt.Rows.Count == 0)
+                    {
+                        MessageBox.Show("❗ Không có dữ liệu để hiển thị báo cáo.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        return;
+                    }
+                    ReportDocument rpt = new ReportDocument();
+                    string reportPath = Path.Combine(Application.StartupPath, "BAOCAOHOCPHI.rpt");
+                    rpt.Load(reportPath);
+                    rpt.SetDataSource(dt);
+                    crystalReportViewer1.ReportSource = rpt;
+                    crystalReportViewer1.Refresh();
                 }
-
-                
-                crystalReportViewer1.ReportSource = rpt;
-                crystalReportViewer1.Refresh();
             }
             catch (Exception ex)
             {
