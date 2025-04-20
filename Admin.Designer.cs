@@ -35,19 +35,26 @@ namespace ProjectStudentTuitionManagement
             this.label1 = new System.Windows.Forms.Label();
             this.lkLogout = new System.Windows.Forms.LinkLabel();
             this.btnStatisticReport = new System.Windows.Forms.Button();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.btnTuition = new System.Windows.Forms.Button();
             this.btnSemester = new System.Windows.Forms.Button();
             this.btnStudent = new System.Windows.Forms.Button();
             this.panelMain = new System.Windows.Forms.Panel();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.pnlDropdown = new System.Windows.Forms.Panel();
+            this.BottomToolStripPanel = new System.Windows.Forms.ToolStripPanel();
+            this.TopToolStripPanel = new System.Windows.Forms.ToolStripPanel();
+            this.RightToolStripPanel = new System.Windows.Forms.ToolStripPanel();
+            this.LeftToolStripPanel = new System.Windows.Forms.ToolStripPanel();
+            this.ContentPanel = new System.Windows.Forms.ToolStripContentPanel();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            this.pnlDropdown.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.pnlDropdown);
             this.panel1.Controls.Add(this.label1);
-            this.panel1.Controls.Add(this.lkLogout);
             this.panel1.Controls.Add(this.btnStatisticReport);
             this.panel1.Controls.Add(this.pictureBox1);
             this.panel1.Controls.Add(this.btnTuition);
@@ -57,7 +64,7 @@ namespace ProjectStudentTuitionManagement
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(200, 522);
+            this.panel1.Size = new System.Drawing.Size(217, 522);
             this.panel1.TabIndex = 0;
             this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
             // 
@@ -65,7 +72,7 @@ namespace ProjectStudentTuitionManagement
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(12, 171);
+            this.label1.Location = new System.Drawing.Point(12, 166);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(71, 22);
             this.label1.TabIndex = 6;
@@ -75,10 +82,10 @@ namespace ProjectStudentTuitionManagement
             // lkLogout
             // 
             this.lkLogout.AutoSize = true;
-            this.lkLogout.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
-            this.lkLogout.Location = new System.Drawing.Point(52, 471);
+            this.lkLogout.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
+            this.lkLogout.Location = new System.Drawing.Point(3, 0);
             this.lkLogout.Name = "lkLogout";
-            this.lkLogout.Size = new System.Drawing.Size(101, 25);
+            this.lkLogout.Size = new System.Drawing.Size(84, 20);
             this.lkLogout.TabIndex = 5;
             this.lkLogout.TabStop = true;
             this.lkLogout.Text = "Đăng xuất";
@@ -98,6 +105,17 @@ namespace ProjectStudentTuitionManagement
             this.btnStatisticReport.Text = "Thống kê, báo cáo";
             this.btnStatisticReport.UseVisualStyleBackColor = true;
             this.btnStatisticReport.Click += new System.EventHandler(this.btnStatisticReport_Click);
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Image = global::NewProject.Properties.Resources.logo_neu_inkythuatso_01_09_10_41_01;
+            this.pictureBox1.Location = new System.Drawing.Point(35, 8);
+            this.pictureBox1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(142, 142);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox1.TabIndex = 2;
+            this.pictureBox1.TabStop = false;
             // 
             // btnTuition
             // 
@@ -147,23 +165,57 @@ namespace ProjectStudentTuitionManagement
             // 
             // panelMain
             // 
-            this.panelMain.Location = new System.Drawing.Point(210, 0);
+            this.panelMain.Location = new System.Drawing.Point(223, 0);
             this.panelMain.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.panelMain.Name = "panelMain";
-            this.panelMain.Size = new System.Drawing.Size(950, 520);
+            this.panelMain.Size = new System.Drawing.Size(937, 520);
             this.panelMain.TabIndex = 1;
             this.panelMain.Paint += new System.Windows.Forms.PaintEventHandler(this.panelMain_Paint);
             // 
-            // pictureBox1
+            // pnlDropdown
             // 
-            this.pictureBox1.Image = global::NewProject.Properties.Resources.logo_neu_inkythuatso_01_09_10_41_01;
-            this.pictureBox1.Location = new System.Drawing.Point(35, 8);
-            this.pictureBox1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(142, 142);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBox1.TabIndex = 2;
-            this.pictureBox1.TabStop = false;
+            this.pnlDropdown.Controls.Add(this.lkLogout);
+            this.pnlDropdown.Location = new System.Drawing.Point(54, 191);
+            this.pnlDropdown.Name = "pnlDropdown";
+            this.pnlDropdown.Size = new System.Drawing.Size(96, 22);
+            this.pnlDropdown.TabIndex = 0;
+            this.pnlDropdown.Visible = false;
+            // 
+            // BottomToolStripPanel
+            // 
+            this.BottomToolStripPanel.Location = new System.Drawing.Point(0, 0);
+            this.BottomToolStripPanel.Name = "BottomToolStripPanel";
+            this.BottomToolStripPanel.Orientation = System.Windows.Forms.Orientation.Horizontal;
+            this.BottomToolStripPanel.RowMargin = new System.Windows.Forms.Padding(4, 0, 0, 0);
+            this.BottomToolStripPanel.Size = new System.Drawing.Size(0, 0);
+            // 
+            // TopToolStripPanel
+            // 
+            this.TopToolStripPanel.Location = new System.Drawing.Point(0, 0);
+            this.TopToolStripPanel.Name = "TopToolStripPanel";
+            this.TopToolStripPanel.Orientation = System.Windows.Forms.Orientation.Horizontal;
+            this.TopToolStripPanel.RowMargin = new System.Windows.Forms.Padding(4, 0, 0, 0);
+            this.TopToolStripPanel.Size = new System.Drawing.Size(0, 0);
+            // 
+            // RightToolStripPanel
+            // 
+            this.RightToolStripPanel.Location = new System.Drawing.Point(0, 0);
+            this.RightToolStripPanel.Name = "RightToolStripPanel";
+            this.RightToolStripPanel.Orientation = System.Windows.Forms.Orientation.Horizontal;
+            this.RightToolStripPanel.RowMargin = new System.Windows.Forms.Padding(4, 0, 0, 0);
+            this.RightToolStripPanel.Size = new System.Drawing.Size(0, 0);
+            // 
+            // LeftToolStripPanel
+            // 
+            this.LeftToolStripPanel.Location = new System.Drawing.Point(0, 0);
+            this.LeftToolStripPanel.Name = "LeftToolStripPanel";
+            this.LeftToolStripPanel.Orientation = System.Windows.Forms.Orientation.Horizontal;
+            this.LeftToolStripPanel.RowMargin = new System.Windows.Forms.Padding(4, 0, 0, 0);
+            this.LeftToolStripPanel.Size = new System.Drawing.Size(0, 0);
+            // 
+            // ContentPanel
+            // 
+            this.ContentPanel.Size = new System.Drawing.Size(150, 150);
             // 
             // Admin
             // 
@@ -177,9 +229,12 @@ namespace ProjectStudentTuitionManagement
             this.Name = "Admin";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Form1";
+            this.Load += new System.EventHandler(this.Admin_Load_1);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            this.pnlDropdown.ResumeLayout(false);
+            this.pnlDropdown.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -194,6 +249,12 @@ namespace ProjectStudentTuitionManagement
         private Panel panelMain;
         private Button btnStatisticReport;
         private LinkLabel lkLogout;
+        private ToolStripPanel BottomToolStripPanel;
+        private ToolStripPanel TopToolStripPanel;
+        private ToolStripPanel RightToolStripPanel;
+        private ToolStripPanel LeftToolStripPanel;
+        private ToolStripContentPanel ContentPanel;
         private Label label1;
+        private Panel pnlDropdown;
     }
 }

@@ -16,7 +16,9 @@ namespace ProjectStudentTuitionManagement
         public Admin(string username)
         {
             InitializeComponent();
-            label1.Text = $"Xin chào, {username}";
+            label1.Text = $"Xin chào {username} ⌄";
+            this.label1.MouseEnter += new EventHandler(lblAdmin_MouseEnter);
+            this.label1.MouseLeave += new EventHandler(lblAdmin_MouseLeave);
         }
 
         private void ShowControl(UserControl uc)
@@ -32,12 +34,6 @@ namespace ProjectStudentTuitionManagement
         {
 
         }
-
-        private void Admin_Load(object sender, EventArgs e)
-        {
-
-        }
-
         private void textBox2_TextChanged(object sender, EventArgs e)
         {
 
@@ -83,7 +79,7 @@ namespace ProjectStudentTuitionManagement
 
         private void label1_Click(object sender, EventArgs e)
         {
-
+            pnlDropdown.Visible = !pnlDropdown.Visible;
         }
         private void HighlightButton(Button activeButton)
         {
@@ -110,6 +106,25 @@ namespace ProjectStudentTuitionManagement
         private void panelMain_Paint(object sender, PaintEventArgs e)
         {
 
+        }
+        private void lblAdmin_MouseEnter(object sender, EventArgs e)
+        {
+            label1.BackColor = Color.LightGray; 
+            label1.Cursor = Cursors.Hand;       
+        }
+
+        private void lblAdmin_MouseLeave(object sender, EventArgs e)
+        {
+            label1.BackColor = SystemColors.Control; 
+        }
+
+        private void Admin_Load_1(object sender, EventArgs e)
+        {
+            this.FormBorderStyle = FormBorderStyle.FixedDialog;
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
+            this.ControlBox = false;
+            this.StartPosition = FormStartPosition.CenterScreen;
         }
     }
 }

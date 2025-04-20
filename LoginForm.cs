@@ -39,6 +39,9 @@ namespace ProjectStudentTuitionManagement
             this.MinimizeBox = false; 
             this.ControlBox = false;  
             this.StartPosition = FormStartPosition.CenterScreen;
+
+            this.AcceptButton = button1;
+
         }
 
         private void button1_Click_1(object sender, EventArgs e)

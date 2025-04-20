@@ -314,6 +314,21 @@ BEGIN
     ORDER BY kh.NamHoc DESC, kh.TenKiHoc;
 END;
 
+CREATE OR ALTER VIEW v_ThongTinSinhVien AS
+SELECT 
+    sv.MaSV,
+    sv.FullName AS HoTen,
+    sv.Lop AS MaLop,
+    l.TENLOP,
+    sv.Khoa AS MaKhoa,
+    kv.TENKHOA,
+    l.CVHT AS CoVanHocTap
+FROM 
+    SinhVien sv
+JOIN Lop l ON sv.Lop = l.MALOP
+JOIN KhoaVien kv ON sv.Khoa = kv.MAKHOA;
+
+
 
 -- Bảng con trước
 DROP TABLE IF EXISTS HoaDon;
@@ -483,4 +498,17 @@ SELECT * FROM v_HoaDon_ChiTiet;
 SELECT * FROM v_ThongKeSinhVienDayDu;
 SELECT * FROM v_BaoCaoHocPhi;
 SELECT * FROM v_ThongKeHocPhiTongQuat;
+SELECT * FROM v_ThongTinSinhVien;
+
+
+SELECT * FROM KhoaVien;
+SELECT * FROM Lop;
+SELECT * FROM SinhVien;
+SELECT * FROM Users;
+SELECT * FROM TinChi;
+SELECT * FROM KiHoc;
+SELECT * FROM HocPhi;
+SELECT * FROM ThanhToan;
+SELECT * FROM HoaDon;
+SELECT * FROM ThongBaoNo;
 

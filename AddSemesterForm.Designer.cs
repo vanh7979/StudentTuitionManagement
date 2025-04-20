@@ -47,7 +47,7 @@
             // btnExit
             // 
             this.btnExit.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
-            this.btnExit.Location = new System.Drawing.Point(477, 372);
+            this.btnExit.Location = new System.Drawing.Point(448, 423);
             this.btnExit.Name = "btnExit";
             this.btnExit.Size = new System.Drawing.Size(181, 36);
             this.btnExit.TabIndex = 21;
@@ -58,7 +58,7 @@
             // btnAdd
             // 
             this.btnAdd.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
-            this.btnAdd.Location = new System.Drawing.Point(174, 372);
+            this.btnAdd.Location = new System.Drawing.Point(138, 423);
             this.btnAdd.Name = "btnAdd";
             this.btnAdd.Size = new System.Drawing.Size(181, 36);
             this.btnAdd.TabIndex = 20;
@@ -72,7 +72,7 @@
             this.txtMaHK.Location = new System.Drawing.Point(263, 114);
             this.txtMaHK.Name = "txtMaHK";
             this.txtMaHK.ReadOnly = true;
-            this.txtMaHK.Size = new System.Drawing.Size(415, 30);
+            this.txtMaHK.Size = new System.Drawing.Size(238, 30);
             this.txtMaHK.TabIndex = 16;
             // 
             // lblClass
@@ -109,7 +109,7 @@
             // 
             this.lblSemester.AutoSize = true;
             this.lblSemester.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
-            this.lblSemester.Location = new System.Drawing.Point(317, 46);
+            this.lblSemester.Location = new System.Drawing.Point(295, 38);
             this.lblSemester.Name = "lblSemester";
             this.lblSemester.Size = new System.Drawing.Size(145, 32);
             this.lblSemester.TabIndex = 11;
@@ -120,7 +120,7 @@
             this.txtYear.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
             this.txtYear.Location = new System.Drawing.Point(263, 239);
             this.txtYear.Name = "txtYear";
-            this.txtYear.Size = new System.Drawing.Size(415, 30);
+            this.txtYear.Size = new System.Drawing.Size(238, 30);
             this.txtYear.TabIndex = 22;
             // 
             // cbxHocki
@@ -129,13 +129,13 @@
             this.cbxHocki.FormattingEnabled = true;
             this.cbxHocki.Location = new System.Drawing.Point(263, 177);
             this.cbxHocki.Name = "cbxHocki";
-            this.cbxHocki.Size = new System.Drawing.Size(415, 33);
+            this.cbxHocki.Size = new System.Drawing.Size(238, 33);
             this.cbxHocki.TabIndex = 23;
             // 
             // btnNew
             // 
             this.btnNew.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
-            this.btnNew.Location = new System.Drawing.Point(702, 111);
+            this.btnNew.Location = new System.Drawing.Point(543, 111);
             this.btnNew.Name = "btnNew";
             this.btnNew.Size = new System.Drawing.Size(86, 36);
             this.btnNew.TabIndex = 24;
@@ -145,9 +145,10 @@
             // 
             // dtpStart
             // 
-            this.dtpStart.Location = new System.Drawing.Point(193, 307);
+            this.dtpStart.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dtpStart.Location = new System.Drawing.Point(263, 306);
             this.dtpStart.Name = "dtpStart";
-            this.dtpStart.Size = new System.Drawing.Size(228, 22);
+            this.dtpStart.Size = new System.Drawing.Size(238, 28);
             this.dtpStart.TabIndex = 25;
             // 
             // lblStart
@@ -164,7 +165,7 @@
             // 
             this.lblEnd.AutoSize = true;
             this.lblEnd.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
-            this.lblEnd.Location = new System.Drawing.Point(438, 304);
+            this.lblEnd.Location = new System.Drawing.Point(59, 350);
             this.lblEnd.Name = "lblEnd";
             this.lblEnd.Size = new System.Drawing.Size(84, 25);
             this.lblEnd.TabIndex = 27;
@@ -172,16 +173,17 @@
             // 
             // dtpEnd
             // 
-            this.dtpEnd.Location = new System.Drawing.Point(528, 307);
+            this.dtpEnd.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dtpEnd.Location = new System.Drawing.Point(263, 353);
             this.dtpEnd.Name = "dtpEnd";
-            this.dtpEnd.Size = new System.Drawing.Size(238, 22);
+            this.dtpEnd.Size = new System.Drawing.Size(238, 28);
             this.dtpEnd.TabIndex = 28;
             // 
             // AddSemesterForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(803, 545);
             this.Controls.Add(this.dtpEnd);
             this.Controls.Add(this.lblEnd);
             this.Controls.Add(this.lblStart);

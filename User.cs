@@ -19,25 +19,27 @@ namespace ProjectStudentTuitionManagement
         {
             InitializeComponent();
             this.maSV = maSV;
+            
         }
         private void LoadThongTinSinhVien()
         {
-            string query = $"SELECT * FROM SinhVien WHERE MaSV = '{maSV}'";
+            string query = $"SELECT * FROM v_ThongTinSinhVien WHERE MaSV = '{maSV}'";
             DataTable dt = dp.Lay_DLbang(query);
 
             if (dt != null && dt.Rows.Count > 0)
             {
                 string ma = dt.Rows[0]["MaSV"].ToString();
-                string ten = dt.Rows[0]["FullName"].ToString();
-                string lop = dt.Rows[0]["Lop"].ToString();
-                string khoa = dt.Rows[0]["Khoa"].ToString();
+                string tenLop = dt.Rows[0]["TENLOP"].ToString();
+                string tenKhoa = dt.Rows[0]["TENKHOA"].ToString();
+                string ten = dt.Rows[0]["HoTen"].ToString();
 
                 label2.Text = ma;
-                label3.Text = ten;
-                label4.Text = lop;
-                label5.Text = khoa;
+                label4.Text = tenLop;
+                label5.Text = tenKhoa;
+
+                label1.Text = $"Xin chào {ten} ";
             }
-            
+
         }
 
 
@@ -165,7 +167,7 @@ namespace ProjectStudentTuitionManagement
             {
                 dataGridView1.DataSource = dta;
 
-                // Thiết lập tiêu đề cột cho đầy đủ các cột trả về
+               
                 dataGridView1.Columns["SoTien"].HeaderText = "Tổng tiền";
                 dataGridView1.Columns["SoTienConNo"].HeaderText = "Còn phải đóng";
                 dataGridView1.Columns["HanDong"].HeaderText = "Hạn đóng";
@@ -202,6 +204,11 @@ namespace ProjectStudentTuitionManagement
         }
 
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+        private void comboBox2_SelectedIndexChanged(object sender, EventArgs e)
         {
 
         }

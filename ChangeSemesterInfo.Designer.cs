@@ -45,16 +45,17 @@
             // 
             // dtpEnd
             // 
-            this.dtpEnd.Location = new System.Drawing.Point(505, 305);
+            this.dtpEnd.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dtpEnd.Location = new System.Drawing.Point(240, 365);
             this.dtpEnd.Name = "dtpEnd";
-            this.dtpEnd.Size = new System.Drawing.Size(238, 22);
+            this.dtpEnd.Size = new System.Drawing.Size(261, 30);
             this.dtpEnd.TabIndex = 42;
             // 
             // lblEnd
             // 
             this.lblEnd.AutoSize = true;
             this.lblEnd.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
-            this.lblEnd.Location = new System.Drawing.Point(415, 302);
+            this.lblEnd.Location = new System.Drawing.Point(35, 363);
             this.lblEnd.Name = "lblEnd";
             this.lblEnd.Size = new System.Drawing.Size(84, 25);
             this.lblEnd.TabIndex = 41;
@@ -72,9 +73,10 @@
             // 
             // dtpStart
             // 
-            this.dtpStart.Location = new System.Drawing.Point(170, 305);
+            this.dtpStart.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dtpStart.Location = new System.Drawing.Point(240, 305);
             this.dtpStart.Name = "dtpStart";
-            this.dtpStart.Size = new System.Drawing.Size(228, 22);
+            this.dtpStart.Size = new System.Drawing.Size(261, 30);
             this.dtpStart.TabIndex = 39;
             // 
             // txtYear
@@ -83,13 +85,13 @@
             this.txtYear.Location = new System.Drawing.Point(240, 237);
             this.txtYear.Name = "txtYear";
             this.txtYear.ReadOnly = true;
-            this.txtYear.Size = new System.Drawing.Size(415, 30);
+            this.txtYear.Size = new System.Drawing.Size(261, 30);
             this.txtYear.TabIndex = 36;
             // 
             // btnExit
             // 
             this.btnExit.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
-            this.btnExit.Location = new System.Drawing.Point(454, 370);
+            this.btnExit.Location = new System.Drawing.Point(445, 458);
             this.btnExit.Name = "btnExit";
             this.btnExit.Size = new System.Drawing.Size(181, 36);
             this.btnExit.TabIndex = 35;
@@ -100,7 +102,7 @@
             // btnChange
             // 
             this.btnChange.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
-            this.btnChange.Location = new System.Drawing.Point(151, 370);
+            this.btnChange.Location = new System.Drawing.Point(68, 458);
             this.btnChange.Name = "btnChange";
             this.btnChange.Size = new System.Drawing.Size(221, 36);
             this.btnChange.TabIndex = 34;
@@ -114,7 +116,7 @@
             this.txtMaHK.Location = new System.Drawing.Point(240, 112);
             this.txtMaHK.Name = "txtMaHK";
             this.txtMaHK.ReadOnly = true;
-            this.txtMaHK.Size = new System.Drawing.Size(415, 30);
+            this.txtMaHK.Size = new System.Drawing.Size(261, 30);
             this.txtMaHK.TabIndex = 33;
             // 
             // lblClass
@@ -151,7 +153,7 @@
             // 
             this.lblSemester.AutoSize = true;
             this.lblSemester.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
-            this.lblSemester.Location = new System.Drawing.Point(294, 44);
+            this.lblSemester.Location = new System.Drawing.Point(300, 47);
             this.lblSemester.Name = "lblSemester";
             this.lblSemester.Size = new System.Drawing.Size(145, 32);
             this.lblSemester.TabIndex = 29;
@@ -163,14 +165,14 @@
             this.txtHocKi.Location = new System.Drawing.Point(240, 172);
             this.txtHocKi.Name = "txtHocKi";
             this.txtHocKi.ReadOnly = true;
-            this.txtHocKi.Size = new System.Drawing.Size(415, 30);
+            this.txtHocKi.Size = new System.Drawing.Size(261, 30);
             this.txtHocKi.TabIndex = 43;
             // 
             // ChangeSemesterInfo
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(672, 554);
             this.Controls.Add(this.txtHocKi);
             this.Controls.Add(this.dtpEnd);
             this.Controls.Add(this.lblEnd);

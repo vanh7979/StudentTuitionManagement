@@ -46,6 +46,10 @@ D:\Visual Studio\LTUD\StudentTuitionManagement-master\obj\Debug\NewProject.Chang
 D:\New\StudentTuitionManagement\bin\Debug\NewProject.exe
 D:\New\StudentTuitionManagement\bin\Debug\HOADON.rpt
 D:\New\StudentTuitionManagement\bin\Debug\HOADON.cs
+D:\New\StudentTuitionManagement\bin\Debug\BAOCAOSINHVIEN.rpt
+D:\New\StudentTuitionManagement\bin\Debug\BAOCAOHOCPHI.rpt
+D:\New\StudentTuitionManagement\bin\Debug\BAOCAOHOCPHI.cs
+D:\New\StudentTuitionManagement\bin\Debug\BAOCAOSINHVIEN.cs
 D:\New\StudentTuitionManagement\bin\Debug\NewProject.exe.config
 D:\New\StudentTuitionManagement\bin\Debug\NewProject.pdb
 D:\New\StudentTuitionManagement\bin\Debug\CrystalDecisions.CrystalReports.Engine.dll
@@ -73,6 +77,8 @@ D:\New\StudentTuitionManagement\obj\Debug\ProjectStudentTuitionManagement.Admin.
 D:\New\StudentTuitionManagement\obj\Debug\NewProject.ChangeSemesterInfo.resources
 D:\New\StudentTuitionManagement\obj\Debug\NewProject.ChangeStudentInfo.resources
 D:\New\StudentTuitionManagement\obj\Debug\NewProject.ChangeTuitionInfo.resources
+D:\New\StudentTuitionManagement\obj\Debug\NewProject.FormBaoCaoHP.resources
+D:\New\StudentTuitionManagement\obj\Debug\NewProject.FormBaoCaoSV.resources
 D:\New\StudentTuitionManagement\obj\Debug\NewProject.FormInvoice.resources
 D:\New\StudentTuitionManagement\obj\Debug\ProjectStudentTuitionManagement.LoginForm.resources
 D:\New\StudentTuitionManagement\obj\Debug\NewProject.Properties.Resources.resources
@@ -87,9 +93,3 @@ D:\New\StudentTuitionManagement\obj\Debug\NewProject.csproj.CoreCompileInputs.ca
 D:\New\StudentTuitionManagement\obj\Debug\NewProject.csproj.Up2Date
 D:\New\StudentTuitionManagement\obj\Debug\NewProject.exe
 D:\New\StudentTuitionManagement\obj\Debug\NewProject.pdb
-D:\New\StudentTuitionManagement\obj\Debug\NewProject.FormBaoCaoSV.resources
-D:\New\StudentTuitionManagement\bin\Debug\BAOCAOSINHVIEN.rpt
-D:\New\StudentTuitionManagement\bin\Debug\BAOCAOSINHVIEN.cs
-D:\New\StudentTuitionManagement\obj\Debug\NewProject.FormBaoCaoHP.resources
-D:\New\StudentTuitionManagement\bin\Debug\BAOCAOHOCPHI.rpt
-D:\New\StudentTuitionManagement\bin\Debug\BAOCAOHOCPHI.cs

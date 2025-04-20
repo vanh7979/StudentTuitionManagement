@@ -37,7 +37,6 @@ namespace ProjectStudentTuitionManagement
             this.button1 = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.button2 = new System.Windows.Forms.Button();
@@ -54,9 +53,9 @@ namespace ProjectStudentTuitionManagement
             // 
             this.pictureBox1.BackColor = System.Drawing.SystemColors.ButtonHighlight;
             this.pictureBox1.Image = global::NewProject.Properties.Resources.logo_neu_inkythuatso_01_09_10_41_01;
-            this.pictureBox1.Location = new System.Drawing.Point(35, 10);
+            this.pictureBox1.Location = new System.Drawing.Point(12, 12);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(130, 130);
+            this.pictureBox1.Size = new System.Drawing.Size(163, 153);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox1.TabIndex = 5;
             this.pictureBox1.TabStop = false;
@@ -65,7 +64,7 @@ namespace ProjectStudentTuitionManagement
             // button4
             // 
             this.button4.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button4.Location = new System.Drawing.Point(240, 570);
+            this.button4.Location = new System.Drawing.Point(225, 567);
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(223, 40);
             this.button4.TabIndex = 12;
@@ -76,16 +75,17 @@ namespace ProjectStudentTuitionManagement
             // dataGridView1
             // 
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(225, 187);
+            this.dataGridView1.Location = new System.Drawing.Point(225, 123);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowHeadersWidth = 51;
-            this.dataGridView1.Size = new System.Drawing.Size(856, 353);
+            this.dataGridView1.Size = new System.Drawing.Size(856, 417);
             this.dataGridView1.TabIndex = 13;
             this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(925, 570);
+            this.button1.Font = new System.Drawing.Font("Segoe UI", 12F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button1.Location = new System.Drawing.Point(881, 567);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(200, 40);
             this.button1.TabIndex = 14;
@@ -96,9 +96,9 @@ namespace ProjectStudentTuitionManagement
             // label1
             // 
             this.label1.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(46, 187);
+            this.label1.Location = new System.Drawing.Point(2, 197);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(108, 25);
+            this.label1.Size = new System.Drawing.Size(217, 25);
             this.label1.TabIndex = 15;
             this.label1.Text = "Người dùng";
             // 
@@ -106,41 +106,31 @@ namespace ProjectStudentTuitionManagement
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(67, 232);
+            this.label2.Location = new System.Drawing.Point(12, 254);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(59, 23);
             this.label2.TabIndex = 16;
             this.label2.Text = "Mã SV";
             // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(67, 274);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(63, 23);
-            this.label3.TabIndex = 17;
-            this.label3.Text = "Họ Tên";
-            // 
             // label4
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(67, 319);
+            this.label4.Location = new System.Drawing.Point(12, 288);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(38, 23);
+            this.label4.Size = new System.Drawing.Size(69, 23);
             this.label4.TabIndex = 18;
-            this.label4.Text = "Lớp";
+            this.label4.Text = "Tên Lớp";
             // 
             // label5
             // 
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(67, 367);
+            this.label5.Location = new System.Drawing.Point(12, 331);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(78, 23);
+            this.label5.Size = new System.Drawing.Size(80, 23);
             this.label5.TabIndex = 19;
-            this.label5.Text = "Mã Khoa";
+            this.label5.Text = "Tên Khoa";
             this.label5.Click += new System.EventHandler(this.label5_Click_1);
             // 
             // button2
@@ -148,7 +138,7 @@ namespace ProjectStudentTuitionManagement
             this.button2.BackColor = System.Drawing.SystemColors.ActiveBorder;
             this.button2.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button2.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.button2.Location = new System.Drawing.Point(814, 83);
+            this.button2.Location = new System.Drawing.Point(961, 47);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(120, 40);
             this.button2.TabIndex = 20;
@@ -160,9 +150,9 @@ namespace ProjectStudentTuitionManagement
             // 
             this.comboBox1.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(465, 61);
+            this.comboBox1.Location = new System.Drawing.Point(307, 53);
             this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(312, 36);
+            this.comboBox1.Size = new System.Drawing.Size(195, 36);
             this.comboBox1.TabIndex = 21;
             this.comboBox1.Text = "Chọn kì học";
             // 
@@ -170,17 +160,18 @@ namespace ProjectStudentTuitionManagement
             // 
             this.comboBox2.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.comboBox2.FormattingEnabled = true;
-            this.comboBox2.Location = new System.Drawing.Point(465, 106);
+            this.comboBox2.Location = new System.Drawing.Point(661, 53);
             this.comboBox2.Name = "comboBox2";
-            this.comboBox2.Size = new System.Drawing.Size(312, 36);
+            this.comboBox2.Size = new System.Drawing.Size(195, 36);
             this.comboBox2.TabIndex = 22;
             this.comboBox2.Text = "Chọn trạng thái học phí";
+            this.comboBox2.SelectedIndexChanged += new System.EventHandler(this.comboBox2_SelectedIndexChanged);
             // 
             // button3
             // 
             this.button3.BackColor = System.Drawing.SystemColors.ActiveBorder;
             this.button3.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button3.Location = new System.Drawing.Point(372, 61);
+            this.button3.Location = new System.Drawing.Point(225, 51);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(76, 36);
             this.button3.TabIndex = 23;
@@ -192,7 +183,7 @@ namespace ProjectStudentTuitionManagement
             // 
             this.button5.BackColor = System.Drawing.SystemColors.ActiveBorder;
             this.button5.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button5.Location = new System.Drawing.Point(372, 106);
+            this.button5.Location = new System.Drawing.Point(579, 52);
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(76, 36);
             this.button5.TabIndex = 24;
@@ -204,7 +195,7 @@ namespace ProjectStudentTuitionManagement
             // 
             this.linkLabel1.AutoSize = true;
             this.linkLabel1.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.linkLabel1.Location = new System.Drawing.Point(2, 625);
+            this.linkLabel1.Location = new System.Drawing.Point(7, 370);
             this.linkLabel1.Name = "linkLabel1";
             this.linkLabel1.Size = new System.Drawing.Size(106, 28);
             this.linkLabel1.TabIndex = 25;
@@ -226,7 +217,6 @@ namespace ProjectStudentTuitionManagement
             this.Controls.Add(this.button2);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.label4);
-            this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.button1);
@@ -252,7 +242,6 @@ namespace ProjectStudentTuitionManagement
         private Button button1;
         private Label label1;
         private Label label2;
-        private Label label3;
         private Label label4;
         private Label label5;
         private Button button2;

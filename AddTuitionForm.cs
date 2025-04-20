@@ -115,6 +115,7 @@ namespace NewProject
                 int count = Convert.ToInt32(dp.Lay_GiaTriDon(checkQuery));
                 string tenKiHoc = cbxHocki.Text; 
 
+                
                 MessageBox.Show($"⚠️ Học phí kỳ học {tenKiHoc} cho sinh viên đã tồn tại!\nVui lòng chọn kỳ học khác hoặc chỉnh sửa bản ghi cũ.",
                                 "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
 
@@ -142,6 +143,11 @@ namespace NewProject
         }
 
         private void txtMaSV_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void lblName_Click(object sender, EventArgs e)
         {
 
         }
