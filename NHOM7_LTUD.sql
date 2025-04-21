@@ -170,7 +170,7 @@ FROM
     SinhVien sv
 JOIN HocPhi hp ON sv.MaSV = hp.MaSV
 LEFT JOIN ThanhToan tt ON tt.HocPhiID = hp.HocPhiID;
--- Trigger xóa toàn bộ dữ liệu liên quan khi xóa sinh viên
+
 CREATE OR ALTER TRIGGER trg_DeleteSinhVien
 ON SinhVien
 AFTER DELETE
@@ -178,30 +178,30 @@ AS
 BEGIN
     SET NOCOUNT ON;
 
-    -- Xóa hóa đơn
+
     DELETE hd
     FROM HoaDon hd
     JOIN ThanhToan tt ON hd.ThanhToanID = tt.ThanhToanID
     JOIN HocPhi hp ON tt.HocPhiID = hp.HocPhiID
     JOIN deleted d ON hp.MaSV = d.MaSV;
 
-    -- Xóa thanh toán
+
     DELETE tt
     FROM ThanhToan tt
     JOIN HocPhi hp ON tt.HocPhiID = hp.HocPhiID
     JOIN deleted d ON hp.MaSV = d.MaSV;
 
-    -- Xóa thông báo nợ
+
     DELETE tb
     FROM ThongBaoNo tb
     JOIN deleted d ON tb.MaSV = d.MaSV;
 
-    -- Xóa học phí
+
     DELETE hp
     FROM HocPhi hp
     JOIN deleted d ON hp.MaSV = d.MaSV;
 
-    -- Xóa tài khoản người dùng
+
     DELETE u
     FROM Users u
     JOIN deleted d ON u.MaSV = d.MaSV;
@@ -217,7 +217,6 @@ BEGIN
 
     DECLARE @HocPhiID NVARCHAR(20), @KiHocID NVARCHAR(50), @TongTien DECIMAL(18,2);
 
-    -- Lấy học phí
     SELECT TOP 1
         @HocPhiID = hp.HocPhiID,
         @TongTien = hp.SoTien,
@@ -247,22 +246,22 @@ BEGIN
             ELSE N'Còn nợ'
         END;
 
-    -- Ghi nhận thanh toán
+
     INSERT INTO ThanhToan (HocPhiID, NgayThanhToan, SoTienDaDong)
     VALUES (@HocPhiID, GETDATE(), @SoTien);
 
     DECLARE @ThanhToanID INT = SCOPE_IDENTITY();
 
-    -- Ghi hóa đơn
+
     INSERT INTO HoaDon (ThanhToanID, NgayLap, SoTien, NganHang)
     VALUES (@ThanhToanID, GETDATE(), @SoTien, @NganHang);
 
-    -- Cập nhật trạng thái
+
     UPDATE HocPhi
     SET TrangThai = @TrangThai
     WHERE HocPhiID = @HocPhiID;
 
-    -- Ghi nhận còn nợ nếu có
+
     IF @ConLai > 0
     BEGIN
         INSERT INTO ThongBaoNo (MaSV, KiHocID, SoTienNo, NgayThongBao)
@@ -285,10 +284,12 @@ BEGIN
         hp.HanDong,
         hp.TrangThai
     FROM HocPhi hp
-    INNER JOIN KiHoc kh ON hp.KiHocID = kh.KiHocID
+    JOIN KiHoc kh ON hp.KiHocID = kh.KiHocID
     WHERE hp.MaSV = @MaSV
     ORDER BY kh.NamHoc DESC, kh.TenKiHoc;
 END;
+
+
 CREATE OR ALTER PROCEDURE sp_LocHocPhi
     @MaSV NVARCHAR(20),
     @TenKiHoc NVARCHAR(50) = NULL,
@@ -307,7 +308,7 @@ BEGIN
         hp.HanDong,
         hp.TrangThai
     FROM HocPhi hp
-    INNER JOIN KiHoc kh ON hp.KiHocID = kh.KiHocID
+    JOIN KiHoc kh ON hp.KiHocID = kh.KiHocID
     WHERE hp.MaSV = @MaSV
         AND (@TenKiHoc IS NULL OR kh.TenKiHoc = @TenKiHoc)
         AND (@TrangThai IS NULL OR hp.TrangThai = @TrangThai)
@@ -511,4 +512,10 @@ SELECT * FROM HocPhi;
 SELECT * FROM ThanhToan;
 SELECT * FROM HoaDon;
 SELECT * FROM ThongBaoNo;
+
+
+
+
+
+
 

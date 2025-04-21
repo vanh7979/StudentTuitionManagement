@@ -129,11 +129,17 @@ namespace ProjectStudentTuitionManagement
 
         private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            this.Hide();
-            LoginForm loginForm = new LoginForm();
-            loginForm.Show();
+            DialogResult result = MessageBox.Show(
+                                    "Bạn có chắc chắn muốn thoát không?",
+                                    "Xác nhận thoát",
+                                    MessageBoxButtons.YesNo,
+                                    MessageBoxIcon.Question
+            );
 
-            Application.Restart();
+            if (result == DialogResult.Yes)
+            {
+                Application.Exit();
+            }
         }
     }
 }

@@ -24,6 +24,9 @@ namespace ProjectStudentTuitionManagement
             label1.MouseLeave += label1_MouseLeave;
             label1.Click += label1_Click;
 
+            
+
+
         }
         private void LoadThongTinSinhVien()
         {
@@ -46,21 +49,6 @@ namespace ProjectStudentTuitionManagement
 
         }
 
-
-        private void textBox2_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label2_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label5_Click(object sender, EventArgs e)
-        {
-
-        }
         public void HOCPHI()
         {
             string query = $"EXEC sp_LayHocPhiTheoMaSV N'{maSV}'";
@@ -78,14 +66,6 @@ namespace ProjectStudentTuitionManagement
             }
 
         }
-
-        
-
-        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
-
         private void pictureBox1_Click(object sender, EventArgs e)
         {
 
@@ -96,19 +76,6 @@ namespace ProjectStudentTuitionManagement
             HOCPHI();
         }
 
-        private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
-        {
-            var result = MessageBox.Show("Bạn có chắc chắn muốn đăng xuất?", "Xác nhận", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-            if (result == DialogResult.Yes)
-            {
-                this.Hide();
-
-                LoginForm loginForm = new LoginForm();
-                loginForm.Show();
-
-                Application.Restart();
-            }
-        }
 
         private void button1_Click_1(object sender, EventArgs e)
         {
@@ -255,11 +222,22 @@ namespace ProjectStudentTuitionManagement
 
         private void linkLabel2_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            this.Hide();
-            LoginForm loginForm = new LoginForm();
-            loginForm.Show();
+            DialogResult result = MessageBox.Show(
+                                    "Bạn có chắc chắn muốn thoát không?",
+                                    "Xác nhận thoát",
+                                    MessageBoxButtons.YesNo,
+                                    MessageBoxIcon.Question
+            );
 
-            Application.Restart();
+            if (result == DialogResult.Yes)
+            {
+                Application.Exit(); 
+            }
+        }
+
+        private void pnlDropdown_Paint(object sender, PaintEventArgs e)
+        {
+
         }
     }
 }

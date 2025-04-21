@@ -87,5 +87,10 @@ namespace NewProject
                 this.Close();
             }
         }
+
+        private void dtpStart_ValueChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }

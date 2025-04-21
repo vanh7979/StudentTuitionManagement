@@ -41,15 +41,12 @@ namespace ProjectStudentTuitionManagement
 
         private void button4_Click_1(object sender, EventArgs e)
         {
-            // Bước 1: Kiểm tra số tiền nhập
             decimal daDong;
             if (!decimal.TryParse(textBox1.Text, out daDong) || daDong <= 0)
             {
                 MessageBox.Show("Vui lòng nhập số tiền hợp lệ và lớn hơn 0!", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
-
-            // Bước 2: Xác định ngân hàng được chọn
             string nganHang = "";
             if (radioButton1.Checked) nganHang = "MB Bank";
             else if (radioButton2.Checked) nganHang = "Techcombank";
@@ -60,29 +57,27 @@ namespace ProjectStudentTuitionManagement
                 MessageBox.Show("Vui lòng chọn ngân hàng thanh toán!", "Thiếu thông tin", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
-
-            // Bước 3: Gọi stored procedure để xử lý thanh toán
             DataProvider dp = new DataProvider();
             try
             {
                 
-                dp.KetNoiDl(); // mở kết nối
+                dp.KetNoiDl(); 
 
                 SqlCommand cmd = new SqlCommand("sp_ThanhToanHocPhi", dp.cnn);
                 cmd.CommandType = CommandType.StoredProcedure;
 
-                // Thêm các tham số vào stored procedure
+   
                 cmd.Parameters.AddWithValue("@MaSV", maSV);
                 cmd.Parameters.AddWithValue("@TenKiHoc", tenKiHoc);
                 cmd.Parameters.AddWithValue("@SoTien", daDong);
                 cmd.Parameters.AddWithValue("@NganHang", nganHang);
 
-                cmd.ExecuteNonQuery(); // thực thi
+                cmd.ExecuteNonQuery(); 
 
                 MessageBox.Show("Thanh toán thành công!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-                // Mở form hóa đơn
-                FormInvoice f = new FormInvoice(maSV, tenKiHoc); // truyền vào nếu form hỗ trợ
+                
+                FormInvoice f = new FormInvoice(maSV, tenKiHoc); 
                 f.ShowDialog();
 
                 this.Close();
@@ -93,8 +88,6 @@ namespace ProjectStudentTuitionManagement
             }
             finally
             {
-                // Đóng kết nối
-                
                 dp.HuyKN();
             }
         }
